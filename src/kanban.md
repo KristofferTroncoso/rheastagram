@@ -1,5 +1,4 @@
 # To do
-* check out amplify console
 * add loading icons or display nothing while loading for foodcards. Suspense?
 * fix NewPic modal
 * do a new-account test. see how it is with no pics or anything.
@@ -13,7 +12,7 @@
 * add search feature or remove searchbar
 * when deleting a post, should it delete all comments and likes associated with it?
 * try having one dynamodb table instead of 4 separate ones? see if that's possible?
-* try deploying to either amplify console or to s3 and cloudfront
+* add an admin account. a way to have power to delete any post or user.
 
 # In Progress
 
@@ -50,6 +49,13 @@
   * might be temporary but i just had it push to home. the problem was the double modal thing
     going on when deleting from userpage and it just pushes to same place so its like
     nothing happens.
+* try deploying to either amplify console or to s3 and cloudfront
+  * ok that was easier than i thought. i basically just pushed it to a new private
+    repo on my GitHub. Then i went to amplify console and connected the repo. Everything
+    just happened automatically. Now my app is hosted here https://master.d3bmzm8bmp8ok9.amplifyapp.com/
+* check out amplify console
+  * check above
+
 
 # Postpone
 * add short-video upload feature
