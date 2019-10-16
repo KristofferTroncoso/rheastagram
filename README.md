@@ -1,4 +1,5 @@
 # This is a serverless Instagram clone
+side-note: This is more of a backup. Not sure if this will be showcased.
 
 ## Overview
 * React frontend

@@ -12,7 +12,8 @@
 * Make one custom S3Image component and replace all the other ones i have.
 * add search feature or remove searchbar
 * when deleting a post, should it delete all comments and likes associated with it?
-
+* try having one dynamodb table instead of 4 separate ones? see if that's possible?
+* try deploying to either amplify console or to s3 and cloudfront
 
 # In Progress
 
