@@ -1,0 +1,35 @@
+type User @model {
+    id: ID!
+    username: String!
+    name: String
+    bio: String
+    email: String
+    photoUrl: String
+    userPosts: [Post] @connection(name: "UserPosts")
+    comments: [Comment] @connection(name: "UserComments")
+    likes: [Like] @connection(name: "UserLikes")
+}
+
+type Post @model {
+    id: ID!
+    picUrl: String
+    user: User @connection(name: "UserPosts")
+    comments: [Comment] @connection(name: "PostComments")
+    likes: [Like] @connection(name: "PostLikes")
+    timeCreated: String
+}
+
+type Comment @model {
+    id: ID!
+    content: String
+    user: User @connection(name: "UserComments")
+    post: Post @connection(name: "PostComments")
+    timeCreated: String
+}
+
+type Like @model {
+    id: ID!
+    user: User @connection(name: "UserLikes")
+    post: Post @connection(name: "PostLikes")
+    timeCreated: String
+}

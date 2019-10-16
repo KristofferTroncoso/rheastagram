@@ -1,0 +1,42 @@
+.NewPic {
+  margin: 10px;
+  width: 280px;
+  height: 280px;
+}
+
+.Pic {
+  height: 280px;
+  width: 280px;
+  margin: 0;
+}
+
+.Pic img {
+  height: 280px;
+  min-width: 280px;
+  width: 280px;
+}
+
+.Pic h2 {
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  height: 280px;
+  width: 280px;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Pic h2 i {
+  padding: 0 5px;
+}
+
+.Pic h2 span {
+  margin: 0 5px;
+}
+
+.Pic h2:hover {
+  opacity: 1;
+}

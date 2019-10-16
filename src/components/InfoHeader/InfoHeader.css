@@ -1,0 +1,20 @@
+.InfoHeader {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 100px auto 10px;
+}
+
+.InfoHeader img {
+  height: 90%;
+  clip-path: circle(80px at center);
+}
+
+.InfoHeader span {
+  font-weight: 400;
+}
+
+.InfoHeader h2 {
+  padding: 10px 15px;
+}

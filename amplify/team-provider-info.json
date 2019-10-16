@@ -1,0 +1,19 @@
+{
+    "newinsta": {
+        "awscloudformation": {
+            "AuthRoleName": "newinstatest-newinsta-20190923030216-authRole",
+            "UnauthRoleArn": "arn:aws:iam::375497050422:role/newinstatest-newinsta-20190923030216-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::375497050422:role/newinstatest-newinsta-20190923030216-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "newinstatest-newinsta-20190923030216-deployment",
+            "UnauthRoleName": "newinstatest-newinsta-20190923030216-unauthRole",
+            "StackName": "newinstatest-newinsta-20190923030216",
+            "StackId": "arn:aws:cloudformation:us-east-1:375497050422:stack/newinstatest-newinsta-20190923030216/8cf698d0-ddae-11e9-a14a-12f08cf73b28"
+        },
+        "categories": {
+            "auth": {
+                "newinstatest6192df12": {}
+            }
+        }
+    }
+}

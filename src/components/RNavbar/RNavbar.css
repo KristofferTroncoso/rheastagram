@@ -1,0 +1,60 @@
+.Navbar {
+  background: white; 
+  padding: 0 20px;
+  border-bottom: 1px solid #E0E0E0;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 1;
+}
+
+.Navbar nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Title {
+  font-family: 'Cookie', cursive;
+  font-size: 34px;
+  color: black;
+}
+
+.Search {
+  width: 200px;
+  border: 1px solid #E0E0E0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f7f7f7;
+  text-align: center;
+  font-size: 13px;
+}
+
+.Search::placeholder {
+  color: #b1b1b1;
+}
+
+.Search:focus {
+  width: 250px;
+  background: white;
+  outline: none;
+  text-align: left;
+  transition: width 0.2s;
+}
+
+.LogInBtn {
+  background: #039BE5;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+.SignUpBtn {
+  background: white;
+  color: #039BE5;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 3px;
+}

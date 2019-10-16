@@ -1,0 +1,28 @@
+.SignInForm {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px lightgrey;
+    width: 300px;
+    margin: 20px;
+}
+
+input {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 1px solid lightgrey;
+}
+
+.SignInForm button {
+    background: dodgerblue;
+    color: white;
+    width: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    
+}

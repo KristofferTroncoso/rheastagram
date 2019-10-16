@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "newinstatestapi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authnewinstatest6192df12",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
