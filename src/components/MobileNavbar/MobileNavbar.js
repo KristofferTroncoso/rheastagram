@@ -22,7 +22,7 @@ function MobileNavbar({userData}) {
       }}      
     >
       <Link to="/"><Icon type="home" style={{fontSize: '28px', color: '#3b3b3b'}} /></Link>
-      <Link to="/post"><Icon type="plus-circle" style={{fontSize: '38px', color: '#3b3b3b'}} /></Link>
+      <Link to="/post"><Icon type="plus-square" style={{fontSize: '38px', color: '#3b3b3b'}} /></Link>
       <Link to={`/user/${userData.username}`}><Icon type="user" style={{fontSize: '28px', color: '#3b3b3b'}} /></Link>
     </div>
   )
