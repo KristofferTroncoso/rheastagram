@@ -10,7 +10,7 @@ function RNavbar({userData}) {
     <div className="Navbar">
       <nav className="wrapper">
         <Link to="/">
-          <Icon type="instagram" style={{fontSize: '26px', color: 'black', marginRight: '22px'}} />
+          <Icon className="Navbar_Instagram_icon" type="instagram" style={{color: '#3b3b3b'}} />
           <span className="Title" style={{margin: "0 0 4px 0px", paddingLeft: '18px', borderLeft: '1px solid #4a4a4a'}}>
             Rheastagram
           </span>

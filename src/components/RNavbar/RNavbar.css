@@ -21,7 +21,11 @@
   color: black;
 }
 
-
+.Navbar_Instagram_icon {
+  font-size: 26px;
+  color: #3b3b3b;
+  margin-right: 22px;
+}
 
 @media (max-width: 768px){ 
   .Search {
@@ -35,6 +39,13 @@
   }
   .Navbar nav {
     height: 60px;
+  }
+  .Title {
+    display: none;
+  }
+  .Navbar_Instagram_icon {
+    font-size: 40px;
+    margin: 5px 10px;
   }
 } 
 
