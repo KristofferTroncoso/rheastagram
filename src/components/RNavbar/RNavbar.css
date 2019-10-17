@@ -21,11 +21,29 @@
   color: black;
 }
 
-.Search {
+
+
+@media (max-width: 768px){ 
+  .Search {
+    display: none;
+  }
+  .PostPhotoButton {
+    display: none;
+  }
+  .Navbar {
+    padding: 0 5px;
+  }
+  .Navbar nav {
+    height: 60px;
+  }
+} 
+
+  
+.Search_Box {
   width: 200px;
   border: 1px solid #E0E0E0;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 3px 6px;
+  border-radius: 2px;
   background: #f7f7f7;
   text-align: center;
   font-size: 13px;

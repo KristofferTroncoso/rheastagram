@@ -17,10 +17,10 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
       style={{
         background: 'white', 
         border: '1px solid #e6e6e6',
-        borderRadius: '4px',
+        borderRadius: '3px',
         padding: '0', 
         margin: '10px auto', 
-        width: '650px'
+        maxWidth: '600px'
         
       }}
       className="wrapper"
@@ -43,10 +43,10 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
       </div>
       <img src={imgKey} alt={imgUrl} style={{width: '100%'}} />
       <div style={{padding: '15px'}}>
-        <Icon type="heart" theme={true ? null : "twoTone"} twoToneColor="salmon" style={{fontSize: '30px', margin: '0 5px', color: 'grey'}} />
-        <Icon type="message" style={{fontSize: '30px', margin: '0 5px', color: 'grey'}} />
-        <Icon type="upload" style={{fontSize: '30px', margin: '0 5px', color: 'grey'}} />
-        <p style={{color: 'grey', fontSize: '11px'}}>{moment(createdAt).fromNow().toUpperCase()}</p>
+        <Icon type="heart" theme={true ? null : "twoTone"} twoToneColor="salmon" style={{fontSize: '26px', margin: '0 8px', color: '#5c5c5c'}} />
+        <Icon type="message" style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} />
+        <Icon type="upload" style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} />
+        <p style={{color: 'grey', fontSize: '11px', margin: '12px 10px 6px'}}>{moment(createdAt).fromNow().toUpperCase()}</p>
       </div>
     </div>
   )

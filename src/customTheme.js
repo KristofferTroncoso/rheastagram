@@ -13,7 +13,6 @@
 
 export const Container = {};
 export const FormContainer = {
-  width: '500px',
   marginBottom: '0',
   maxHeight: '600px'
 };
@@ -24,7 +23,9 @@ export const SectionBody = {};
 export const SectionFooter = {};
 export const SectionFooterPrimaryContent = {};
 export const SectionFooterSecondaryContent = {};
-export const Input = {};
+export const Input = {
+
+};
 export const Button = {
   background: `linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
             linear-gradient(127deg, rgba(255,255,0,.8), rgba(255,255,0,0) 70.71%),
@@ -34,7 +35,8 @@ export const Button = {
 export const PhotoPickerButton = {
   display: 'none'
 };
-export const PhotoPlaceholder = {};
+export const PhotoPlaceholder = {
+};
 export const SignInButton = {};
 export const SignInButtonIcon = {};
 export const SignInButtonContent = {};

@@ -14,6 +14,7 @@
 * try having one dynamodb table instead of 4 separate ones? see if that's possible?
 * add an admin account. a way to have power to delete any post or user.
 
+    
 # In Progress
 
 
@@ -55,7 +56,13 @@
     just happened automatically. Now my app is hosted here https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 * check out amplify console
   * check above
-
+* add mobile footer. 
+    * If mobile device (google 'how to check if mobile device'), show MobileNavBar
+        which should have a post photo button, a profile button, and a home button
+    * need to add upload feature for MobileNavbar. 
+        * so i ended up just redirecting to /post like my normal way to upload.
+* for top navbar, if window width is small/mobile, take out search bar.
+    * i could make this better.
 
 # Postpone
 * add short-video upload feature

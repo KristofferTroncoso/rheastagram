@@ -22,7 +22,7 @@ const HomePage = ({ userData }) => {
   }
   
   return (
-    <div style={{padding: '100px 0'}}>
+    <div className="wrapper" style={{padding: '80px 0'}}>
       {allPosts.map(post => (
         <FoodCard 
           key={post.id} 

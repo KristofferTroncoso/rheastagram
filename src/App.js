@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import customTheme from './customTheme';
 import RNavbar from './components/RNavbar/RNavbar';
+import MobileNavbar from './components/MobileNavbar/MobileNavbar';
 import HomePage from './pages/HomePage';
 import PublicPage from './pages/PublicPage';
 import PostPhotoPage from './pages/PostPhotoPage';
@@ -168,6 +169,7 @@ function App() {
         <Route path="/editprofile" render={props => <EditProfilePage userData={userData} getAuthenticatedUserAndData={getAuthenticatedUserAndData} />} />
         <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
         {/* <FooterBar post={postUser} list={list} userData={userData} getUserData={getAuthenticatedUserAndData} /> */}
+        {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
       </div>
     </Router>
   );

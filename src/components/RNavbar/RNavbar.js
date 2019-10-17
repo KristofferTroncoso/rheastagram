@@ -10,19 +10,18 @@ function RNavbar({userData}) {
     <div className="Navbar">
       <nav className="wrapper">
         <Link to="/">
-          <Icon type="instagram" style={{fontSize: '26px', color: 'black'}} />
-          <span style={{fontSize: '36px', color: 'black', margin: '0 15px'}}>|</span>
-          <span className="Title" style={{margin: "0 0 4px 0"}}>
+          <Icon type="instagram" style={{fontSize: '26px', color: 'black', marginRight: '22px'}} />
+          <span className="Title" style={{margin: "0 0 4px 0px", paddingLeft: '18px', borderLeft: '1px solid #4a4a4a'}}>
             Rheastagram
           </span>
         </Link>
-        <div>
-          <input type="text" className="Search" placeholder="Search (pics of Rhea)" />
+        <div className="Search">
+          <input type="text" className="Search_Box" placeholder="Search" />
         </div>
         {userData       
         ? (
           <div style={{display: 'flex', alignItems: 'center'}}>
-            <Link to="/post">
+            <Link to="/post" className="PostPhotoButton">
               <Button 
                 style={{
                   margin: '0 10px'
@@ -33,12 +32,13 @@ function RNavbar({userData}) {
               </Button>
             </Link>
             <Avatar img={userData.profilePhotoUrl} username={userData.username} />
-            <button 
+            <Button 
               onClick={e => {Auth.signOut().then(d => console.log(d))}}
-              style={{background: 'inherit', border: 0, color: 'grey', margin: '0 10px'}}
+              style={{color: 'salmon'}}
+              type="link"
             > 
               Log Out
-            </button>
+            </Button>
             
           </div>
           )

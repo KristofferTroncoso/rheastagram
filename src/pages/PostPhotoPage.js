@@ -35,14 +35,14 @@ function PostPhotoPage({userData}) {
   }
   
   return (
-    <div style={{padding: '50px'}}>
+    <div style={{padding: '70px 0 50px'}} className="wrapper">
      {/* <button onClick={e => console.log(imgKey)}>what is the img key</button> */}
       <PhotoPicker 
         preview 
         theme={customTheme} 
         onPick={handlePick} 
       />
-      <div style={{margin: '0 auto', textAlign: 'center', width: '400px'}}>
+      <div style={{margin: '0 auto', textAlign: 'center', maxWidth: '400px', padding: '0 5px'}}>
         <Button 
           block 
           onClick={handleSave} 
