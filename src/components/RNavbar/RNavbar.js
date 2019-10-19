@@ -10,10 +10,12 @@ function RNavbar({userData}) {
     <div className="Navbar">
       <nav className="wrapper">
         <Link to="/">
-          <Icon className="Navbar_Instagram_icon" type="instagram" style={{color: '#3b3b3b'}} />
-          <span className="Title" style={{margin: "0 0 4px 0px", paddingLeft: '18px', borderLeft: '1px solid #4a4a4a'}}>
-            Rheastagram
-          </span>
+          <div className="LogoAndTitle">
+            <Icon className="Navbar_Instagram_icon" type="instagram" style={{color: '#3b3b3b'}} />
+            <span className="Title">
+              Rheastagram
+            </span>
+          </div>
         </Link>
         <div className="Search">
           <input type="text" className="Search_Box" placeholder="Search" />

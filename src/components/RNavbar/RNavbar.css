@@ -15,16 +15,23 @@
   align-items: center;
 }
 
+.LogoAndTitle {
+  display: flex;
+  align-items: center;
+}
+
 .Title {
   font-family: 'Cookie', cursive;
   font-size: 34px;
   color: black;
+  padding-left: 16px;
 }
 
 .Navbar_Instagram_icon {
-  font-size: 26px;
+  font-size: 32px;
   color: #3b3b3b;
-  margin-right: 22px;
+  border-right: 1px solid #4a4a4a;
+  padding-right: 16px;
 }
 
 @media (max-width: 768px){ 
@@ -40,12 +47,13 @@
   .Navbar nav {
     height: 60px;
   }
-  .Title {
-    display: none;
-  }
   .Navbar_Instagram_icon {
-    font-size: 40px;
+    font-size: 28px;
     margin: 5px 10px;
+  }
+  .Title {
+    font-size: 28px;
+    padding-left: 8px;
   }
 } 
 

@@ -22,7 +22,6 @@
 
 
 # In Progress
-* keep instagram name in mobile
 
 
 # Completed
@@ -75,6 +74,8 @@
   * mine arent square so i have to do some fancy shz. i thought it'd be easy with grid but it's not
   * omg i think i actually did it. i played around on codepen for so long but i think i got it.
   * weeehooo. it works perfectly. i love it.
+* keep instagram name in mobile
+
 
 
 # Postpone
