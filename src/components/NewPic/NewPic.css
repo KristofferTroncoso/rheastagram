@@ -1,32 +1,25 @@
 .NewPic {
-  margin: 10px;
-  width: 280px;
-  height: 280px;
+  display: block;
+  height: 31vw;
+  max-height: 288px;
 }
 
 .Pic {
-  height: 280px;
-  width: 280px;
-  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
-.Pic img {
-  height: 280px;
-  min-width: 280px;
-  width: 280px;
-}
 
 .Pic h2 {
   color: white;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  height: 280px;
-  width: 280px;
   margin: 0;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .Pic h2 i {

@@ -5,7 +5,6 @@
 * add likes feature
 * add comment feature
 * explore/try out fetch api or some apollo or urql stuff instead of amazon's API and graphqlOperation
-* make layout responsive
 * make a react native version
 * pull out graphql queries and mutations into own file. right now theyre in the components
 * Make one custom S3Image component and replace all the other ones i have.
@@ -13,11 +12,17 @@
 * when deleting a post, should it delete all comments and likes associated with it?
 * try having one dynamodb table instead of 4 separate ones? see if that's possible?
 * add an admin account. a way to have power to delete any post or user.
+* userpage should have chrono order
+* take off 'Log Out' link on mobile
+* make gear icon/button on profile page for options like log out
+* try streaming or graphql subscriptions. so if something gets posted to db, it should
+  just show up on your home page.
+* fix pic orientation issue when uploading mobile sometimes
+* turn off autocapitalization on login form. attribute is "autocapitalization"
 
-    
+
 # In Progress
-
-
+* keep instagram name in mobile
 
 
 # Completed
@@ -63,6 +68,14 @@
         * so i ended up just redirecting to /post like my normal way to upload.
 * for top navbar, if window width is small/mobile, take out search bar.
     * i could make this better.
+* make layout responsive
+* manifest.json make it app-like
+* grid on profilepage
+  * this is so hard. apparently the thing that helps a lot is if your photos are already square
+  * mine arent square so i have to do some fancy shz. i thought it'd be easy with grid but it's not
+  * omg i think i actually did it. i played around on codepen for so long but i think i got it.
+  * weeehooo. it works perfectly. i love it.
+
 
 # Postpone
 * add short-video upload feature

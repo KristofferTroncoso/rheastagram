@@ -1,5 +1,21 @@
+.PicGridWrapper {
+  margin: 0 10px;
+}
+
 .PicGrid {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  margin: 0 auto;
+  max-width: 935px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 28px;
+}
+
+@media (max-width: 735px){ 
+  .PicGrid {
+    grid-gap: 4px;
+  }
+  .PicGridWrapper {
+    margin: 2px;
+  }
 }
