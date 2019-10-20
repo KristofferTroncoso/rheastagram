@@ -88,17 +88,17 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   }
   
   return (
-    <div>
+    <div style={{padding: '40px 0'}}>
       {isUserFound
       ? <div 
           className="wrapper" 
           style={{
             background: 'white',
-            marginTop: '150px',
-            padding: '50px',
+            marginTop: '60px',
+            padding: '40px',
             border: '1px solid lightgrey',
             borderRadius: '4px',
-            height: '1000px'
+            height: '600px'
           }}
         >
           <h1>Edit Profile</h1>

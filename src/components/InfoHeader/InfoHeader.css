@@ -4,9 +4,15 @@
   align-items: center;
   padding: 10px;
   margin: 100px auto 10px;
+  max-width: 800px;
 }
 
-.InfoHeader img {
+.InfoHeader_username {
+  font-weight: 300;
+  font-size: 34px;
+}
+
+.InfoHeader_img {
   height: 90%;
   clip-path: circle(80px at center);
 }
@@ -17,4 +23,17 @@
 
 .InfoHeader h2 {
   padding: 10px 15px;
+}
+
+
+@media (max-width: 768px){ 
+  .InfoHeader {
+    margin: 60px auto 10px;
+    height: 140px;
+    padding: 4px;
+  }
+  .InfoHeader_img {
+    height: 70px;
+    clip-path: circle(35px at center);
+  }
 }

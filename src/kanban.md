@@ -75,6 +75,7 @@
   * omg i think i actually did it. i played around on codepen for so long but i think i got it.
   * weeehooo. it works perfectly. i love it.
 * keep instagram name in mobile
+* Fix InfoHeader on fullpage and mobile. 
 
 
 

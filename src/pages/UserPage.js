@@ -67,7 +67,7 @@ function UserPage({loggedInUserData, props}) {
   
   
   return (
-    <div>
+    <div style={{padding: "20px 0"}}>
       <InfoHeader userData={foundUserData} loggedInUserData={loggedInUserData} />
       <PicGrid pics={foundUserData.posts} userData={foundUserData} loggedInUserData={loggedInUserData} />
     </div>
