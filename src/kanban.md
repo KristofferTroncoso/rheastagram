@@ -14,11 +14,13 @@
 * add an admin account. a way to have power to delete any post or user.
 * userpage should have chrono order
 * take off 'Log Out' link on mobile
-* make gear icon/button on profile page for options like log out
 * try streaming or graphql subscriptions. so if something gets posted to db, it should
   just show up on your home page.
 * turn off autocapitalization on login form. attribute is "autocapitalization"
-* add a pic rotation program component? its an exif issue
+* add a pic rotation program component? its an exif issue. 
+    * thing is the problem is on the phone camera itself. even facebook mobile website
+        has the same issue. Looks like they solve it by just using a native app.
+
 
 # In Progress
 
@@ -81,6 +83,8 @@
         not working once deployed to amplify console.
     * turns out it has something to do with redirects. I was able to fix the issue through
         amplify console. i copied pasted the code from here https://github.com/aws-amplify/amplify-js/issues/2498
+* make gear icon/button on profile page for options like log out
+    * i also just removed it from the navbar alltogether. just like the real ig app
 
 
 # Postpone

@@ -34,14 +34,6 @@ function RNavbar({userData}) {
               </Button>
             </Link>
             <Avatar img={userData.profilePhotoUrl} username={userData.username} />
-            <Button 
-              onClick={e => {Auth.signOut().then(d => console.log(d))}}
-              style={{color: 'salmon'}}
-              type="link"
-            > 
-              Log Out
-            </Button>
-            
           </div>
           )
         : <div>
