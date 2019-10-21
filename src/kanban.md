@@ -13,13 +13,12 @@
 * try having one dynamodb table instead of 4 separate ones? see if that's possible?
 * add an admin account. a way to have power to delete any post or user.
 * userpage should have chrono order
-* take off 'Log Out' link on mobile
 * try streaming or graphql subscriptions. so if something gets posted to db, it should
   just show up on your home page.
 * turn off autocapitalization on login form. attribute is "autocapitalization"
-* add a pic rotation program component? its an exif issue. 
-    * thing is the problem is on the phone camera itself. even facebook mobile website
-        has the same issue. Looks like they solve it by just using a native app.
+* Fix pages to actually make it DRY. like gatsby pages. It shouldn't be typing and
+    repeating the same styling for each file.
+
 
 
 # In Progress
@@ -94,3 +93,13 @@
     * on top of that i would also have to modify and maybe rebuild the file upload
         component to allow video files. Since im using the PhotoPicker from aws-amplify,
         it may be a bigger component rebuild than i thought.
+* add a pic rotation program component? its an exif issue. 
+    * thing is the problem is on the phone camera itself. even facebook mobile website
+        has the same issue. Looks like they solve it by just using a native app.
+* test and experiment graphql client. is the API module from aws-amplify needed?
+    * can we do vanilla fetch or apollo?
+    * Ok so it might be harder than i thought (with native fetch).. Like there's authentication and other
+        headers that will have to be sent out with the request. Maybe ill try urql?
+    * ya its complicated. the API function from aws-amplify is not bad. the graphqloperation
+        is super confusing tho. it actually does nothing. it's just an object {query: query, variables: variables}
+    * it would be nice to use apollo or urql sometime but for now, it's low priority

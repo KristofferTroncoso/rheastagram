@@ -46,9 +46,11 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
         footer={false}
         bodyStyle={{padding: 0}}
         closable={false}
+        width="900px"
+        height="900px"
       >
-        <div style={{display: 'flex', background: 'white'}}>
-          <img alt={imgKey} src={imgKey} style={{maxHeight: '600px', objectFit: 'contain'}} />
+        <div style={{display: 'flex', background: 'white', justifyContent: 'space-between'}}>
+          <img alt={imgKey} src={imgKey} style={{maxWidth: '700px', maxHeight: '800px', objectFit: 'contain'}} />
           <div style={{minWidth: '280px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
             <div
               style={{

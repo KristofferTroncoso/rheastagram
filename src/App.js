@@ -145,7 +145,25 @@ function App() {
     // console.log(response);
     console.log('listing');
   }
-
+  
+  const handleTest = async e => {
+    let endpointUrl = "https://l2p5qjd4f5dlrig4il3zkkgqre.appsync-api.us-east-1.amazonaws.com/graphql";
+    const getUserTestQuery = `
+      query GetUserTest($id:ID!) {
+        getUser(id: $id) {
+          id username
+        }
+      }
+    `
+    const queryVariables = {
+      id: "us-east-1:94d08666-8d6a-46cb-aa70-68c1fc6adf05"
+    }
+    let test = {query: getUserTestQuery, variables: queryVariables};
+    console.log(graphqlOperation)
+    const response = await API.graphql(test);
+    console.log(response)
+    // fetch(endpointUrl, {method: "POST"}).then(r => console.log(r));
+  }
 
   return (
     <Router>
@@ -168,8 +186,14 @@ function App() {
         <Route path="/user/:id" render={props => <UserPage loggedInUserData={userData} props={props} />} />
         <Route path="/editprofile" render={props => <EditProfilePage userData={userData} getAuthenticatedUserAndData={getAuthenticatedUserAndData} />} />
         <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
-        {/* <FooterBar post={postUser} list={list} userData={userData} getUserData={getAuthenticatedUserAndData} /> */}
         {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
+        {/* <FooterBar post={postUser} list={list} userData={userData} getUserData={getAuthenticatedUserAndData} /> */}
+        {/*
+        <button
+          className="TestBtn"
+          onClick={handleTest}
+        >Test</button>
+        */}
       </div>
     </Router>
   );
