@@ -17,9 +17,8 @@
 * make gear icon/button on profile page for options like log out
 * try streaming or graphql subscriptions. so if something gets posted to db, it should
   just show up on your home page.
-* fix pic orientation issue when uploading mobile sometimes
 * turn off autocapitalization on login form. attribute is "autocapitalization"
-
+* add a pic rotation program component? its an exif issue
 
 # In Progress
 
@@ -76,7 +75,12 @@
   * weeehooo. it works perfectly. i love it.
 * keep instagram name in mobile
 * Fix InfoHeader on fullpage and mobile. 
-
+* react router params redirecting to index.html in amplify production app
+    * just fixed a scary problem where typing routes directing into url bar such as
+        '/user/kris' was redirecting to /index.html instead. It was working in dev but 
+        not working once deployed to amplify console.
+    * turns out it has something to do with redirects. I was able to fix the issue through
+        amplify console. i copied pasted the code from here https://github.com/aws-amplify/amplify-js/issues/2498
 
 
 # Postpone

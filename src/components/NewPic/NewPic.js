@@ -7,7 +7,6 @@ import Avatar from '../Avatar/Avatar';
 
 
 function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
-
   const [visible, changeVisible] = React.useState(false);
   const [imgKey, changeImgKey] = React.useState('');
   
@@ -45,33 +44,41 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={false}
-        width='1000px'
         bodyStyle={{padding: 0}}
         closable={false}
       >
-        <div style={{display: 'flex'}}>
-          <img alt={imgKey} src={imgKey} style={{width: '100%', objectFit: 'contain'}} />
-          <div 
-            style={{
-              width: '400px', 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center', 
-              height: '60px', 
-              padding: '5px',
-              borderBottom: '1px solid lightgrey'
-            }}
-          >
-            <div 
+        <div style={{display: 'flex', background: 'white'}}>
+          <img alt={imgKey} src={imgKey} style={{maxHeight: '600px', objectFit: 'contain'}} />
+          <div style={{minWidth: '280px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+            <div
               style={{
                 display: 'flex', 
+                justifyContent: 'space-between', 
                 alignItems: 'center', 
+                height: '60px', 
+                padding: '5px',
+                borderBottom: '1px solid lightgrey',
+                background: 'white'
               }}
             >
-              <Avatar img={userData.profilePhotoUrl}  username={userData.username} />
-              <h3 style={{marginLeft: '10px'}}>{userData.username}</h3>
+              <div 
+                style={{
+                  display: 'flex', 
+                  alignItems: 'center', 
+                }}
+              >
+                <Avatar img={userData.profilePhotoUrl}  username={userData.username} />
+                <h3 style={{marginLeft: '10px'}}>{userData.username}</h3>
+              </div>
+              <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
             </div>
-            <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
+            <input type="text" placeholder="Add comment" 
+              style={{
+                border: 0,
+                borderTop: '1px solid lightgrey',
+                padding: '18px 14px'
+              }}
+            />
           </div>
         </div>
       </Modal>
