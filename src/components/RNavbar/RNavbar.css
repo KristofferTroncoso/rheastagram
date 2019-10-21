@@ -16,6 +16,7 @@
 }
 
 .LogoAndTitle {
+  font-family: 'Cookie', cursive;
   display: flex;
   align-items: center;
 }
