@@ -50,7 +50,8 @@
   }
   .Navbar_Instagram_icon {
     font-size: 28px;
-    margin: 5px 10px;
+    margin: 5px 0;
+    padding-right: 8px;
   }
   .Title {
     font-size: 28px;
