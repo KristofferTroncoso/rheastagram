@@ -2,7 +2,6 @@ import React from 'react';
 import './InfoHeader.css';
 import { Link } from 'react-router-dom';
 import { Storage } from 'aws-amplify';
-import { Icon } from 'antd';
 import SettingsModal from '../SettingsModal/SettingsModal';
 
 

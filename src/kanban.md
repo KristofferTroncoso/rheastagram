@@ -3,8 +3,6 @@
 * fix NewPic modal
 * do a new-account test. see how it is with no pics or anything.
 * add likes feature
-* add comment feature
-* explore/try out fetch api or some apollo or urql stuff instead of amazon's API and graphqlOperation
 * make a react native version
 * pull out graphql queries and mutations into own file. right now theyre in the components
 * Make one custom S3Image component and replace all the other ones i have.
@@ -18,8 +16,7 @@
 * turn off autocapitalization on login form. attribute is "autocapitalization"
 * Fix pages to actually make it DRY. like gatsby pages. It shouldn't be typing and
     repeating the same styling for each file.
-
-
+* why is userpage using listusers graphql query. doesnt it only need getuser?
 
 # In Progress
 
@@ -84,6 +81,12 @@
         amplify console. i copied pasted the code from here https://github.com/aws-amplify/amplify-js/issues/2498
 * make gear icon/button on profile page for options like log out
     * i also just removed it from the navbar alltogether. just like the real ig app
+* add comment feature
+  * ok wow i actually got pretty far. the commenting is actually working. i just have
+    to refresh and add the comment when i post it. 
+  * yayy i actually fixed it. the refreshing when you post a comment. no errors.
+  * now i just have to fix chrono order.
+  * wow this was crazy but i actually did it. it actually looks good
 
 
 # Postpone
@@ -96,6 +99,7 @@
 * add a pic rotation program component? its an exif issue. 
     * thing is the problem is on the phone camera itself. even facebook mobile website
         has the same issue. Looks like they solve it by just using a native app.
+* explore/try out fetch api or some apollo or urql stuff instead of amazon's API and graphqlOperation
 * test and experiment graphql client. is the API module from aws-amplify needed?
     * can we do vanilla fetch or apollo?
     * Ok so it might be harder than i thought (with native fetch).. Like there's authentication and other

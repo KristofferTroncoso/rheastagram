@@ -1,14 +1,16 @@
 import React from 'react';
 import './NewPic.css';
 import { Modal, Icon } from 'antd';
-import { Storage } from 'aws-amplify'
+import { API, Storage } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
+import { genUUID, getISODate } from '../../utils';
+import moment from 'moment';
 
-
-function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
+function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId, getUser}) {
   const [visible, changeVisible] = React.useState(false);
   const [imgKey, changeImgKey] = React.useState('');
+  const [inputText, changeInputText] = React.useState('');
   
   React.useEffect(() => {
     Storage.get(img).then(d => changeImgKey(d)).catch(err => console.log(err));
@@ -26,6 +28,50 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
     changeVisible(false);
   };
   
+  const handleSubmit = e => {
+    e.preventDefault();
+    
+    const query = `
+      mutation CreateComment(
+        $id: ID!
+        $content: String
+        $timeCreated: String
+        $commentUserId: ID
+        $commentPostId: ID
+      ) {
+        createComment(input: {
+          id: $id
+          content: $content
+          timeCreated: $timeCreated
+          commentUserId: $commentUserId
+          commentPostId: $commentPostId
+        }) {
+          id
+        }
+      }
+    `
+    const variables = {
+      id: `commentid:${genUUID()}`,
+      content: inputText,
+      timeCreated: getISODate(),
+      commentUserId: loggedInUserData.id,
+      commentPostId: postId
+    }
+    
+    API.graphql({query, variables})
+    .then(res => {
+      console.log(res);
+      getUser(userData.username);
+    })
+    .catch(err => console.log(err));
+    changeInputText('');
+  }
+  
+  const handleChange = e => {
+    changeInputText(e.target.value);
+  }
+  
+
   return (
     <div className="NewPic">
       <div className="Pic" 
@@ -51,7 +97,7 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
       >
         <div style={{display: 'flex', background: 'white', justifyContent: 'space-between'}}>
           <img alt={imgKey} src={imgKey} style={{maxWidth: '700px', maxHeight: '800px', objectFit: 'contain'}} />
-          <div style={{minWidth: '280px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+          <div style={{minWidth: '320px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
             <div
               style={{
                 display: 'flex', 
@@ -74,13 +120,36 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData}) {
               </div>
               <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
             </div>
-            <input type="text" placeholder="Add comment" 
-              style={{
-                border: 0,
-                borderTop: '1px solid lightgrey',
-                padding: '18px 14px'
-              }}
-            />
+            <div className="NewPic_Comments" style={{padding: "8px", height: '100%'}}>
+              {post.comments.items
+              .sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0))
+              .map(comment => (
+                <div style={{display: 'flex', marginBottom: '8px'}}>
+                  <Avatar img={comment.user.photoUrl} username={comment.user.username} />
+                  <div className="NewPic_CommentBox" style={{marginLeft: '10px'}}>
+                    <div key={comment.id} style={{display: 'flex', alignItems: 'baseline'}}>
+                      <h4 style={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>{comment.user.username}</h4>
+                      <p style={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>{comment.content}</p>
+                    </div>
+                    <p style={{fontSize: '11px', color: 'grey'}}>{moment(comment.timeCreated).fromNow()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <form onSubmit={handleSubmit} style={{width: '100%'}}>
+              <input 
+                type="text" 
+                placeholder="Add comment" 
+                onChange={handleChange}
+                value={inputText}
+                style={{
+                  border: 0,
+                  borderTop: '1px solid lightgrey',
+                  padding: '18px 14px',
+                  width: '100%'
+                }}
+              />
+            </form>
           </div>
         </div>
       </Modal>

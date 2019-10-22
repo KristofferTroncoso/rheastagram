@@ -1,13 +1,11 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
-import { useHistory } from "react-router";
 import './SettingsModal.css';
 
 
 function SettingsModal() {
   const [visible, changeVisible] = React.useState(false);
-  const history = useHistory();
 
   const showModal = () => {
     changeVisible(true)

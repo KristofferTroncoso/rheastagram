@@ -1,9 +1,5 @@
-/* eslint-disable */
 import React from 'react';
-import { Auth, API, graphqlOperation } from 'aws-amplify';
-import { PhotoPicker } from 'aws-amplify-react';
-import customTheme from '../customTheme';
-import Avatar from '../components/Avatar/Avatar';
+import { API, graphqlOperation } from 'aws-amplify';
 import FoodCard from '../components/FoodCard/FoodCard';
 import { listPosts } from '../graphql/queries';
 

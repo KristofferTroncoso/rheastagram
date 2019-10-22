@@ -1,7 +1,6 @@
 import React from 'react';
 import './RNavbar.css';
 import { Link } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
 import { Icon, Button } from 'antd';
 import Avatar from '../Avatar/Avatar';
 
