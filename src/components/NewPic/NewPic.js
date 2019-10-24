@@ -124,10 +124,10 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
               {post.comments.items
               .sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0))
               .map(comment => (
-                <div style={{display: 'flex', marginBottom: '8px'}}>
+                <div style={{display: 'flex', marginBottom: '8px'}}  key={comment.id}>
                   <Avatar img={comment.user.photoUrl} username={comment.user.username} />
                   <div className="NewPic_CommentBox" style={{marginLeft: '10px'}}>
-                    <div key={comment.id} style={{display: 'flex', alignItems: 'baseline'}}>
+                    <div style={{display: 'flex', alignItems: 'baseline'}}>
                       <h4 style={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>{comment.user.username}</h4>
                       <p style={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>{comment.content}</p>
                     </div>

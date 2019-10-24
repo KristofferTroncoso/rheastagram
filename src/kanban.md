@@ -17,8 +17,14 @@
 * Fix pages to actually make it DRY. like gatsby pages. It shouldn't be typing and
     repeating the same styling for each file.
 * why is userpage using listusers graphql query. doesnt it only need getuser?
+* add pull to refresh functionality. search up npm or react packages.
+* catch unknown params such as /user/idkthisuser
+* Mobile Bar icons should be highlighted based on current route
+
+
 
 # In Progress
+
 
 
 # Completed
@@ -87,6 +93,11 @@
   * yayy i actually fixed it. the refreshing when you post a comment. no errors.
   * now i just have to fix chrono order.
   * wow this was crazy but i actually did it. it actually looks good
+* add post page. like a page just solely for a post. with the postid as the url param.
+  * there are issues with fetching and loading and stuff
+  * alright i finally fixed it. so all those errors were because something was missing
+    when i fetched from server. specifically for the comment list. i can see how
+    something like TypeScript would help.
 
 
 # Postpone

@@ -18,6 +18,7 @@ import PublicPage from './pages/PublicPage';
 import PostPhotoPage from './pages/PostPhotoPage';
 import UserPage from './pages/UserPage';
 import EditProfilePage from './pages/EditProfilePage';
+import PostPage from './pages/PostPage/PostPage';
 import FooterBar from './components/FooterBar/FooterBar';
 import { listUsers, getUser } from './graphql/queries';
 import { createUser } from './graphql/mutations';
@@ -186,6 +187,7 @@ function App() {
         <Route path="/user/:id" render={props => <UserPage loggedInUserData={userData} props={props} />} />
         <Route path="/editprofile" render={props => <EditProfilePage userData={userData} getAuthenticatedUserAndData={getAuthenticatedUserAndData} />} />
         <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
+        <Route path="/p/:postId" render={props => <PostPage props={props} loggedInUserData={userData} />} />
         {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
         {/* <FooterBar post={postUser} list={list} userData={userData} getUserData={getAuthenticatedUserAndData} /> */}
         {/*

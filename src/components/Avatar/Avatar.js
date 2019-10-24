@@ -8,6 +8,7 @@ function Avatar({img, username}) {
   const [imgKey, changeImgKey] = React.useState('');
   
   React.useEffect(() => {
+    console.log('Avatar:useEffect')
     Storage.get(img).then(d => changeImgKey(d)).catch(err => console.log(err));
   }, [img])
   
@@ -35,5 +36,7 @@ function Avatar({img, username}) {
     </Link>
   )
 }
+
+
 
 export default Avatar;

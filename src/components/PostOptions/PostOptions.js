@@ -3,6 +3,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
 import { deletePost } from '../../graphql/mutations';
 import { useHistory } from "react-router";
+import { Link } from 'react-router-dom';
 
 
 function PostOptions({id, imgKey, userData, loggedInUserData}) {
@@ -65,6 +66,14 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
         >
           <h2>Copy Link</h2>
         </Button>
+        <Link to={`/p/${id}`}>
+          <Button 
+            onClick={e => console.log(id)}
+            block style={{border: 0, boxShadow: 'none', margin: '10px 0'}}
+          >
+            <h2>Go to Post</h2>
+          </Button>
+        </Link>
       </Modal>
     </div>
   );   
