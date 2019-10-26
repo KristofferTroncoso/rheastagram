@@ -102,16 +102,16 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
           }}
         >
           <h1>Edit Profile</h1>
-          <div style={{display: 'flex', alignContent: 'center', alignItems: 'cente'}}>
+          <div style={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
             <Avatar img={userData.profilePhotoUrl} style={{alignContent: 'center'}} username={userData.username} />
-            <div>
-              <h2>{userData.username}</h2>
+            <div style={{padding: '0 10px'}}>
+              <h2 style={{margin: 0, padding: 0}}>{userData.username}</h2>
               <Upload 
                 accept="image/*" 
                 showUploadList={false}
                 beforeUpload={handlePicUpload}
               >
-                <Button style={{border: 0, color: 'dodgerblue', boxShadow: 'none'}}>Change Profile Photo</Button>
+                <Button style={{border: 0, color: 'dodgerblue', boxShadow: 'none', margin: 0, padding: 0, height: '22px'}}><span style={{fontWeight: '700'}}>Change Profile Photo</span></Button>
               </Upload>
             </div>
           </div>

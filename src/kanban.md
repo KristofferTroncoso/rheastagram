@@ -2,7 +2,6 @@
 * add loading icons or display nothing while loading for foodcards. Suspense?
 * fix NewPic modal
 * do a new-account test. see how it is with no pics or anything.
-* add likes feature
 * make a react native version
 * pull out graphql queries and mutations into own file. right now theyre in the components
 * Make one custom S3Image component and replace all the other ones i have.
@@ -24,6 +23,7 @@
 
 
 # In Progress
+* add likes feature
 
 
 

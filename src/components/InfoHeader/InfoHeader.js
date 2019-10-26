@@ -13,11 +13,13 @@ function InfoHeader({userData, loggedInUserData}) {
   }, [userData.profilePhotoUrl]);
   
   return (
-    <div className="InfoHeader wrapper">
+    <div className="InfoHeader wrapper" style={{marginBottom: '30px'}}>
+      <div className="InfoHeader_img_container">
       {userData.profilePhotoUrl ? <img className="InfoHeader_img" alt={imgKey} src={imgKey} /> : null}
+      </div>
       <div>
-        <div style={{display: 'flex', alignContent: 'center', alignItems: 'baseline', marginBottom: '20px'}}>
-          <h1 className="InfoHeader_username" style={{marginBottom: 0}}>{userData.username}</h1>
+        <div className="InfoHeader_username_container">
+          <h1 className="InfoHeader_username" style={{marginBottom: '5px'}}>{userData.username}</h1>
           {userData.username === loggedInUserData.username 
             ? <>
                 <Link to="/editprofile">

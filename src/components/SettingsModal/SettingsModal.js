@@ -27,7 +27,7 @@ function SettingsModal() {
     <div>
       <button
         onClick={showModal}
-        style={{border: 0}}
+        style={{border: 0, outline: 0}}
       >
         <Icon type="setting" style={{fontSize: '30px', margin: '0 5px'}} />
       </button>

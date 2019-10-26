@@ -7,14 +7,27 @@
   max-width: 800px;
 }
 
+.InfoHeader_username_container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
 .InfoHeader_username {
   font-weight: 300;
   font-size: 34px;
 }
 
+.InfoHeader_img_container {
+  background: lightgrey;
+  clip-path: circle(77px at center);
+  height: 100%;
+}
+
 .InfoHeader_img {
-  height: 90%;
-  clip-path: circle(80px at center);
+  height: 100%;
+  clip-path: circle(76px at center);
 }
 
 .InfoHeader span {
@@ -30,10 +43,18 @@
   .InfoHeader {
     margin: 60px auto 10px;
     height: 140px;
+    max-width: 600px;
     padding: 4px;
+  }
+  .InfoHeader_username_container {
+    margin-bottom: 0px;
   }
   .InfoHeader_img {
     height: 70px;
     clip-path: circle(35px at center);
+  }
+  .InfoHeader_img_container {
+    height: 70px;
+    clip-path: circle(36px at center);
   }
 }

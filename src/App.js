@@ -62,7 +62,9 @@ const customGetUserQuery = `
       likes {
         items {
           id
-          timeCreated
+          post {
+            id
+          }
         }
         nextToken
       }
@@ -80,15 +82,10 @@ function App() {
     likes: [],
     bio: ''
   });
-  
+  const [arrOfLikes, changeArrOfLikes] = React.useState([]);
 
   React.useEffect(() => {
     console.log("App-useEffect: Getting Auth Data for current logged-in user!")
-    //     Auth.currentCredentials()
-    // .then(res => {
-    //   getUserData(res.data.IdentityId);
-    // })
-    // .catch(err => console.log(err))
     getAuthenticatedUserAndData();
   }, []);
   
@@ -165,6 +162,8 @@ function App() {
     console.log(response)
     // fetch(endpointUrl, {method: "POST"}).then(r => console.log(r));
   }
+
+  
 
   return (
     <Router>

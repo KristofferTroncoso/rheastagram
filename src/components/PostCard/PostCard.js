@@ -5,9 +5,11 @@ import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
+import Like from '../Like/Like';
+import { Icon } from 'antd';
 
 
-function PostCard({postImgUrl, likes, comments, userData, loggedInUserData, postId, getUser, getPostData}) {
+function PostCard({postImgUrl, likes, comments, userData, loggedInUserData, postId, getUser, getPostData, arrOfLikes, timeCreated, getNewArrOfLikes}) {
   const [imgKey, changeImgKey] = React.useState('');
   const [inputText, changeInputText] = React.useState('');
   
@@ -59,9 +61,23 @@ function PostCard({postImgUrl, likes, comments, userData, loggedInUserData, post
   }
   
   return (
-    <div className="PostCard" style={{display: 'flex', background: 'lightgrey', justifyContent: 'space-between'}}>
-      <img alt="rhea" src={imgKey} style={{maxWidth: '700px', maxHeight: '800px', objectFit: 'contain'}} />
-      <div style={{minWidth: '320px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+    <div 
+      className="PostCard" 
+      style={{display: 'flex', background: 'lightgrey', justifyContent: 'center', borderRadius: '4px', maxWidth: '850px'}}
+    >
+      <img alt="rhea" src={imgKey} style={{maxWidth: '700px', maxHeight: '800px', objectFit: 'cover', border: '1px solid lightgrey'}} />
+      <div 
+        style={{
+          minWidth: '320px', 
+          background: 'white', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'space-between', 
+          borderRadius: '4px', 
+          border: '1px solid lightgrey',
+          borderLeft: 0
+        }}
+      >
         <div
           style={{
             display: 'flex', 
@@ -84,7 +100,7 @@ function PostCard({postImgUrl, likes, comments, userData, loggedInUserData, post
           </div>
           <PostOptions userData={userData} id={postId} imgKey={imgKey} loggedInUserData={loggedInUserData} />
         </div>
-        <div className="NewPic_Comments" style={{padding: "8px", height: '100%'}}>
+        <div className="NewPic_Comments" style={{padding: "8px", height: '100%', overflow: 'auto'}}>
           {comments
           .sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0))
           .map(comment => (
@@ -99,6 +115,14 @@ function PostCard({postImgUrl, likes, comments, userData, loggedInUserData, post
               </div>
             </div>
           ))}
+        </div>
+        <div className="PostCard_stats" style={{borderTop: '1px solid lightgrey', padding: '8px'}}>
+          <div className="PostCard_stats_icons" style={{display: 'flex'}}>
+            <Like postId={postId} loggedInUserData={loggedInUserData} arrOfLikes={arrOfLikes} getPostData={getPostData} getNewArrOfLikes={getNewArrOfLikes} />
+            <Icon type="message" style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} />
+          </div>
+          <h4 style={{fontWeight: '700', margin: 0}}>{likes.length} {likes.length > 1 ? 'likes' : 'like'}</h4>
+          <span style={{color: 'grey', fontSize: '12px'}}>{moment(timeCreated).format('MMMM D, YYYY')}</span>
         </div>
         <form onSubmit={handleSubmit} style={{width: '100%'}}>
           <input 

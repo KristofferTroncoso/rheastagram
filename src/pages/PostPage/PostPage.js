@@ -5,6 +5,7 @@ import PostCard from '../../components/PostCard/PostCard';
 
 function PostPage({props, loggedInUserData}) {
   const [findPostState, changeFindPostState] = React.useState('loading');
+  const [arrOfLikes, changeArrOfLikes] = React.useState([]);
   const [postData, changePostData] = React.useState({
     id: '',
     picUrl: '',
@@ -42,6 +43,9 @@ function PostPage({props, loggedInUserData}) {
           likes {
             items {
               id
+              user {
+                id
+              }
             }
           }
         }
@@ -63,14 +67,26 @@ function PostPage({props, loggedInUserData}) {
     }
   }
   
+  const reduceUserLikes = (loggedInUserData) => {
+    return loggedInUserData.likes.reduce((acc, currVal) => {
+    	acc.push(currVal.post.id);
+    	return acc;
+    }, []);
+  }
+  
+  const getNewArrOfLikes = () => {
+    changeArrOfLikes(reduceUserLikes(loggedInUserData));
+  }
+  
   React.useEffect(() => {
     console.log("PostPage: useEffect");
     let res = getPostData(paramsPostId);
     res.then(d => changeFindPostState(d));
-  }, [paramsPostId]);
+    getNewArrOfLikes();
+  }, [paramsPostId, loggedInUserData]);
   
   return (
-    <div className="PostPage" style={{paddingTop: '200px', margin: '0 auto', maxWidth: '1000px'}}>
+    <div className="PostPage" style={{paddingTop: '100px', margin: '0 auto', maxWidth: '1000px'}}>
       {{loading: <h1>Loading</h1>,
         found:  <PostCard
                   postId={postData.id}
@@ -80,6 +96,10 @@ function PostPage({props, loggedInUserData}) {
                   likes={postData.likes.items}
                   comments={postData.comments.items}
                   getPostData={getPostData}
+                  arrOfLikes={arrOfLikes}
+                  timeCreated={postData.timeCreated}
+                  likeId={postData.likes.items.id}
+                  getNewArrOfLikes={getNewArrOfLikes}
                 />,
         notfound: <h1>Post not found</h1>
       }[findPostState]}
