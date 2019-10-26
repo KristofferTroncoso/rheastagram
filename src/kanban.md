@@ -23,8 +23,7 @@
 
 
 # In Progress
-* add likes feature
-* Mobile Bar icons should be highlighted based on current route
+
 
 
 # Completed
@@ -98,6 +97,8 @@
   * alright i finally fixed it. so all those errors were because something was missing
     when i fetched from server. specifically for the comment list. i can see how
     something like TypeScript would help.
+* add likes feature
+* Mobile Bar icons should be highlighted based on current route
 
 
 # Postpone

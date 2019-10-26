@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FaPlusSquare, FaRegPlusSquare, FaUser, FaRegUser } from 'react-icons/fa';
 import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
 import './MobileNavbar.css';
 
 function MobileNavbar({userData}) {
   const [currentPage, changeCurrentPage] = React.useState();
-  React.useEffect(() => {
-    console.log(currentPage)
-  }, [currentPage])
+
   return (
     <div 
       className="MobileNavbar"
@@ -29,7 +27,11 @@ function MobileNavbar({userData}) {
         exact
         to="/"
         isActive={(match, location) => {
-          match ? changeCurrentPage('home') : console.log('yo')
+          if (match) {
+            changeCurrentPage('home')
+          } else {
+            return null
+          }
         }}
       >
         {currentPage === 'home'
@@ -40,7 +42,11 @@ function MobileNavbar({userData}) {
       <NavLink 
         to="/post" 
         isActive={(match, location) => {
-          match ? changeCurrentPage('post') : console.log('yo')
+          if (match) {
+            changeCurrentPage('post')
+          } else {
+            return null
+          }
         }}
       >
         {currentPage === 'post'
@@ -51,7 +57,11 @@ function MobileNavbar({userData}) {
       <NavLink 
         to={`/user/${userData.username}`}
         isActive={(match, location) => {
-          match ? changeCurrentPage('user') : console.log('yo')
+          if (match) {
+            changeCurrentPage('user')
+          } else {
+            return null
+          }
         }}        
       >
         {currentPage === 'user'
