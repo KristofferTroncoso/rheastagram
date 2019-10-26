@@ -1,7 +1,8 @@
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import FoodCard from '../components/FoodCard/FoodCard';
-import { listPosts } from '../graphql/queries';
+import FoodCard from '../../components/FoodCard/FoodCard';
+import { listPosts } from '../../graphql/queries';
+import './HomePage.css';
 
 
 const HomePage = ({ userData }) => {
@@ -18,7 +19,7 @@ const HomePage = ({ userData }) => {
   }
   
   return (
-    <div className="wrapper" style={{padding: '80px 0'}}>
+    <div className="HomePage wrapper">
       {allPosts.map(post => (
         <FoodCard 
           key={post.id} 

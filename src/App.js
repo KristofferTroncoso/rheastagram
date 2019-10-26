@@ -13,7 +13,7 @@ import {
 import customTheme from './customTheme';
 import RNavbar from './components/RNavbar/RNavbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import PublicPage from './pages/PublicPage';
 import PostPhotoPage from './pages/PostPhotoPage';
 import UserPage from './pages/UserPage';

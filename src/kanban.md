@@ -18,13 +18,13 @@
 * why is userpage using listusers graphql query. doesnt it only need getuser?
 * add pull to refresh functionality. search up npm or react packages.
 * catch unknown params such as /user/idkthisuser
-* Mobile Bar icons should be highlighted based on current route
+
 
 
 
 # In Progress
 * add likes feature
-
+* Mobile Bar icons should be highlighted based on current route
 
 
 # Completed
