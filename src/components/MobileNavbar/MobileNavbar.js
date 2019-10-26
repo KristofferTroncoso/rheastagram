@@ -33,6 +33,7 @@ function MobileNavbar({userData}) {
             return null
           }
         }}
+        style={{padding: '4px 40px'}}
       >
         {currentPage === 'home'
           ? <AiFillHome style={{fontSize: '34px', color: '#3b3b3b'}} />
@@ -48,6 +49,7 @@ function MobileNavbar({userData}) {
             return null
           }
         }}
+        style={{padding: '0 40px'}}
       >
         {currentPage === 'post'
           ? <FaPlusSquare style={{fontSize: '38px', color: '#3b3b3b'}} />
@@ -62,7 +64,8 @@ function MobileNavbar({userData}) {
           } else {
             return null
           }
-        }}        
+        }}
+        style={{padding: '4px 40px'}}
       >
         {currentPage === 'user'
           ? <FaUser style={{fontSize: '30px', color: '#3b3b3b'}} />
