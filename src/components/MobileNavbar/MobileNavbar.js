@@ -2,27 +2,27 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaPlusSquare, FaRegPlusSquare, FaUser, FaRegUser } from 'react-icons/fa';
 import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
-import './MobileNavbar.css';
+import styled from 'styled-components';
+
+const StyledNav = styled.nav`
+  background: white;
+  height: 50px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 0 10px;
+  border-top: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
 
 function MobileNavbar({userData}) {
   const [currentPage, changeCurrentPage] = React.useState();
 
   return (
-    <div 
-      className="MobileNavbar"
-      style={{
-        background: 'white',
-        height: '50px',
-        position: 'fixed',
-        bottom: '0px',
-        width: '100%',
-        padding: '0 10px 0',
-        borderTop: '1px solid #e6e6e6',
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-      }}      
-    >
+    <StyledNav className="MobileNavbar">
       <NavLink 
         exact
         to="/"
@@ -72,7 +72,7 @@ function MobileNavbar({userData}) {
           : <FaRegUser style={{fontSize: '30px', color: '#3b3b3b'}} />
         }
       </NavLink>
-    </div>
+    </StyledNav>
   )
 }
 

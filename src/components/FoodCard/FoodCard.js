@@ -5,6 +5,43 @@ import { Storage } from 'aws-amplify';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledSection = styled.section`
+  background: white;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+  padding: 0;
+  margin: 10px auto;
+  max-width: 600px;
+`;
+
+const StyledDiv = styled.div`
+  height: 60px;
+  padding: 5px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+`;
+
+const StyledH3 = styled.h3`
+  padding: 0 15px;
+  margin: 0;
+`;
+
+const StyledTimestamp = styled.p`
+  color: grey;
+  font-size: 11px;
+  margin: 12px 10px 6px;
+`;
+
+const StyledIcon = styled(Icon)`
+  font-size: 24px;
+  margin: 0 8px;
+  color: #5c5c5c;
+`;
+
 
 function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
   const [imgKey, changeImgKey] = React.useState('');
@@ -18,44 +55,34 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
   }
   
   return (
-    <div 
-      style={{
-        background: 'white', 
-        border: '1px solid #e6e6e6',
-        borderRadius: '3px',
-        padding: '0', 
-        margin: '10px auto', 
-        maxWidth: '600px'
-        
-      }}
-      className="wrapper"
-    >
-      <div 
-        style={{
-          height: '60px', 
-          padding: '5px 15px', 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          alignContent: 'center'
-        }}
-      >
+    <StyledSection className="wrapper">
+      <StyledDiv>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <Avatar img={userData.photoUrl}  username={userData.username} />
-          <Link to={`/user/${userData.username}`}><h3 style={{padding: '0 15px'}}>{userData.username}</h3></Link>
+          <Link to={`/user/${userData.username}`}>
+            <StyledH3>{userData.username}</StyledH3>
+          </Link>
         </div>
-        <PostOptions userData={userData} id={id} imgKey={imgKey} loggedInUserData={loggedInUserData} />
-      </div>
+        <PostOptions 
+          userData={userData} 
+          id={id} imgKey={imgKey} 
+          loggedInUserData={loggedInUserData}
+        />
+      </StyledDiv>
       <img src={imgKey} alt={imgUrl} style={{width: '100%'}} />
       <div style={{padding: '15px'}}>
-        <button onClick={handleLike} style={{border: 0, padding: 0}}>
-          <Icon type="heart" theme={true ? null : "twoTone"} twoToneColor="salmon" style={{fontSize: '26px', margin: '0 8px', padding: '0', color: '#5c5c5c'}} />
+        <button onClick={handleLike} style={{border: 0, padding: 0, outline: 0}}>
+          <StyledIcon 
+            type="heart" 
+            theme={true ? null : "twoTone"} 
+            twoToneColor="salmon" 
+          />
         </button>
-        <Icon type="message" style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} />
-        <Icon type="upload" style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} />
-        <p style={{color: 'grey', fontSize: '11px', margin: '12px 10px 6px'}}>{moment(createdAt).fromNow().toUpperCase()}</p>
+        <StyledIcon type="message" />
+        <StyledIcon type="upload" />
+        <StyledTimestamp>{moment(createdAt).fromNow().toUpperCase()}</StyledTimestamp>
       </div>
-    </div>
+    </StyledSection>
   )
 }
 

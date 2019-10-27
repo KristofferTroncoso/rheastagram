@@ -36,7 +36,7 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
   }
   
   return (
-    <div>
+    <button style={{border: 0, outline: 0}}>
       <div
         onClick={showModal}
       >
@@ -75,7 +75,7 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
           </Button>
         </Link>
       </Modal>
-    </div>
+    </button>
   );   
 }
 
