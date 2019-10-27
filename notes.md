@@ -5,6 +5,7 @@ im trying to do graphql version of my instagram app.
 
 # omg it worked. the graphql schema i was working on
 
+```
 type User @model {
     id: ID!
     username: String!
@@ -24,9 +25,10 @@ type Comment @model {
     user: User @connection(name: "Users")
     post: Post @connection(name: "PostComments")
 }
-
+```
 
 # what i want for the real one
+```
 type User @model {
     id: ID!
     username: String!
@@ -61,9 +63,10 @@ type Like @model {
     post: Post @connection(name: "PostLikes")
     timeCreated: String
 }
-
+```
 
 ## notes
+
 Date.toISOString()
 console.log(moment("2019-09-24T20:08:26.874Z").fromNow())
 
