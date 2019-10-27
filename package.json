@@ -1,6 +1,6 @@
 {
-  "name": "newinstatest",
-  "version": "0.1.0",
+  "name": "Rheastagram",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "antd": "^3.23.4",

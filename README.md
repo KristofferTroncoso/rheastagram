@@ -1,5 +1,5 @@
 # This is a serverless Instagram clone
-side-note: This is more of a backup. Not sure if this will be showcased.
+Named after the best dog Rhea
 
 # live demo here (deployed on Amplify Console): 
 https://master.d3bmzm8bmp8ok9.amplifyapp.com/
