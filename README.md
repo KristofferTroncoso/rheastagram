@@ -13,7 +13,9 @@ https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 * React
 * Ant-Design components
 * AWS Amplify components
-* css flexbox
+* React-Icons
+* css flexbox and css grid
+* styled-components
 * graphql api
 
 
