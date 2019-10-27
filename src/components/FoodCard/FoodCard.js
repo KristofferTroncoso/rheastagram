@@ -14,6 +14,13 @@ const StyledSection = styled.section`
   padding: 0;
   margin: 10px auto;
   max-width: 600px;
+  
+  @media (max-width: 500px){
+    background: #f7f7f7;
+    border: 0;
+    border-radius: 0;
+    margin: 0 auto;
+  }
 `;
 
 const StyledDiv = styled.div`
