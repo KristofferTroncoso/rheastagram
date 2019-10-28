@@ -66,7 +66,6 @@ type Like @model {
 ```
 
 ## notes
-
 Date.toISOString()
 console.log(moment("2019-09-24T20:08:26.874Z").fromNow())
 
