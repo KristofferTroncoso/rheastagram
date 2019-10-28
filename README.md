@@ -19,6 +19,7 @@ Live Demo: https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 - [x] Responsive, modern layout (CSS Grid and Flexbox)
 - [x] CRUD operations (create, read, update, and delete User, Posts, and Comments)
 - [x] CI/CD (AWS Amplify Console)
+- [x] Routing (React-Router)
 - [ ] Type-checking (Prop-Types/TypeScript(refactor))
 - [ ] Testing (Jest, Enzyme)
 
@@ -28,11 +29,12 @@ Live Demo: https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 * AWS Amplify components
 * CSS Grid and Flexbox
 * React-Icons
+* React-Router
 * graphql api
 
 ## backend
 * AWS Amplify
-* AppSync (graphql)
-* DynamoDB (NoSQL Database)
-* S3 (Storage)
-* Cognito (Auth)
+* AWS AppSync (graphql)
+* Amazon DynamoDB (NoSQL Database)
+* Amazon S3 (Storage)
+* AWS Cognito (Auth)
