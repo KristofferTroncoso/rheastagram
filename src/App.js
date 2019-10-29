@@ -11,7 +11,7 @@ import {
   withRouter
 } from "react-router-dom";
 import customTheme from './customTheme';
-import RNavbar from './components/RNavbar/RNavbar';
+import Navbar from './components/Navbar/Navbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
 import HomePage from './pages/HomePage/HomePage';
 import PublicPage from './pages/PublicPage';
@@ -167,7 +167,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <RNavbar userData={userData} />
+        <Navbar userData={userData} />
         <Route 
           path="/" 
           exact 
