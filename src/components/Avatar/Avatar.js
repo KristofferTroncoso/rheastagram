@@ -1,8 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Avatar.css';
 import { Avatar as AntAvatar } from 'antd';
 import { Storage } from 'aws-amplify';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  background: #ec008c; 
+  background: -webkit-linear-gradient(to right, #ffc852, #ec008c); 
+  background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(255,255,0,.8), rgba(255,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+  padding: 2px;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+`;
+
+const StyledAntAvatar = styled(AntAvatar)`
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+`;
 
 function Avatar({img, username}) {
   const [imgKey, changeImgKey] = React.useState('');
@@ -14,25 +32,12 @@ function Avatar({img, username}) {
   
   return (
     <Link to={`/user/${username}`}>
-      <div className="AvatarIcon">
-        <AntAvatar 
-          style={{width: '40px', height: '40px', border: '2px solid white'}} 
+      <StyledDiv className="AvatarIcon">
+        <StyledAntAvatar 
           icon="user" 
           src={imgKey && imgKey} 
         />
-      
-        {/*
-        <div 
-          className="AvatarIcon_img" 
-          style={{
-            backgroundImage: `url(${img})`, 
-            backgroundPosition: 'center', 
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
-          }} 
-        />
-        */}
-      </div>
+      </StyledDiv>
     </Link>
   )
 }

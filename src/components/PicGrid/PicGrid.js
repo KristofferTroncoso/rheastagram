@@ -1,12 +1,31 @@
 import React from 'react';
 import NewPic from '../NewPic/NewPic';
-import './PicGrid.css';
+import styled from 'styled-components';
 
+const StyledPicGridWrapper = styled.div`
+  margin: 0 10px;
+  
+  @media (max-width: 735px){ 
+    margin: 2px;
+  }
+`;
+
+const StyledPicGrid = styled.div`
+  margin: 0 auto;
+  max-width: 935px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 28px;
+
+  @media (max-width: 735px){ 
+    grid-gap: 4px;
+  }
+`;
 
 function PicGrid({pics, modalStatus, userData, loggedInUserData, getUser}) {
   return (
-    <div className="PicGridWrapper">
-      <div className="PicGrid">
+    <StyledPicGridWrapper className="PicGridWrapper">
+      <StyledPicGrid className="PicGrid">
         {pics.map((pic) => (
           <NewPic 
             key={pic.id} 
@@ -20,8 +39,8 @@ function PicGrid({pics, modalStatus, userData, loggedInUserData, getUser}) {
             getUser={getUser}
           />
         ))}
-      </div>
-    </div>
+      </StyledPicGrid>
+    </StyledPicGridWrapper>
   );
 }
 

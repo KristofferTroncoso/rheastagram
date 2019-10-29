@@ -132,7 +132,11 @@ function PostCard(
           style={{padding: "8px", height: '100%', overflow: 'auto'}}
         >
           {comments
-          .sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0))
+          .sort((a, b) => (a.timeCreated < b.timeCreated) 
+            ? -1 
+            : ((a.timeCreated > b.timeCreated) 
+              ? 1 
+              : 0))
           .map(comment => (
             <div style={{display: 'flex', marginBottom: '8px'}}  key={comment.id}>
               <Avatar img={comment.user.photoUrl} username={comment.user.username} />
@@ -141,14 +145,21 @@ function PostCard(
                   <h4 style={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>
                     {comment.user.username}
                   </h4>
-                  <p style={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>{comment.content}</p>
+                  <p style={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>
+                    {comment.content}
+                  </p>
                 </div>
-                <p style={{fontSize: '11px', color: 'grey'}}>{moment(comment.timeCreated).fromNow()}</p>
+                <p style={{fontSize: '11px', color: 'grey'}}>
+                  {moment(comment.timeCreated).fromNow()}
+                </p>
               </div>
             </div>
           ))}
         </div>
-        <div className="PostCard_stats" style={{borderTop: '1px solid lightgrey', padding: '8px'}}>
+        <div 
+          className="PostCard_stats" 
+          style={{borderTop: '1px solid lightgrey', padding: '8px'}}
+        >
           <div className="PostCard_stats_icons" style={{display: 'flex'}}>
             <Like 
               postId={postId} 
@@ -157,7 +168,10 @@ function PostCard(
               getPostData={getPostData} 
               getNewArrOfLikes={getNewArrOfLikes} 
             />
-            <Icon type="message" style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} />
+            <Icon 
+              type="message" 
+              style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} 
+            />
           </div>
           <h4 style={{fontWeight: '700', margin: 0}}>
             {likes.length} {likes.length > 1 ? 'likes' : 'like'}
