@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from 'react';
-import './App.css';
 import { Auth, Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
 import { withAuthenticator, Authenticator, SignIn, ForgotPassword } from 'aws-amplify-react';
 import {
