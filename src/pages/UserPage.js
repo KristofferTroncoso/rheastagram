@@ -6,7 +6,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 
 function UserPage({loggedInUserData, props}) {
   const [foundUserData, changeFoundUserData] = React.useState({posts: []})
-  const [isFound, changeIsFound] = React.useState();
+  const [isFound, changeIsFound] = React.useState(true);
   
   React.useEffect(() => {
     console.log(`UserPage-useEffect: Getting user data for this page!`);
