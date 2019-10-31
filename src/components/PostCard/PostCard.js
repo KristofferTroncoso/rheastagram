@@ -10,22 +10,25 @@ import styled from 'styled-components';
 
 const StyledSection = styled.section`
   display: flex;
-  background: lightgrey;
+  background: inherit;
   justify-content: center;
   border-radius: 4px;
-  max-width: 850px;
+  max-width: 950px;
   margin: 0 auto;
+  
+  @media (max-width: 768px){ 
+    flex-direction: column;
+  }
 `;
 
 const StyledImg = styled.img`
-  max-width: 700px;
   max-height: 700px;
   object-fit: cover;
   border: 1px solid lightgrey;
 `;
 
 const StyledDiv = styled.div`
-  min-width: 320px;
+  min-width: 335px;
   background: white;
   display: flex;
   flex-direction: column;
