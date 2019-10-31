@@ -23,6 +23,10 @@ Live Demo: https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 - [ ] Type-checking (Prop-Types/TypeScript(refactor))
 - [ ] Testing (Jest, Enzyme)
 
+## demo gif
+![demo gif](./public/demo.gif)
+
+
 ## frontend
 * React
 * Ant-Design components
