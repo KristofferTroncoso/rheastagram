@@ -28,6 +28,7 @@ function UserPage({loggedInUserData, props}) {
               items {
                 id
                 picUrl
+                timeCreated
                 comments {
                   items {
                     id
@@ -86,7 +87,12 @@ function UserPage({loggedInUserData, props}) {
       {isFound 
       ? <>
           <InfoHeader userData={foundUserData} loggedInUserData={loggedInUserData} />
-          <PicGrid pics={foundUserData.posts} userData={foundUserData} loggedInUserData={loggedInUserData} getUser={getUser} />
+          <PicGrid 
+            pics={foundUserData.posts} 
+            userData={foundUserData} 
+            loggedInUserData={loggedInUserData}
+            getUser={getUser} 
+          />
         </> 
       : <h1 style={{textAlign: 'center', paddingTop: '200px'}}>User not found</h1>}
     </div>

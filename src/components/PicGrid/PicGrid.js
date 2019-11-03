@@ -23,10 +23,14 @@ const StyledPicGrid = styled.div`
 `;
 
 function PicGrid({pics, modalStatus, userData, loggedInUserData, getUser}) {
+  let sortedPics = pics.sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0)).reverse();
+  
   return (
     <StyledPicGridWrapper className="PicGridWrapper">
+      <button onClick={e => console.log(pics)}>console log pics</button>
+      <button onClick={e => console.log(sortedPics)}>console log sorted pics</button>
       <StyledPicGrid className="PicGrid">
-        {pics.map((pic) => (
+        {sortedPics.map((pic) => (
           <NewPic 
             key={pic.id} 
             postId={pic.id}
