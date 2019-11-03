@@ -27,8 +27,6 @@ function PicGrid({pics, modalStatus, userData, loggedInUserData, getUser}) {
   
   return (
     <StyledPicGridWrapper className="PicGridWrapper">
-      <button onClick={e => console.log(pics)}>console log pics</button>
-      <button onClick={e => console.log(sortedPics)}>console log sorted pics</button>
       <StyledPicGrid className="PicGrid">
         {sortedPics.map((pic) => (
           <NewPic 
