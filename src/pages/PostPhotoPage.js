@@ -14,7 +14,7 @@ function PostPhotoPage({userData}) {
   
   const handlePick = data => {
     console.log(data);
-    Storage.put(`${userData.id}/${data.name}`, data.file, {
+    Storage.put(`${userData.id}/${genUUID()}-${data.name}`, data.file, {
         level: 'public',
         contentType: data.type
     })
