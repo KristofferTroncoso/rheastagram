@@ -1,7 +1,13 @@
 import React from 'react';
-import './PostPage.css';
 import { API } from 'aws-amplify';
 import PostCard from '../../components/PostCard/PostCard';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  padding-top: 100px;
+  margin: 0 auto;
+  max-width: 1000px;
+`;
 
 function PostPage({props, loggedInUserData}) {
   const [findPostState, changeFindPostState] = React.useState('loading');
@@ -86,7 +92,7 @@ function PostPage({props, loggedInUserData}) {
   }, [paramsPostId, loggedInUserData]);
   
   return (
-    <div className="PostPage" style={{paddingTop: '100px', margin: '0 auto', maxWidth: '1000px'}}>
+    <StyledDiv className="PostPage">
       {{loading: <h1>Loading</h1>,
         found:  <PostCard
                   postId={postData.id}
@@ -103,7 +109,7 @@ function PostPage({props, loggedInUserData}) {
                 />,
         notfound: <h1>Post not found</h1>
       }[findPostState]}
-    </div>
+    </StyledDiv>
   )
 }
 
