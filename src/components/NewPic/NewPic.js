@@ -95,8 +95,8 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
         width="900px"
         height="900px"
       >
-        <div style={{display: 'flex', background: 'white', justifyContent: 'space-between'}}>
-          <img alt={imgKey} src={imgKey} style={{maxWidth: '700px', maxHeight: '800px', objectFit: 'contain'}} />
+        <div className="NewPicCard">
+          <img alt={imgKey} src={imgKey} style={{maxWidth: '700px', maxHeight: '800px', objectFit: 'contain', background: '#f7f7f7'}} />
           <div style={{minWidth: '320px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
             <div
               style={{

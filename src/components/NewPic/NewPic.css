@@ -33,3 +33,16 @@
 .Pic h2:hover {
   opacity: 1;
 }
+
+
+.NewPicCard {
+  display: flex;
+  background: white;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px){ 
+  .NewPicCard {
+    flex-direction: column;
+  }
+}
