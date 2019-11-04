@@ -28,7 +28,7 @@ export const Input = {
 };
 export const Button = {
   background: `linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
-            linear-gradient(127deg, rgba(255,255,0,.8), rgba(255,255,0,0) 70.71%),
+            linear-gradient(127deg, rgba(255,157,45,.8), rgba(255,255,0,0) 70.71%),
             linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%)`,
   borderRadius: '4px'
 };
@@ -62,7 +62,7 @@ export const Nav = {};
 export const NavItem = {};
 export const NavButton = {};
 
-const customTheme = {
+const awsCustomTheme = {
   container: Container,
   formContainer: FormContainer,
   formSection: FormSection,
@@ -105,4 +105,4 @@ const customTheme = {
   navButton: NavButton
 };
 
-export default customTheme;
+export default awsCustomTheme;

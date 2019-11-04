@@ -9,7 +9,7 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
-import customTheme from './customTheme';
+import awsCustomTheme from './awsCustomTheme';
 import Navbar from './components/Navbar/Navbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
 import HomePage from './pages/HomePage/HomePage';
@@ -192,4 +192,4 @@ function App() {
 }
 
 
-export default withAuthenticator(App, false, [], null, customTheme);
+export default withAuthenticator(App, false, [], null, awsCustomTheme);

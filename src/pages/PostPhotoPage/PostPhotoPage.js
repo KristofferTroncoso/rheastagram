@@ -1,7 +1,7 @@
 import React from 'react';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { PhotoPicker } from 'aws-amplify-react';
-import customTheme from '../../customTheme';
+import awsCustomTheme from '../../awsCustomTheme';
 import { Button, Icon } from 'antd';
 import { createPost } from '../../graphql/mutations';
 import { genUUID, getISODate } from '../../utils';
@@ -39,7 +39,7 @@ function PostPhotoPage({userData}) {
      {/* <button onClick={e => console.log(imgKey)}>what is the img key</button> */}
       <PhotoPicker 
         preview 
-        theme={customTheme} 
+        theme={awsCustomTheme} 
         onPick={handlePick} 
       />
       <div style={{margin: '0 auto', textAlign: 'center', maxWidth: '400px', padding: '0 5px'}}>
