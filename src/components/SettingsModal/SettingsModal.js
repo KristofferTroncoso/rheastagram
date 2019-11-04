@@ -1,8 +1,6 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
-import './SettingsModal.css';
-
 
 function SettingsModal() {
   const [visible, changeVisible] = React.useState(false);
