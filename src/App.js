@@ -1,14 +1,7 @@
-/* eslint-disable */
 import React from 'react';
-import { Auth, Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
-import { withAuthenticator, Authenticator, SignIn, ForgotPassword } from 'aws-amplify-react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from "react-router-dom";
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import awsCustomTheme from './awsCustomTheme';
 import Navbar from './components/Navbar/Navbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
@@ -18,9 +11,7 @@ import PostPhotoPage from './pages/PostPhotoPage/PostPhotoPage';
 import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
-import { listUsers, getUser } from './graphql/queries';
 import { createUser } from './graphql/mutations';
-import { genUUID } from './utils';
 
 const customGetUserQuery = `
   query GetUser($id: ID!) {
@@ -98,6 +89,7 @@ function App() {
     };
     console.log(createUserInput);
     const response = await API.graphql(graphqlOperation(createUser, {input: createUserInput}));
+    console.log(response);
     getUserData(identityId);
   }
   
@@ -133,36 +125,6 @@ function App() {
     }
   }
   
-  const testfunc = () => console.log('testing!')
-
-  const list = async(identityId) => {
-    // console.log('calling api');
-    // const response = await API.get(myApi, `/items/postid:456`);
-    // console.log(response);
-    console.log('listing');
-  }
-  
-  const handleTest = async e => {
-    let endpointUrl = "https://l2p5qjd4f5dlrig4il3zkkgqre.appsync-api.us-east-1.amazonaws.com/graphql";
-    const getUserTestQuery = `
-      query GetUserTest($id:ID!) {
-        getUser(id: $id) {
-          id username
-        }
-      }
-    `
-    const queryVariables = {
-      id: "us-east-1:94d08666-8d6a-46cb-aa70-68c1fc6adf05"
-    }
-    let test = {query: getUserTestQuery, variables: queryVariables};
-    console.log(graphqlOperation)
-    const response = await API.graphql(test);
-    console.log(response)
-    // fetch(endpointUrl, {method: "POST"}).then(r => console.log(r));
-  }
-
-  
-
   return (
     <Router>
       <div className="App">
@@ -176,7 +138,6 @@ function App() {
               post={postUser} 
               getUserData={getUserData} 
               userData={userData} 
-              list={list} 
             />
           } 
         />
