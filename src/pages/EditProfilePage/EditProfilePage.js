@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Form, Input, Upload } from 'antd';
-import { updateUser } from '../graphql/mutations';
+import { updateUser } from '../../graphql/mutations';
 import { API, Storage, graphqlOperation } from 'aws-amplify';
 // import { useHistory } from "react-router";
 // import { S3Image } from 'aws-amplify-react';
-import Avatar from '../components/Avatar/Avatar';
+import Avatar from '../../components/Avatar/Avatar';
 
 
 function EditProfilePage({userData, getAuthenticatedUserAndData}) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listUsers } from '../graphql/queries';
+import { listUsers } from '../../graphql/queries';
 
 function PublicPage({userData}) {
   React.useEffect(() => {

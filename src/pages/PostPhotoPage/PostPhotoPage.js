@@ -1,10 +1,10 @@
 import React from 'react';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { PhotoPicker } from 'aws-amplify-react';
-import customTheme from '../customTheme';
+import customTheme from '../../customTheme';
 import { Button, Icon } from 'antd';
-import { createPost } from '../graphql/mutations';
-import { genUUID, getISODate } from '../utils';
+import { createPost } from '../../graphql/mutations';
+import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import PicGrid from '../components/PicGrid/PicGrid';
-import InfoHeader from '../components/InfoHeader/InfoHeader';
+import PicGrid from '../../components/PicGrid/PicGrid';
+import InfoHeader from '../../components/InfoHeader/InfoHeader';
 import { API, graphqlOperation } from 'aws-amplify';
 
 
