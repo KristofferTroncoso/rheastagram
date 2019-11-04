@@ -6,20 +6,31 @@ import { Button, Icon } from 'antd';
 import { createPost } from '../../graphql/mutations';
 import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
+import styled from 'styled-components';
 
+const StyledDiv = styled.div`
+  padding: 70px 0 50px;
+  margin: 0 auto;
+`;
 
 function PostPhotoPage({userData}) {
   const [imgKey, changeImgKey] = React.useState();
+  const [isTooBig, changeIsTooBig] = React.useState();
   const history = useHistory();
   
   const handlePick = data => {
     console.log(data);
-    Storage.put(`${userData.id}/${genUUID()}-${data.name}`, data.file, {
-        level: 'public',
-        contentType: data.type
-    })
-    .then (result => changeImgKey(result.key))
-    .catch(err => console.log(err));
+    if (data.size > 300000) {
+      changeIsTooBig(true);
+    } else {
+      changeIsTooBig(false);
+      Storage.put(`${userData.id}/${genUUID()}-${data.name}`, data.file, {
+          level: 'public',
+          contentType: data.type
+      })
+      .then (result => changeImgKey(result.key))
+      .catch(err => console.log(err));     
+    }
   }
   
   const handleSave = async(e) => {
@@ -35,14 +46,14 @@ function PostPhotoPage({userData}) {
   }
   
   return (
-    <div style={{padding: '70px 0 50px'}} className="wrapper">
-     {/* <button onClick={e => console.log(imgKey)}>what is the img key</button> */}
+    <StyledDiv className="wrapper">
       <PhotoPicker 
         preview 
         theme={awsCustomTheme} 
         onPick={handlePick} 
       />
       <div style={{margin: '0 auto', textAlign: 'center', maxWidth: '400px', padding: '0 5px'}}>
+        {isTooBig && <h2 style={{color: 'tomato'}}>Photo too big. Please Upload another image</h2>}
         <Button 
           block 
           onClick={handleSave} 
@@ -53,7 +64,7 @@ function PostPhotoPage({userData}) {
           Submit
         </Button>
       </div>
-    </div>
+    </StyledDiv>
   )
 }
 
