@@ -9,7 +9,7 @@ import { useHistory } from "react-router"
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  padding: 70px 0 50px;
+  padding: 50px 0;
   margin: 0 auto;
 `;
 
@@ -22,6 +22,7 @@ function PostPhotoPage({userData}) {
     console.log(data);
     if (data.size > 300000) {
       changeIsTooBig(true);
+      changeImgKey(null);
     } else {
       changeIsTooBig(false);
       Storage.put(`${userData.id}/${genUUID()}-${data.name}`, data.file, {
@@ -53,7 +54,7 @@ function PostPhotoPage({userData}) {
         onPick={handlePick} 
       />
       <div style={{margin: '0 auto', textAlign: 'center', maxWidth: '400px', padding: '0 5px'}}>
-        {isTooBig && <h2 style={{color: 'tomato'}}>Photo too big. Please Upload another image</h2>}
+        {isTooBig && <h2 style={{color: 'tomato'}}>Photo is too large. Please upload a smaller photo.</h2>}
         <Button 
           block 
           onClick={handleSave} 
