@@ -4,7 +4,7 @@ import PostCard from '../../components/PostCard/PostCard';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  padding-top: 100px;
+  padding: 100px 0 60px;
   margin: 0 auto;
   max-width: 1000px;
 `;
