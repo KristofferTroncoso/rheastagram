@@ -8,10 +8,22 @@ import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
 import styled from 'styled-components';
 
-const StyledDiv = styled.div`
+const StyledPageWrapper = styled.div`
   padding: 50px 0;
   margin: 0 auto;
 `;
+
+const StyledDiv = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  max-width: 400px;
+  padding: 0 5px;
+`;
+
+const StyledH2 = styled.h2`
+  color: tomato;
+`;
+
 
 function PostPhotoPage({userData}) {
   const [imgKey, changeImgKey] = React.useState();
@@ -47,14 +59,18 @@ function PostPhotoPage({userData}) {
   }
   
   return (
-    <StyledDiv className="wrapper">
+    <StyledPageWrapper className="wrapper">
       <PhotoPicker 
         preview 
         theme={{...awsCustomTheme, formSection: {padding: '10px 15px 0'}}} 
         onPick={handlePick} 
       />
-      <div style={{margin: '0 auto', textAlign: 'center', maxWidth: '400px', padding: '0 5px'}}>
-        {isTooBig && <h2 style={{color: 'tomato'}}>Photo is too large. Please upload a smaller photo.</h2>}
+      <StyledDiv>
+        {isTooBig && 
+          <StyledH2>
+            Photo is too large. Please upload a smaller photo.
+          </StyledH2>
+        }
         <Button 
           block 
           onClick={handleSave} 
@@ -64,8 +80,8 @@ function PostPhotoPage({userData}) {
           <Icon type="save" />
           Submit
         </Button>
-      </div>
-    </StyledDiv>
+      </StyledDiv>
+    </StyledPageWrapper>
   )
 }
 
