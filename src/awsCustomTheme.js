@@ -17,7 +17,7 @@ export const FormContainer = {
   maxWidth: '450px',
   padding: '0px'
 };
-export const FormSection = {padding: '10px 15px 0', margin: '0 0 5px'};
+export const FormSection = {margin: '0 0 5px'};
 export const FormField = {};
 export const SectionHeader = {display: 'none', padding: '2px', margin: 0};
 export const SectionBody = {};

@@ -50,7 +50,7 @@ function PostPhotoPage({userData}) {
     <StyledDiv className="wrapper">
       <PhotoPicker 
         preview 
-        theme={awsCustomTheme} 
+        theme={{...awsCustomTheme, formSection: {padding: '10px 15px 0'}}} 
         onPick={handlePick} 
       />
       <div style={{margin: '0 auto', textAlign: 'center', maxWidth: '400px', padding: '0 5px'}}>
