@@ -23,7 +23,7 @@ const StyledAntAvatar = styled(AntAvatar)`
 `;
 
 function Avatar({img, username}) {
-  const [imgKey, changeImgKey] = React.useState('');
+  const [imgKey, changeImgKey] = React.useState();
   
   React.useEffect(() => {
     console.log('Avatar:useEffect')
