@@ -49,9 +49,18 @@ const StyledIcon = styled(Icon)`
   color: #5c5c5c;
 `;
 
+const StyledImg = styled.img`
+  width: 100%;
+  min-height: 300px;
+  background: #3A1C71;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); 
+  background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); 
+  filter: ${props => props.isImgLoaded ? 'none' : 'blur(10px)'};
+`;
 
 function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
   const [imgKey, changeImgKey] = React.useState('');
+  const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   
   React.useEffect(() => {
     Storage.get(imgUrl).then(d => changeImgKey(d)).catch(err => console.log(err));
@@ -76,7 +85,14 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
           loggedInUserData={loggedInUserData}
         />
       </StyledDiv>
-      <img src={imgKey} alt={imgUrl} style={{width: '100%'}} />
+      <div style={{overflow: 'hidden'}}>
+        <StyledImg 
+          src={imgKey} 
+          alt={isImgLoaded ? imgUrl : null} 
+          onLoad={e => setIsImgLoaded(true)} 
+          isImgLoaded={isImgLoaded}
+        />
+      </div>
       <div style={{padding: '15px'}}>
         <button onClick={handleLike} style={{border: 0, padding: 0, outline: 0}}>
           <StyledIcon 
