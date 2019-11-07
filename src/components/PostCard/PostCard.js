@@ -21,7 +21,34 @@ const StyledSection = styled.section`
   }
 `;
 
+const StyledImgWrapper = styled.div`
+  overflow: hidden;
+  background: orange;
+  background-image: radial-gradient(
+      closest-corner circle at 30% 70%,
+      steelblue 30%,
+      rgb(207, 84, 84),
+      90%,
+      transparent
+    ),
+    radial-gradient(
+      closest-corner circle at 90% 40%,
+      pink 20%,
+      orange,
+      90%,
+      transparent
+    ),
+    radial-gradient(
+      closest-corner circle at 30% 10%,
+      tomato 15%,
+      green,
+      85%,
+      transparent
+    );
+`;
+
 const StyledImg = styled.img`
+  width: 100%;
   max-height: 700px;
   object-fit: cover;
   border: 1px solid lightgrey;
@@ -64,6 +91,7 @@ function PostCard(
   }) {
   const [imgKey, changeImgKey] = React.useState('');
   const [inputText, changeInputText] = React.useState('');
+  const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   
   React.useEffect(() => {
     Storage.get(postImgUrl)
@@ -116,7 +144,14 @@ function PostCard(
   
   return (
     <StyledSection className="PostCard">
-      <StyledImg alt="rhea" src={imgKey}  />
+      <StyledImgWrapper>
+        <StyledImg 
+          alt="rhea" 
+          src={imgKey}
+          style={isImgLoaded ? null : {filter: 'blur(15px)'}}
+          onLoad={e => setIsImgLoaded(true)}
+        />
+      </StyledImgWrapper>
       <StyledDiv>
         <StyledDivHeader>
           <div style={{display: 'flex', alignItems: 'center'}}>
