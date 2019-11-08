@@ -74,7 +74,7 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
     <StyledSection className="wrapper">
       <StyledDiv>
         <div style={{display: 'flex', alignItems: 'center'}}>
-          <Avatar img={userData.photoUrl}  username={userData.username} />
+          <Avatar img={userData.photoUrl}  username={userData.username} rainbow large />
           <Link to={`/user/${userData.username}`}>
             <StyledH3>{userData.username}</StyledH3>
           </Link>

@@ -156,7 +156,7 @@ function PostCard(
       <StyledDiv>
         <StyledDivHeader>
           <div style={{display: 'flex', alignItems: 'center'}}>
-            <Avatar img={userData.photoUrl}  username={userData.username} />
+            <Avatar img={userData.photoUrl}  username={userData.username} rainbow />
             <h3 style={{marginLeft: '10px'}}>{userData.username}</h3>
           </div>
           <PostOptions 

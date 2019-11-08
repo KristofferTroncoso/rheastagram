@@ -137,7 +137,12 @@ function Navbar({userData}) {
                 <span style={{margin: '0 5px'}}>Post Photo</span>
               </Button>
             </StyledLink>
-            <Avatar img={userData.profilePhotoUrl} username={userData.username} />
+            <Avatar 
+              img={userData.profilePhotoUrl} 
+              username={userData.username} 
+              rainbow
+              large
+            />
           </div>
           )
         : <div>
