@@ -51,7 +51,7 @@ const StyledIcon = styled(Icon)`
 
 const StyledImg = styled.img`
   width: 100%;
-  min-height: 300px;
+  min-height: 200px;
   background: #3A1C71;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); 
   background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); 
