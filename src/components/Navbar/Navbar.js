@@ -138,7 +138,7 @@ function Navbar({userData}) {
               </Button>
             </StyledLink>
             <Avatar 
-              img={userData.profilePhotoUrl} 
+              img={userData.photoUrl} 
               username={userData.username} 
               rainbow
               large

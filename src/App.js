@@ -65,7 +65,6 @@ function App() {
   const [userData, changeUserData] = React.useState({
     id: null,
     name: '',
-    profilePhotoUrl: null,
     posts: [],
     comments: [],
     likes: [],
@@ -117,7 +116,7 @@ function App() {
         name,
         bio,
         username,
-        profilePhotoUrl: photoUrl,
+        photoUrl,
         posts: userPosts.items,
         comments: comments.items,
         likes: likes.items
