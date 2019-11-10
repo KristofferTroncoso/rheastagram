@@ -141,10 +141,24 @@ function App() {
           } 
         />
         <Route path="/public" render={props => <PublicPage userData={userData} />} />
-        <Route path="/user/:id" render={props => <UserPage loggedInUserData={userData} props={props} />} />
-        <Route path="/editprofile" render={props => <EditProfilePage userData={userData} getAuthenticatedUserAndData={getAuthenticatedUserAndData} />} />
+        <Route 
+          path="/user/:id" 
+          render={props => <UserPage loggedInUserData={userData} props={props} />} 
+        />
+        <Route 
+          path="/editprofile" 
+          render={props => 
+            <EditProfilePage 
+              userData={userData} 
+              getAuthenticatedUserAndData={getAuthenticatedUserAndData} 
+            />
+          } 
+        />
         <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
-        <Route path="/p/:postId" render={props => <PostPage props={props} loggedInUserData={userData} />} />
+        <Route 
+          path="/p/:postId" 
+          render={props => <PostPage props={props} loggedInUserData={userData} />} 
+        />
         {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
       </div>
     </Router>
