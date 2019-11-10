@@ -4,7 +4,28 @@ import { Modal, Icon, Button } from 'antd';
 import { deletePost } from '../../graphql/mutations';
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
+const StyledButton = styled.button`
+  border: 0;
+  outline: 0;
+`;
+
+const StyledIcon = styled(Icon)`
+  font-size: 24px;
+  color: #212121;
+`;
+
+const StyledModalButton = styled(Button)`
+  border: 0;
+  box-shadow: none;
+  margin: 10px 0;
+  font-size: 21px;
+  :hover {
+    opacity: 0.8;
+    color: dodgerblue;
+  }
+`;
 
 function PostOptions({id, imgKey, userData, loggedInUserData}) {
   const [visible, changeVisible] = React.useState(false);
@@ -36,12 +57,10 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
   }
   
   return (
-    <button style={{border: 0, outline: 0}}>
-      <div
-        onClick={showModal}
-      >
-        <Icon type="ellipsis" style={{fontSize: '30px', margin: '0 5px'}} />
-      </div>
+    <div>
+      <StyledButton onClick={showModal}>
+        <StyledIcon type="ellipsis" />
+      </StyledButton>
       <Modal
         visible={visible}
         onOk={handleOk}
@@ -52,30 +71,30 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
       >
         {
           loggedInUserData.id === userData.id 
-          ? <Button 
+          ? <StyledModalButton 
               onClick={handleDelete}
-              block style={{border: 0, boxShadow: 'none', margin: '10px 0'}}
+              block 
             >
-              <h2 style={{color: 'red'}}>Delete</h2>
-            </Button>
+              <span style={{color: 'red'}}>Delete</span>
+            </StyledModalButton>
           : null
         }
-        <Button 
+        <StyledModalButton 
           onClick={e => console.log(imgKey)}
-          block style={{border: 0, boxShadow: 'none', margin: '10px 0'}}
+          block
         >
-          <h2>Copy Link</h2>
-        </Button>
+          Copy Link
+        </StyledModalButton>
         <Link to={`/p/${id}`}>
-          <Button 
+          <StyledModalButton 
             onClick={e => console.log(id)}
-            block style={{border: 0, boxShadow: 'none', margin: '10px 0'}}
+            block
           >
-            <h2>Go to Post</h2>
-          </Button>
+            Go to Post
+          </StyledModalButton>
         </Link>
       </Modal>
-    </button>
+    </div>
   );   
 }
 
