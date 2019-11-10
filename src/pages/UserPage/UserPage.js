@@ -2,7 +2,17 @@ import React from 'react';
 import PicGrid from '../../components/PicGrid/PicGrid';
 import InfoHeader from '../../components/InfoHeader/InfoHeader';
 import { API, graphqlOperation } from 'aws-amplify';
+import styled from 'styled-components';
 
+
+const StyledDiv = styled.div`
+  padding: 20px 0 200px;
+`;
+
+const StyledH1 = styled.h1`
+  text-align: center;
+  padding-top: 200px;
+`;
 
 function UserPage({loggedInUserData, props}) {
   const [foundUserData, changeFoundUserData] = React.useState({posts: []})
@@ -83,7 +93,7 @@ function UserPage({loggedInUserData, props}) {
   
   
   return (
-    <div style={{padding: "20px 0"}}>
+    <StyledDiv>
       {isFound 
       ? <>
           <InfoHeader userData={foundUserData} loggedInUserData={loggedInUserData} />
@@ -94,8 +104,8 @@ function UserPage({loggedInUserData, props}) {
             getUser={getUser} 
           />
         </> 
-      : <h1 style={{textAlign: 'center', paddingTop: '200px'}}>User not found</h1>}
-    </div>
+      : <StyledH1>User not found</StyledH1>}
+    </StyledDiv>
   )
 }
 
