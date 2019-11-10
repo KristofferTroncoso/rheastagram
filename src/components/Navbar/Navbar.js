@@ -109,6 +109,15 @@ const StyledSignUpBtn = styled.button`
   border-radius: 3px;
 `;
 
+const StyledPostPhotoButton = styled(Button)`
+  margin: 0 10px;
+  :hover {
+    color: white;
+    border: white;
+    background: salmon;
+  }
+`;
+
 function Navbar({userData}) {
   return (
     <StyledDiv className="Navbar">
@@ -128,14 +137,10 @@ function Navbar({userData}) {
         ? (
           <div style={{display: 'flex', alignItems: 'center'}}>
             <StyledLink to="/post" className="PostPhotoButton">
-              <Button 
-                style={{
-                  margin: '0 10px'
-                }}
-              >
+              <StyledPostPhotoButton>
                 <Icon type="camera" />
                 <span style={{margin: '0 5px'}}>Post Photo</span>
-              </Button>
+              </StyledPostPhotoButton>
             </StyledLink>
             <Avatar 
               img={userData.photoUrl} 

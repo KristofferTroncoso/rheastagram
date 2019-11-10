@@ -23,7 +23,7 @@ const StyledModalButton = styled(Button)`
   font-size: 21px;
   :hover {
     opacity: 0.8;
-    color: dodgerblue;
+    color: #cc2366;
   }
 `;
 
