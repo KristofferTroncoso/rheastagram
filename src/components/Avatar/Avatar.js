@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar as AntAvatar } from 'antd';
-import { Storage } from 'aws-amplify';
+import { Storage, Cache } from 'aws-amplify';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -28,8 +28,19 @@ function Avatar({img, username, large, rainbow}) {
   const [imgKey, changeImgKey] = React.useState();
   
   React.useEffect(() => {
-    console.log('Avatar:useEffect')
-    Storage.get(img).then(d => changeImgKey(d)).catch(err => console.log(err));
+    let cacheRes = Cache.getItem(img);
+    if (cacheRes === null) {
+      Storage.get(img)
+      .then(d => {
+        changeImgKey(d);
+        let dateNow = new Date();
+        let expirationTime = dateNow.getTime() + 3600000;
+        Cache.setItem(img, d, {expires: expirationTime });
+      })
+      .catch(err => console.log(err));
+    } else {
+      changeImgKey(cacheRes);
+    }
   }, [img])
   
   return (
