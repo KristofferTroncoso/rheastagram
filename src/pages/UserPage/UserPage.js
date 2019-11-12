@@ -19,7 +19,6 @@ function UserPage({loggedInUserData, props}) {
   const [isFound, changeIsFound] = React.useState(true);
   
   React.useEffect(() => {
-    console.log(`UserPage-useEffect: Getting user data for this page!`);
     getUser(props.match.params.id);
   }, [props.match.params.id]);
   
@@ -72,7 +71,6 @@ function UserPage({loggedInUserData, props}) {
     };
     
     let res = await API.graphql(graphqlOperation(customListUsers, variables));
-    console.log(res);
     if (res.data.listUsers.items.length > 0) {
       changeIsFound(true);
       let {id, name, username, bio, email, photoUrl, userPosts} = res.data.listUsers.items[0];
