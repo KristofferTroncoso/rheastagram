@@ -1,5 +1,5 @@
 import React from 'react';
-import { API, Storage } from 'aws-amplify'
+import { API, Storage, Cache } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import { genUUID, getISODate } from '../../utils';
@@ -93,11 +93,21 @@ function PostCard(
   const [imgKey, changeImgKey] = React.useState('');
   const [inputText, changeInputText] = React.useState('');
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
-  
+
   React.useEffect(() => {
-    Storage.get(postImgUrl)
-    .then(d => changeImgKey(d))
-    .catch(err => console.log(err));
+    let cacheRes = Cache.getItem(postImgUrl);
+    if (cacheRes === null) {
+      Storage.get(postImgUrl)
+      .then(d => {
+        changeImgKey(d);
+        let dateNow = new Date();
+        let expirationTime = dateNow.getTime() + 3600000;
+        Cache.setItem(postImgUrl, d, {expires: expirationTime });
+      })
+      .catch(err => console.log(err));
+    } else {
+      changeImgKey(cacheRes);
+    }
   }, [postImgUrl])
   
   const handleSubmit = e => {

@@ -1,16 +1,28 @@
 import React from 'react';
 import './InfoHeader.css';
 import { Link } from 'react-router-dom';
-import { Storage } from 'aws-amplify';
+import { Storage, Cache } from 'aws-amplify';
 import SettingsModal from '../SettingsModal/SettingsModal';
 
 
 function InfoHeader({userData, loggedInUserData}) {
   const [imgKey, changeImgKey] = React.useState('');
-  
+
   React.useEffect(() => {
-    Storage.get(userData.profilePhotoUrl).then(d => changeImgKey(d)).catch(err => console.log(err));
-  }, [userData.profilePhotoUrl]);
+    let cacheRes = Cache.getItem(userData.profilePhotoUrl);
+    if (cacheRes === null) {
+      Storage.get(userData.profilePhotoUrl)
+      .then(d => {
+        changeImgKey(d);
+        let dateNow = new Date();
+        let expirationTime = dateNow.getTime() + 3600000;
+        Cache.setItem(userData.profilePhotoUrl, d, {expires: expirationTime });
+      })
+      .catch(err => console.log(err));
+    } else {
+      changeImgKey(cacheRes);
+    }
+  }, [userData.profilePhotoUrl])
   
   return (
     <div className="InfoHeader wrapper" style={{marginBottom: '30px'}}>

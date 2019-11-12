@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import { Icon } from 'antd';
-import { Storage } from 'aws-amplify';
+import { Storage, Cache } from 'aws-amplify';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
 import { Link } from 'react-router-dom';
@@ -63,9 +63,21 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   
   React.useEffect(() => {
-    Storage.get(imgUrl).then(d => changeImgKey(d)).catch(err => console.log(err));
+    let cacheRes = Cache.getItem(imgUrl);
+    if (cacheRes === null) {
+      Storage.get(imgUrl)
+      .then(d => {
+        changeImgKey(d);
+        let dateNow = new Date();
+        let expirationTime = dateNow.getTime() + 3600000;
+        Cache.setItem(imgUrl, d, {expires: expirationTime });
+      })
+      .catch(err => console.log(err));
+    } else {
+      changeImgKey(cacheRes);
+    }
   }, [imgUrl])
-  
+
   const handleLike = e => {
     console.log(`Liking post ${id}`);
   }
