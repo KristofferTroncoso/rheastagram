@@ -42,6 +42,9 @@
 }
 
 @media (max-width: 768px){ 
+  .NewPicCard img {
+    width: 100%;
+  }
   .NewPicCard {
     flex-direction: column;
   }
