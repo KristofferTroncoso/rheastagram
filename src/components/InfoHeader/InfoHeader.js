@@ -15,7 +15,7 @@ function InfoHeader({userData, loggedInUserData}) {
       .then(d => {
         changeImgKey(d);
         let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 3600000;
+        let expirationTime = dateNow.getTime() + 900000;
         Cache.setItem(userData.profilePhotoUrl, d, {expires: expirationTime });
       })
       .catch(err => console.log(err));

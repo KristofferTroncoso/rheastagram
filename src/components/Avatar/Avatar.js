@@ -34,7 +34,7 @@ function Avatar({img, username, large, rainbow}) {
       .then(d => {
         changeImgKey(d);
         let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 3600000;
+        let expirationTime = dateNow.getTime() + 900000;
         Cache.setItem(img, d, {expires: expirationTime });
       })
       .catch(err => console.log(err));

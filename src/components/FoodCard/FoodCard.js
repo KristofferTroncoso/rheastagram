@@ -69,7 +69,7 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
       .then(d => {
         changeImgKey(d);
         let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 3600000;
+        let expirationTime = dateNow.getTime() + 900000;
         Cache.setItem(imgUrl, d, {expires: expirationTime });
       })
       .catch(err => console.log(err));

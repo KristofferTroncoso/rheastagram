@@ -101,7 +101,7 @@ function PostCard(
       .then(d => {
         changeImgKey(d);
         let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 3600000;
+        let expirationTime = dateNow.getTime() + 900000;
         Cache.setItem(postImgUrl, d, {expires: expirationTime });
       })
       .catch(err => console.log(err));
