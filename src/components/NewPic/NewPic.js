@@ -1,11 +1,11 @@
 import React from 'react';
-import './NewPic.css';
 import { Modal, Icon } from 'antd';
 import { API, Storage, Cache } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
+import styled from 'styled-components/macro';
 
 function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId, getUser}) {
   const [visible, changeVisible] = React.useState(false);
@@ -85,16 +85,38 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
   
 
   return (
-    <div className="NewPic">
+    <div className="NewPic" css={`
+      display: block;
+      height: 31vw;
+      max-height: 288px;
+    `}>
       <div className="Pic" 
         style={{
           background: `url(${imgKey}) no-repeat center/cover`,
         }}
+        css={`
+          height: 100%;
+          width: 100%;
+        `}
         onClick={showModal}
       >
-        <h2>
-          <span><Icon type="heart" theme="filled" />{hearts}</span> 
-          <span><Icon type="message" theme="filled" />{comments}</span>
+        <h2 css={`
+          color: white;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+          margin: 0;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          
+          :hover {
+            opacity: 1;
+          }
+        `}>
+          <span css={`margin: 0 5px`}><Icon type="heart" theme="filled" css={`padding: 0 5px`} />{hearts}</span> 
+          <span css={`margin: 0 5px`}><Icon type="message" theme="filled" css={`padding: 0 5px`} />{comments}</span>
         </h2>
       </div>
       <Modal
@@ -107,8 +129,27 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
         width="900px"
         height="900px"
       >
-        <div className="NewPicCard">
-          <img alt={imgKey} src={imgKey} style={{maxWidth: '700px', minHeight: '100px', maxHeight: '800px', objectFit: 'contain', background: '#f7f7f7'}} />
+        <div className="NewPicCard" 
+          css={`
+            display: flex;
+            background: white;
+            justify-content: space-between;
+            
+            @media (max-width: 768px) { 
+              flex-direction: column;
+            }
+          `}
+        >
+          <img 
+            alt={imgKey} 
+            src={imgKey} 
+            style={{maxWidth: '700px', minHeight: '100px', maxHeight: '800px', objectFit: 'contain', background: '#f7f7f7'}} 
+            css={`
+              @media (max-width: 768px) { 
+                width: 100%;
+              }
+            `}
+          />
           <div style={{minWidth: '320px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
             <div
               style={{
