@@ -2,6 +2,7 @@ import React from 'react';
 import { API } from 'aws-amplify';
 import PostCard from '../../components/PostCard/PostCard';
 import styled from 'styled-components';
+import S3Img from '../../components/S3Img/S3Img';
 
 const StyledDiv = styled.div`
   padding: 100px 0 60px;
@@ -93,6 +94,7 @@ function PostPage({props, loggedInUserData}) {
   
   return (
     <StyledDiv className="PostPage">
+      <S3Img />
       {{loading: <h1>Loading</h1>,
         found:  <PostCard
                   postId={postData.id}

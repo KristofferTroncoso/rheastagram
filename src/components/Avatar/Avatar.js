@@ -28,18 +28,22 @@ function Avatar({img, username, large, rainbow}) {
   const [imgKey, changeImgKey] = React.useState();
   
   React.useEffect(() => {
-    let cacheRes = Cache.getItem(img);
-    if (cacheRes === null) {
-      Storage.get(img)
-      .then(d => {
-        changeImgKey(d);
-        let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 900000;
-        Cache.setItem(img, d, {expires: expirationTime });
-      })
-      .catch(err => console.log(err));
+    if (img === undefined) {
+      console.log('undefined')
     } else {
-      changeImgKey(cacheRes);
+      let cacheRes = Cache.getItem(img);
+      if (cacheRes === null) {
+        Storage.get(img)
+        .then(d => {
+          changeImgKey(d);
+          let dateNow = new Date();
+          let expirationTime = dateNow.getTime() + 900000;
+          Cache.setItem(img, d, {expires: expirationTime });
+        })
+        .catch(err => console.log(err));
+      } else {
+        changeImgKey(cacheRes);
+      }
     }
   }, [img])
   

@@ -168,7 +168,7 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
                   alignItems: 'center', 
                 }}
               >
-                <Avatar img={userData.profilePhotoUrl}  username={userData.username} />
+                <Avatar img={userData.photoUrl}  username={userData.username} />
                 <h3 style={{marginLeft: '10px'}}>{userData.username}</h3>
               </div>
               <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
