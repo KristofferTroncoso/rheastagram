@@ -119,6 +119,7 @@ const StyledPostPhotoButton = styled(Button)`
 `;
 
 function Navbar({userData}) {
+
   return (
     <StyledDiv className="Navbar">
       <StyledNav className="wrapper">

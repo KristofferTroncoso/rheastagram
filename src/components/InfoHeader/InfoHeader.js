@@ -26,7 +26,7 @@ function InfoHeader({userData, loggedInUserData}) {
         changeImgKey(cacheRes);
       }
     }
-  }, [userData.photoUrl])
+  }, [userData])
   
   return (
     <div 

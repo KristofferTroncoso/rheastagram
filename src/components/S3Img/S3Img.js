@@ -32,5 +32,3 @@ function S3Img({imgKey, ...props}) {
 }
 
 export default S3Img;
-
-// <S3Img imgKey="hello.jpg" alt="cash money" />
