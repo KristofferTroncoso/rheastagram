@@ -79,7 +79,7 @@ function UserPage({loggedInUserData, props}) {
         name: name,
         username: username,
         bio: bio,
-        profilePhotoUrl: photoUrl,
+        photoUrl: photoUrl,
         email: email,
         posts: userPosts.items
       })     
