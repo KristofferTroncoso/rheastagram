@@ -11,6 +11,10 @@ import styled from 'styled-components';
 const StyledPageWrapper = styled.div`
   padding: 50px 0;
   margin: 0 auto;
+  
+  @media (max-width: 500px){
+    padding: 70px 0;
+  }
 `;
 
 const StyledDiv = styled.div`

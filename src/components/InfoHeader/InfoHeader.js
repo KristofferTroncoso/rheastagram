@@ -61,23 +61,20 @@ function InfoHeader({userData, loggedInUserData}) {
           }
         `}
       >
-        {userData.photoUrl 
-        ? <img 
-            className="InfoHeader_img" 
-            alt={imgKey} 
-            src={imgKey} 
-            css={`
-              height: 100%;
-              clip-path: circle(76px at center);
-              
-              @media (max-width: 768px){ 
-                height: 70px;
-                clip-path: circle(35px at center);
-              }
-            `}
-          /> 
-        : null
-        }
+        <img 
+          className="InfoHeader_img" 
+          alt={imgKey} 
+          src={imgKey} 
+          css={`
+            height: 100%;
+            clip-path: circle(76px at center);
+            
+            @media (max-width: 768px){ 
+              height: 70px;
+              clip-path: circle(35px at center);
+            }
+          `}
+        /> 
       </div>
       <div>
         <div 

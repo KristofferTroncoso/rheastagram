@@ -56,6 +56,8 @@ const StyledImg = styled.img`
   background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); 
   background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); 
   filter: ${props => props.isImgLoaded ? 'none' : 'blur(10px)'};
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
 `;
 
 function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
