@@ -8,11 +8,14 @@ function Avatar({img, username, large, rainbow}) {
   const [imgKey, changeImgKey] = React.useState();
   
   React.useEffect(() => {
-    if (!img) {
+    console.log('avatar: useeffect');
+    if (img === undefined) {
       console.log('undefined')
     } else {
+      console.log(`checking for ${img}`);
       let cacheRes = Cache.getItem(img);
       if (cacheRes === null) {
+        console.log('getting new signedUrl')
         Storage.get(img)
         .then(d => {
           changeImgKey(d);
@@ -22,6 +25,7 @@ function Avatar({img, username, large, rainbow}) {
         })
         .catch(err => console.log(err));
       } else {
+        console.log('img is cached')
         changeImgKey(cacheRes);
       }
     }

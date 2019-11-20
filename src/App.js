@@ -68,8 +68,7 @@ function App() {
     posts: [],
     comments: [],
     likes: [],
-    bio: '',
-    profilePhoto: null
+    bio: ''
   });
   const [arrOfLikes, changeArrOfLikes] = React.useState([]);
 

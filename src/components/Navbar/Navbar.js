@@ -131,7 +131,7 @@ function Navbar({userData}) {
             </StyledSpan>
           </StyledLogoAndTitle>
         </Link>
-        <StyledSearchForm className="Search">
+        <StyledSearchForm className="Search" onSubmit={e => e.preventDefault()}>
           <StyledSearchInput type="text" className="Search_Box" placeholder="Search" />
         </StyledSearchForm>
         {userData       
