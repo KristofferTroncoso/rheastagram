@@ -4,9 +4,13 @@ import PostCard from '../../components/PostCard/PostCard';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  padding: 100px 0 60px;
+  padding: 50px 0 60px;
   margin: 0 auto;
   max-width: 1000px;
+  
+  @media (max-width: 768px){ 
+    padding: 0;
+  }
 `;
 
 function PostPage({props, loggedInUserData}) {

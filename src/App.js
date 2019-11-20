@@ -13,6 +13,7 @@ import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
 import { createUser } from './graphql/mutations';
 import styled from 'styled-components/macro';
+import Wrapper from './components/Wrapper/Wrapper';
 
 const customGetUserQuery = `
   query GetUser($id: ID!) {
@@ -129,7 +130,7 @@ function App() {
     <Router>
       <div className="App">
         <Navbar userData={userData} />
-        <div css={`max-width: 1000px; margin: 0 auto;`}>
+        <Wrapper>
           <Route 
             path="/" 
             exact 
@@ -161,7 +162,7 @@ function App() {
             path="/p/:postId" 
             render={props => <PostPage props={props} loggedInUserData={userData} />} 
           />
-        </div>
+        </Wrapper>
         {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
       </div>
     </Router>

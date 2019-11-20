@@ -6,7 +6,11 @@ import styled from 'styled-components';
 
 
 const StyledDiv = styled.div`
-  padding: 20px 0 200px;
+  padding: 15px 0 200px;
+  
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 const StyledH1 = styled.h1`

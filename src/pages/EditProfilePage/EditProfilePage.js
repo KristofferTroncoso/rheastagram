@@ -5,7 +5,7 @@ import { API, Storage, graphqlOperation } from 'aws-amplify';
 // import { useHistory } from "react-router";
 // import { S3Image } from 'aws-amplify-react';
 import Avatar from '../../components/Avatar/Avatar';
-
+import styled from 'styled-components/macro';
 
 function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   React.useEffect(() => {
@@ -88,17 +88,20 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   }
   
   return (
-    <div style={{padding: '40px 0'}}>
+    <div
+      css={`
+        padding: 20px;
+      `}
+    >
       {isUserFound
       ? <div 
-          style={{
-            background: 'white',
-            marginTop: '60px',
-            padding: '40px',
-            border: '1px solid lightgrey',
-            borderRadius: '4px',
-            height: '600px'
-          }}
+          css={`
+            background: white;
+            padding: 40px;
+            border: 1px solid lightgrey;
+            border-radius: 4px;
+            height: 600px;
+          `}
         >
           <h1>Edit Profile</h1>
           <div style={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>

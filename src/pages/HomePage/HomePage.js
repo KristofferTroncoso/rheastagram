@@ -1,17 +1,7 @@
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import FoodCard from '../../components/FoodCard/FoodCard';
-import styled from 'styled-components';
-
-const StyledDiv = styled.div`
-  padding: 80px 0;
-  
-  @media (max-width: 768px){ 
-    padding: 60px 0;
-  }
-`;
-
-
+import styled from 'styled-components/macro';
 
 const listPosts = `query ListPosts(
     $filter: ModelPostFilterInput
@@ -61,7 +51,11 @@ const HomePage = ({ userData }) => {
   }
   
   return (
-    <StyledDiv>
+    <div
+      css={`
+        padding: 10px 0;
+      `}
+    >
       {allPosts.map(post => (
         <FoodCard 
           key={post.id} 
@@ -73,7 +67,7 @@ const HomePage = ({ userData }) => {
           loggedInUserData={userData}
         />
       ))}
-    </StyledDiv>
+    </div>
   )
 }
 

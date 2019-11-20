@@ -37,12 +37,12 @@ function InfoHeader({userData, loggedInUserData}) {
         display: flex;
         align-items: center;
         padding: 10px;
-        margin: 100px auto 10px;
+        margin: 30px auto 10px;
         max-width: 800px;
         margin-bottom: 30px;
         
         @media (max-width: 768px){ 
-          margin: 60px auto 10px;
+          margin: 15px auto 10px;
           height: 140px;
           max-width: 600px;
           padding: 4px;

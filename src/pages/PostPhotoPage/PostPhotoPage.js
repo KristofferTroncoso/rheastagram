@@ -9,11 +9,11 @@ import { useHistory } from "react-router"
 import styled from 'styled-components';
 
 const StyledPageWrapper = styled.div`
-  padding: 50px 0;
+  padding: 40px 0;
   margin: 0 auto;
   
-  @media (max-width: 500px){
-    padding: 70px 0;
+  @media(max-width: 768px) {
+    padding: 0;
   }
 `;
 
