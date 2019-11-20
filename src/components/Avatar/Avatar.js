@@ -9,10 +9,9 @@ function Avatar({img, username, large, rainbow}) {
   
   React.useEffect(() => {
     console.log('avatar: useeffect');
-    if (img === undefined) {
+    if (!img) {
       console.log('undefined')
     } else {
-      console.log(`checking for ${img}`);
       let cacheRes = Cache.getItem(img);
       if (cacheRes === null) {
         console.log('getting new signedUrl')

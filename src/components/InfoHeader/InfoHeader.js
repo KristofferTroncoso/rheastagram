@@ -9,12 +9,12 @@ function InfoHeader({userData, loggedInUserData}) {
   const [imgKey, changeImgKey] = React.useState('');
 
   React.useEffect(() => {
-    if (userData.photoUrl === undefined) {
+    if (!userData.photoUrl) {
       console.log('userData.photoUrl is undefined');
     } else {
       let cacheRes = Cache.getItem(userData.photoUrl);
       if (cacheRes === null) {
-        Storage.get(userData.photourl)
+        Storage.get(userData.photoUrl)
         .then(d => {
           changeImgKey(d);
           let dateNow = new Date();
@@ -23,6 +23,7 @@ function InfoHeader({userData, loggedInUserData}) {
         })
         .catch(err => console.log(err));
       } else {
+        console.log(`cacheRes is ${cacheRes}`)
         changeImgKey(cacheRes);
       }
     }
