@@ -63,7 +63,7 @@ function PostPhotoPage({userData}) {
   }
   
   return (
-    <StyledPageWrapper className="wrapper">
+    <StyledPageWrapper>
       <PhotoPicker 
         preview 
         theme={{...awsCustomTheme, formSection: {padding: '10px 15px 0'}}} 

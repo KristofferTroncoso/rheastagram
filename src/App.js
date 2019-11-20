@@ -12,6 +12,7 @@ import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
 import { createUser } from './graphql/mutations';
+import styled from 'styled-components/macro';
 
 const customGetUserQuery = `
   query GetUser($id: ID!) {
@@ -128,37 +129,39 @@ function App() {
     <Router>
       <div className="App">
         <Navbar userData={userData} />
-        <Route 
-          path="/" 
-          exact 
-          render={props => 
-            <HomePage 
-              username={userData.name} 
-              post={postUser} 
-              getUserData={getUserData} 
-              userData={userData} 
-            />
-          } 
-        />
-        <Route path="/public" render={props => <PublicPage userData={userData} />} />
-        <Route 
-          path="/user/:id" 
-          render={props => <UserPage loggedInUserData={userData} props={props} />} 
-        />
-        <Route 
-          path="/editprofile" 
-          render={props => 
-            <EditProfilePage 
-              userData={userData} 
-              getAuthenticatedUserAndData={getAuthenticatedUserAndData} 
-            />
-          } 
-        />
-        <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
-        <Route 
-          path="/p/:postId" 
-          render={props => <PostPage props={props} loggedInUserData={userData} />} 
-        />
+        <div css={`max-width: 1000px; margin: 0 auto;`}>
+          <Route 
+            path="/" 
+            exact 
+            render={props => 
+              <HomePage 
+                username={userData.name} 
+                post={postUser} 
+                getUserData={getUserData} 
+                userData={userData} 
+              />
+            } 
+          />
+          <Route path="/public" render={props => <PublicPage userData={userData} />} />
+          <Route 
+            path="/user/:id" 
+            render={props => <UserPage loggedInUserData={userData} props={props} />} 
+          />
+          <Route 
+            path="/editprofile" 
+            render={props => 
+              <EditProfilePage 
+                userData={userData} 
+                getAuthenticatedUserAndData={getAuthenticatedUserAndData} 
+              />
+            } 
+          />
+          <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
+          <Route 
+            path="/p/:postId" 
+            render={props => <PostPage props={props} loggedInUserData={userData} />} 
+          />
+        </div>
         {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
       </div>
     </Router>

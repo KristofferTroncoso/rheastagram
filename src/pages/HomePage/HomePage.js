@@ -61,7 +61,7 @@ const HomePage = ({ userData }) => {
   }
   
   return (
-    <StyledDiv className="HomePage wrapper">
+    <StyledDiv>
       {allPosts.map(post => (
         <FoodCard 
           key={post.id} 

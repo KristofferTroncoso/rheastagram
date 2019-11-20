@@ -91,7 +91,6 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
     <div style={{padding: '40px 0'}}>
       {isUserFound
       ? <div 
-          className="wrapper" 
           style={{
             background: 'white',
             marginTop: '60px',
@@ -103,7 +102,7 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
         >
           <h1>Edit Profile</h1>
           <div style={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
-            <Avatar img={userData.profilePhotoUrl} style={{alignContent: 'center'}} username={userData.username} />
+            <Avatar img={userData.photoUrl} style={{alignContent: 'center'}} username={userData.username} large />
             <div style={{padding: '0 10px'}}>
               <h2 style={{margin: 0, padding: 0}}>{userData.username}</h2>
               <Upload 

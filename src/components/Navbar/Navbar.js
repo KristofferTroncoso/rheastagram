@@ -23,6 +23,8 @@ const StyledNav = styled.nav`
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  max-width: 1000px;
+  
   @media (max-width: 768px){ 
     height: 60px;
   }
@@ -122,7 +124,7 @@ function Navbar({userData}) {
 
   return (
     <StyledDiv className="Navbar">
-      <StyledNav className="wrapper">
+      <StyledNav>
         <Link to="/">
           <StyledLogoAndTitle className="LogoAndTitle">
             <StyledIcon className="Navbar_Instagram_icon" type="instagram" />

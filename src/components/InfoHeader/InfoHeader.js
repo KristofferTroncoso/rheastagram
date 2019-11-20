@@ -31,7 +31,7 @@ function InfoHeader({userData, loggedInUserData}) {
   
   return (
     <div 
-      className="InfoHeader wrapper"
+      className="InfoHeader"
       css={`
         height: 200px;
         display: flex;
