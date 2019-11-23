@@ -6,14 +6,14 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   background: white; 
-  padding: 0 20px;
+  padding: 0 25px;
   border-bottom: 1px solid #E0E0E0;
   position: fixed;
-  width: 100%;
+  width: 100vw;
   top: 0px;
   z-index: 1;
   @media (max-width: 768px){ 
-    padding: 0 5px;
+    padding: 0 15px;
   }
 `;
 
