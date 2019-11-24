@@ -2,79 +2,12 @@ import React from 'react';
 import { API, Storage, Cache } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
+import CommentList from '../CommentList/CommentList';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
 import Like from '../Like/Like';
 import { Icon } from 'antd';
-import styled from 'styled-components';
-
-const StyledSection = styled.section`
-  display: flex;
-  background: inherit;
-  justify-content: center;
-  border-radius: 4px;
-  max-width: 950px;
-  margin: 0 auto;
-  
-  @media (max-width: 768px){ 
-    flex-direction: column;
-  }
-`;
-
-const StyledImgWrapper = styled.div`
-  overflow: hidden;
-  background: orange;
-  background-image: radial-gradient(
-      closest-corner circle at 30% 70%,
-      steelblue 30%,
-      rgb(207, 84, 84),
-      90%,
-      transparent
-    ),
-    radial-gradient(
-      closest-corner circle at 90% 40%,
-      pink 20%,
-      orange,
-      90%,
-      transparent
-    ),
-    radial-gradient(
-      closest-corner circle at 30% 10%,
-      tomato 15%,
-      green,
-      85%,
-      transparent
-    );
-`;
-
-const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
-  max-height: 700px;
-  object-fit: cover;
-  border: 1px solid lightgrey;
-`;
-
-const StyledDiv = styled.div`
-  min-width: 335px;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 4px;
-  border: 1px solid lightgrey;
-  border-left: 0
-`;
-
-const StyledDivHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-  padding: 5px;
-  border-bottom: 1px solid lightgrey;
-  background: white;
-`;
+import styled from 'styled-components/macro';
 
 function PostCard(
   {
@@ -154,20 +87,91 @@ function PostCard(
   }
   
   return (
-    <StyledSection className="PostCard">
-      <StyledImgWrapper>
-        <StyledImg 
+    <section 
+      className="PostCard"
+      css={`
+        display: flex;
+        background: inherit;
+        justify-content: center;
+        border-radius: 4px;
+        max-width: 950px;
+        margin: 0 auto;
+        
+        @media (max-width: 768px){ 
+          flex-direction: column;
+        }
+      `}
+    >
+      <div
+        css={`
+          overflow: hidden;
+          border-radius: 4px 0 0 4px;
+          background: orange;
+          background-image: radial-gradient(
+              closest-corner circle at 30% 70%,
+              steelblue 30%,
+              rgb(207, 84, 84),
+              90%,
+              transparent
+            ),
+            radial-gradient(
+              closest-corner circle at 90% 40%,
+              pink 20%,
+              orange,
+              90%,
+              transparent
+            ),
+            radial-gradient(
+              closest-corner circle at 30% 10%,
+              tomato 15%,
+              green,
+              85%,
+              transparent
+            );        
+        `}
+      >
+        <img 
           alt="rhea" 
           src={imgKey}
           style={isImgLoaded ? null : {filter: 'blur(15px)'}}
           onLoad={e => setIsImgLoaded(true)}
+          css={`
+            width: 100%;
+            height: 100%;
+            max-height: 700px;
+            object-fit: cover;
+            border: 1px solid lightgrey;
+          `}
         />
-      </StyledImgWrapper>
-      <StyledDiv>
-        <StyledDivHeader>
-          <div style={{display: 'flex', alignItems: 'center'}}>
+      </div>
+      <div
+        css={`
+          min-width: 335px;
+          background: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          border-radius: 4px;
+          border: 1px solid lightgrey;
+          border-left: 0;
+          border-radius: inherit;
+        `}
+      >
+        <div
+          css={`
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 5px;
+            border-bottom: 1px solid lightgrey;
+            background: white;     
+            border-radius: 0 4px 0 0;
+          `}
+        >
+          <div css={`display: flex; align-items: center;`}>
             <Avatar img={userData.photoUrl}  username={userData.username} rainbow />
-            <h3 style={{marginLeft: '10px'}}>{userData.username}</h3>
+            <h3 css={`margin: 0 0 0 10px;`}>{userData.username}</h3>
           </div>
           <PostOptions 
             userData={userData} 
@@ -175,41 +179,13 @@ function PostCard(
             imgKey={imgKey} 
             loggedInUserData={loggedInUserData} 
           />
-        </StyledDivHeader>
-        <div 
-          className="NewPic_Comments" 
-          style={{padding: "8px", height: '100%', overflow: 'auto'}}
-        >
-          {comments
-          .sort((a, b) => (a.timeCreated < b.timeCreated) 
-            ? -1 
-            : ((a.timeCreated > b.timeCreated) 
-              ? 1 
-              : 0))
-          .map(comment => (
-            <div style={{display: 'flex', marginBottom: '8px'}}  key={comment.id}>
-              <Avatar img={comment.user.photoUrl} username={comment.user.username} />
-              <div className="NewPic_CommentBox" style={{marginLeft: '10px'}}>
-                <div style={{display: 'flex', alignItems: 'baseline'}}>
-                  <h4 style={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>
-                    {comment.user.username}
-                  </h4>
-                  <p style={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>
-                    {comment.content}
-                  </p>
-                </div>
-                <p style={{fontSize: '11px', color: 'grey'}}>
-                  {moment(comment.timeCreated).fromNow()}
-                </p>
-              </div>
-            </div>
-          ))}
         </div>
+        <CommentList comments={comments} />
         <div 
           className="PostCard_stats" 
-          style={{borderTop: '1px solid lightgrey', padding: '8px'}}
+          css={`border-top: 1px solid lightgrey; padding: 8px;`}
         >
-          <div className="PostCard_stats_icons" style={{display: 'flex'}}>
+          <div className="PostCard_stats_icons" css={`display: flex;`}>
             <Like 
               postId={postId} 
               loggedInUserData={loggedInUserData} 
@@ -219,32 +195,32 @@ function PostCard(
             />
             <Icon 
               type="message" 
-              style={{fontSize: '24px', margin: '0 8px', color: '#5c5c5c'}} 
+              css={`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
             />
           </div>
-          <h4 style={{fontWeight: '700', margin: 0}}>
+          <h4 css={`font-weight: 700; margin: 0`}>
             {likes.length} {likes.length > 1 ? 'likes' : 'like'}
           </h4>
-          <span style={{color: 'grey', fontSize: '12px'}}>
+          <span css={`color: grey; font-size: 12px;`}>
             {moment(timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
-        <form onSubmit={handleSubmit} style={{width: '100%'}}>
+        <form onSubmit={handleSubmit} css={`width: 100%;`}>
           <input 
             type="text" 
             placeholder="Add comment" 
             onChange={handleChange}
             value={inputText}
-            style={{
-              border: 0,
-              borderTop: '1px solid lightgrey',
-              padding: '18px 14px',
-              width: '100%'
-            }}
+            css={`
+              border: 0;
+              border-top: 1px solid lightgrey;
+              padding: 18px 14px;
+              width: 100%;
+            `}
           />
         </form>
-      </StyledDiv>
-    </StyledSection>    
+      </div>
+    </section>    
   )
 }
 
