@@ -5,7 +5,7 @@ import Avatar from '../Avatar/Avatar';
 
 function Comment({comment}) {
   return (
-    <div css={`display: flex; margin-bottom: 8px;`} key={comment.id}>
+    <div css={`display: flex; margin-bottom: 8px;`}>
       <Avatar img={comment.user.photoUrl} username={comment.user.username} />
       <div className="NewPic_CommentBox" css={`margin-left: 10px`}>
         <div css={`display: flex; align-items: baseline`}>

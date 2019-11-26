@@ -15,7 +15,7 @@ function CommentList({comments}) {
           ? 1 
           : 0))
       .map(comment => (
-        <Comment comment={comment} />
+        <Comment key={comment.id} comment={comment} />
       ))}
     </div> 
   )
