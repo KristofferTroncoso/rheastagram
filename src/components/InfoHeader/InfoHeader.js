@@ -1,34 +1,12 @@
 /** @jsx jsx */
-import React from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Storage, Cache } from 'aws-amplify';
 import SettingsModal from '../SettingsModal/SettingsModal';
 import { jsx, css } from '@emotion/core';
-
+import useSignedS3Url from '../../hooks/useSignedS3Url';
 
 function InfoHeader({userData, loggedInUserData}) {
-  const [imgKey, changeImgKey] = React.useState('');
-
-  React.useEffect(() => {
-    if (!userData.photoUrl) {
-      console.log('userData.photoUrl is undefined');
-    } else {
-      let cacheRes = Cache.getItem(userData.photoUrl);
-      if (cacheRes === null) {
-        Storage.get(userData.photoUrl)
-        .then(d => {
-          changeImgKey(d);
-          let dateNow = new Date();
-          let expirationTime = dateNow.getTime() + 900000;
-          Cache.setItem(userData.photoUrl, d, {expires: expirationTime });
-        })
-        .catch(err => console.log(err));
-      } else {
-        console.log(`cacheRes is ${cacheRes}`)
-        changeImgKey(cacheRes);
-      }
-    }
-  }, [userData.photoUrl])
+  const imgKey = useSignedS3Url(userData.photoUrl);
   
   return (
     <div 
@@ -103,14 +81,14 @@ function InfoHeader({userData, loggedInUserData}) {
             {userData.username}
           </h1>
           {userData.username === loggedInUserData.username 
-            ? <>
+            ? <Fragment>
                 <Link to="/editprofile">
                   <button css={{padding: '2px 6px', margin: '0 20px', color: 'black', borderRadius: '4px'}}>
                     Edit Profile
                   </button>
                 </Link>
                 <SettingsModal />
-              </>
+              </Fragment>
             : null
           }
         </div>

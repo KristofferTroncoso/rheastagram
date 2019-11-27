@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
-import { API, Storage, Cache } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import CommentList from '../CommentList/CommentList';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import Like from '../Like/Like';
 import { Icon } from 'antd';
 import { css, jsx } from '@emotion/core';
+import useSignedS3Url from '../../hooks/useSignedS3Url';
 
 function PostCard(
   {
@@ -24,25 +25,10 @@ function PostCard(
     timeCreated, 
     getNewArrOfLikes
   }) {
-  const [imgKey, changeImgKey] = React.useState('');
   const [inputText, changeInputText] = React.useState('');
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
 
-  React.useEffect(() => {
-    let cacheRes = Cache.getItem(postImgUrl);
-    if (cacheRes === null) {
-      Storage.get(postImgUrl)
-      .then(d => {
-        changeImgKey(d);
-        let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 900000;
-        Cache.setItem(postImgUrl, d, {expires: expirationTime });
-      })
-      .catch(err => console.log(err));
-    } else {
-      changeImgKey(cacheRes);
-    }
-  }, [postImgUrl])
+  const imgKey = useSignedS3Url(postImgUrl);
   
   const handleSubmit = e => {
     e.preventDefault();

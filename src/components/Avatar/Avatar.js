@@ -1,35 +1,11 @@
 /** @jsx jsx */
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar as AntAvatar } from 'antd';
-import { Storage, Cache } from 'aws-amplify';
 import { jsx } from '@emotion/core';
+import useSignedS3Url from '../../hooks/useSignedS3Url';
 
 function Avatar({img, username, large, rainbow}) {
-  const [imgKey, changeImgKey] = React.useState();
-  
-  React.useEffect(() => {
-    console.log('avatar: useeffect');
-    if (!img) {
-      console.log('undefined')
-    } else {
-      let cacheRes = Cache.getItem(img);
-      if (cacheRes === null) {
-        console.log('getting new signedUrl')
-        Storage.get(img)
-        .then(d => {
-          changeImgKey(d);
-          let dateNow = new Date();
-          let expirationTime = dateNow.getTime() + 900000;
-          Cache.setItem(img, d, {expires: expirationTime });
-        })
-        .catch(err => console.log(err));
-      } else {
-        console.log('img is cached')
-        changeImgKey(cacheRes);
-      }
-    }
-  }, [img])
+  const imgKey = useSignedS3Url(img);
   
   return (
     <Link to={`/user/${username}`}>

@@ -1,33 +1,19 @@
 /** @jsx jsx */
 import React from 'react';
 import { Modal, Icon } from 'antd';
-import { API, Storage, Cache } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
 import { css, jsx } from '@emotion/core';
+import useSignedS3Url from '../../hooks/useSignedS3Url';
 
 function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId, getUser}) {
   const [visible, changeVisible] = React.useState(false);
-  const [imgKey, changeImgKey] = React.useState('');
   const [inputText, changeInputText] = React.useState('');
 
-  React.useEffect(() => {
-    let cacheRes = Cache.getItem(img);
-    if (cacheRes === null) {
-      Storage.get(img)
-      .then(d => {
-        changeImgKey(d);
-        let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 900000;
-        Cache.setItem(img, d, {expires: expirationTime });
-      })
-      .catch(err => console.log(err));
-    } else {
-      changeImgKey(cacheRes);
-    }
-  }, [img])
+  const imgKey = useSignedS3Url(img);
 
   const showModal = () => {
     changeVisible(true)

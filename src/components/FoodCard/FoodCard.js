@@ -2,13 +2,12 @@
 import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import { Icon } from 'antd';
-import { Storage, Cache } from 'aws-amplify';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
 import { Link } from 'react-router-dom';
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-
+import useSignedS3Url from '../../hooks/useSignedS3Url';
 
 const StyledSection = styled.section`
   background: white;
@@ -64,24 +63,8 @@ const StyledImg = styled.img`
 `;
 
 function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
-  const [imgKey, changeImgKey] = React.useState('');
+  const imgKey = useSignedS3Url(imgUrl);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
-  
-  React.useEffect(() => {
-    let cacheRes = Cache.getItem(imgUrl);
-    if (cacheRes === null) {
-      Storage.get(imgUrl)
-      .then(d => {
-        changeImgKey(d);
-        let dateNow = new Date();
-        let expirationTime = dateNow.getTime() + 900000;
-        Cache.setItem(imgUrl, d, {expires: expirationTime });
-      })
-      .catch(err => console.log(err));
-    } else {
-      changeImgKey(cacheRes);
-    }
-  }, [imgUrl])
 
   const handleLike = e => {
     console.log(`Liking post ${id}`);
