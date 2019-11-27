@@ -1,10 +1,12 @@
+/** @jsx jsx */
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
 import { deletePost } from '../../graphql/mutations';
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 const StyledButton = styled.button`
   border: 0;
@@ -75,7 +77,7 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
               onClick={handleDelete}
               block 
             >
-              <span style={{color: 'red'}}>Delete</span>
+              <span css={{color: 'red'}}>Delete</span>
             </StyledModalButton>
           : null
         }

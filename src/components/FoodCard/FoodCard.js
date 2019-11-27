@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import { Icon } from 'antd';
@@ -5,7 +6,9 @@ import { Storage, Cache } from 'aws-amplify';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { jsx } from '@emotion/core';
+import styled from '@emotion/styled';
+
 
 const StyledSection = styled.section`
   background: white;
@@ -16,7 +19,7 @@ const StyledSection = styled.section`
   max-width: 600px;
   
   @media (max-width: 500px){
-    background: #f7f7f7;
+    background: inherit;
     border: 0;
     border-radius: 0;
     margin: 0 auto;

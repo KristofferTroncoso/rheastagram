@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import { Button, Form, Input, Upload } from 'antd';
 import { updateUser } from '../../graphql/mutations';
@@ -5,7 +6,7 @@ import { API, Storage, graphqlOperation } from 'aws-amplify';
 // import { useHistory } from "react-router";
 // import { S3Image } from 'aws-amplify-react';
 import Avatar from '../../components/Avatar/Avatar';
-import styled from 'styled-components/macro';
+import { css, jsx } from '@emotion/core';
 
 function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   React.useEffect(() => {
@@ -89,13 +90,13 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   
   return (
     <div
-      css={`
+      css={css`
         padding: 20px;
       `}
     >
       {isUserFound
       ? <div 
-          css={`
+          css={css`
             background: white;
             padding: 40px;
             border: 1px solid lightgrey;
@@ -104,16 +105,18 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
           `}
         >
           <h1>Edit Profile</h1>
-          <div style={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
-            <Avatar img={userData.photoUrl} style={{alignContent: 'center'}} username={userData.username} large />
-            <div style={{padding: '0 10px'}}>
-              <h2 style={{margin: 0, padding: 0}}>{userData.username}</h2>
+          <div css={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
+            <Avatar img={userData.photoUrl} css={{alignContent: 'center'}} username={userData.username} large />
+            <div css={{padding: '0 10px'}}>
+              <h2 css={{margin: 0, padding: 0}}>{userData.username}</h2>
               <Upload 
                 accept="image/*" 
                 showUploadList={false}
                 beforeUpload={handlePicUpload}
               >
-                <Button style={{border: 0, color: 'dodgerblue', boxShadow: 'none', margin: 0, padding: 0, height: '22px'}}><span style={{fontWeight: '700'}}>Change Profile Photo</span></Button>
+                <Button css={{border: 0, color: 'dodgerblue', boxShadow: 'none', margin: 0, padding: 0, height: '22px'}}>
+                  <span css={{fontWeight: '700'}}>Change Profile Photo</span>
+                </Button>
               </Upload>
             </div>
           </div>
@@ -126,7 +129,7 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
               disabled={JSON.stringify(formData) === JSON.stringify(initialData) ? true : false}
               type="primary"
               onClick={handleSubmit}
-              style={{marginTop: '10px'}}
+              css={{marginTop: '10px'}}
             >
               Submit
             </Button>

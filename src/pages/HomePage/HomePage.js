@@ -1,7 +1,8 @@
+/** @jsx jsx */
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import FoodCard from '../../components/FoodCard/FoodCard';
-import styled from 'styled-components/macro';
+import { css, jsx } from '@emotion/core';
 
 const listPosts = `query ListPosts(
     $filter: ModelPostFilterInput
@@ -52,7 +53,7 @@ const HomePage = ({ userData }) => {
   
   return (
     <div
-      css={`
+      css={css`
         padding: 10px 0;
       `}
     >

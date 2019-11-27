@@ -1,8 +1,9 @@
+/** @jsx jsx */
 import React from 'react';
 import { Icon } from 'antd';
 import { API } from 'aws-amplify';
 import { genUUID, getISODate } from '../../utils';
-
+import { jsx } from '@emotion/core';
 
 function Like({postId, likeId, loggedInUserData, arrOfLikes, getPostData, getNewArrOfLikes}) {
   const [liked, toggleLiked] = React.useState(false);
@@ -25,13 +26,13 @@ function Like({postId, likeId, loggedInUserData, arrOfLikes, getPostData, getNew
     }
   `;
   
-  const deleteLikeMutation = `
-    mutation DeleteLike($likeId: ID) {
-      deleteLike(input: {id: $likeId}) {
-        id
-      }
-    }
-  `;
+  // const deleteLikeMutation = `
+  //   mutation DeleteLike($likeId: ID) {
+  //     deleteLike(input: {id: $likeId}) {
+  //       id
+  //     }
+  //   }
+  // `;
   
   const createLikeVariables = {
     likeId: `likeid:${genUUID()}`,
@@ -40,19 +41,29 @@ function Like({postId, likeId, loggedInUserData, arrOfLikes, getPostData, getNew
     likePostId: postId
   }
   
-  const deleteLikeVariables = {
-    likeId
-  }
+  // const deleteLikeVariables = {
+  //   likeId
+  // }
   
   const handleToggle = async e => {
     let res = await API.graphql({query: createLikeMutation, variables: createLikeVariables});
+    console.log(res);
     getNewArrOfLikes();
     getPostData(postId);
   }
   
   return (
-    <button onClick={handleToggle} style={{border: 0, margin: 0, padding: 0}} className="LikeBtn">
-      <Icon type="heart" theme={liked ? "twoTone" : null} twoToneColor="red" style={{fontSize: '26px', color: '#5c5c5c'}} />
+    <button 
+      onClick={handleToggle} 
+      css={{border: 0, margin: 0, padding: 0}} 
+      className="LikeBtn"
+    >
+      <Icon 
+        type="heart" 
+        theme={liked ? "twoTone" : null} 
+        twoToneColor="red" 
+        css={{fontSize: '26px', color: '#5c5c5c'}} 
+      />
     </button>
   )
 }

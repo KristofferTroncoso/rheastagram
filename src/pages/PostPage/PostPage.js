@@ -1,7 +1,9 @@
+/** @jsx jsx */
 import React from 'react';
 import { API } from 'aws-amplify';
 import PostCard from '../../components/PostCard/PostCard';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 const StyledDiv = styled.div`
   padding: 50px 0 60px;

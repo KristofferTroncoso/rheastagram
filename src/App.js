@@ -12,7 +12,6 @@ import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
 import { createUser } from './graphql/mutations';
-import styled from 'styled-components/macro';
 import Wrapper from './components/Wrapper/Wrapper';
 
 const customGetUserQuery = `
@@ -72,7 +71,7 @@ function App() {
     likes: [],
     bio: ''
   });
-  const [arrOfLikes, changeArrOfLikes] = React.useState([]);
+  // const [arrOfLikes, changeArrOfLikes] = React.useState([]);
 
   React.useEffect(() => {
     console.log("App-useEffect: Getting Auth Data for current logged-in user!")

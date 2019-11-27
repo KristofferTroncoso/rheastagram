@@ -1,6 +1,8 @@
+/** @jsx jsx */
 import React from 'react';
 import { Auth } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
+import { jsx } from '@emotion/core';
 
 function SettingsModal() {
   const [visible, changeVisible] = React.useState(false);
@@ -27,7 +29,7 @@ function SettingsModal() {
         onClick={showModal}
         style={{border: 0, outline: 0}}
       >
-        <Icon type="setting" style={{fontSize: '30px', margin: '0 5px'}} />
+        <Icon type="setting" css={{fontSize: '30px', margin: '0 5px'}} />
       </button>
       <Modal
         visible={visible}
@@ -39,7 +41,8 @@ function SettingsModal() {
       >
         <Button 
           onClick={handleLogOut}
-          block style={{border: 0, boxShadow: 'none', margin: '10px 0'}}
+          block 
+          css={{border: 0, boxShadow: 'none', margin: '10px 0'}}
         >
           <h2>Log Out</h2>
         </Button>

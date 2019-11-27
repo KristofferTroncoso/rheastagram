@@ -1,6 +1,7 @@
-import React from 'react';
+/** @jsx jsx */
 import NewPic from '../NewPic/NewPic';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 const StyledPicGridWrapper = styled.div`
   margin: 0 10px;

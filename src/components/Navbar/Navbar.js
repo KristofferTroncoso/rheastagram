@@ -1,8 +1,9 @@
-import React from 'react';
+/** @jsx jsx */
 import { Link } from 'react-router-dom';
 import { Icon, Button } from 'antd';
 import Avatar from '../Avatar/Avatar';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 const StyledDiv = styled.div`
   background: white; 
@@ -72,7 +73,7 @@ const StyledSearchInput = styled.input`
   border: 1px solid #E0E0E0;
   padding: 3px 6px;
   border-radius: 2px;
-  background: #f7f7f7;
+  background: #fafafa;
   text-align: center;
   font-size: 13px;
   
@@ -142,7 +143,7 @@ function Navbar({userData}) {
             <StyledLink to="/post" className="PostPhotoButton">
               <StyledPostPhotoButton>
                 <Icon type="camera" />
-                <span style={{margin: '0 5px'}}>Post Photo</span>
+                <span css={{margin: '0 5px'}}>Post Photo</span>
               </StyledPostPhotoButton>
             </StyledLink>
             <Avatar 

@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+/** @jsx jsx */
 import Comment from '../Comment/Comment';
+import { jsx, css } from '@emotion/core';
 
 function CommentList({comments}) {
   return (
     <div 
       className="CommentList" 
-      css={`padding: 8px; height: 100%; overflow: auto;`}
+      css={css`padding: 8px; height: 100%; overflow: auto;`}
     >
       {comments
       .sort((a, b) => (a.timeCreated < b.timeCreated) 

@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import { Modal, Icon } from 'antd';
 import { API, Storage, Cache } from 'aws-amplify'
@@ -5,7 +6,7 @@ import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
-import styled from 'styled-components/macro';
+import { css, jsx } from '@emotion/core';
 
 function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId, getUser}) {
   const [visible, changeVisible] = React.useState(false);
@@ -85,7 +86,7 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
   
 
   return (
-    <div className="NewPic" css={`
+    <div className="NewPic" css={css`
       display: block;
       height: 31vw;
       max-height: 288px;
@@ -94,13 +95,13 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
         style={{
           background: `url(${imgKey}) no-repeat center/cover`,
         }}
-        css={`
+        css={css`
           height: 100%;
           width: 100%;
         `}
         onClick={showModal}
       >
-        <h2 css={`
+        <h2 css={css`
           color: white;
           background: rgba(0, 0, 0, 0.5);
           opacity: 0;
@@ -115,8 +116,8 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
             opacity: 1;
           }
         `}>
-          <span css={`margin: 0 5px`}><Icon type="heart" theme="filled" css={`padding: 0 5px`} />{hearts}</span> 
-          <span css={`margin: 0 5px`}><Icon type="message" theme="filled" css={`padding: 0 5px`} />{comments}</span>
+          <span css={css`margin: 0 5px`}><Icon type="heart" theme="filled" css={css`padding: 0 5px`} />{hearts}</span> 
+          <span css={css`margin: 0 5px`}><Icon type="message" theme="filled" css={css`padding: 0 5px`} />{comments}</span>
         </h2>
       </div>
       <Modal
@@ -130,7 +131,7 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
         height="900px"
       >
         <div className="NewPicCard" 
-          css={`
+          css={css`
             display: flex;
             background: white;
             justify-content: space-between;
@@ -143,16 +144,21 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
           <img 
             alt={imgKey} 
             src={imgKey} 
-            style={{maxWidth: '700px', minHeight: '100px', maxHeight: '800px', objectFit: 'contain', background: '#f7f7f7'}} 
-            css={`
+            css={css`
+              max-width: 700px;
+              min-height: 100px;
+              max-height: 800px;
+              object-fit: contain;
+              background: #f7f7f7;
+              
               @media (max-width: 768px) { 
                 width: 100%;
               }
             `}
           />
-          <div style={{minWidth: '320px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+          <div css={{minWidth: '320px', background: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
             <div
-              style={{
+              css={{
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 alignItems: 'center', 
@@ -163,39 +169,39 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
               }}
             >
               <div 
-                style={{
+                css={{
                   display: 'flex', 
                   alignItems: 'center', 
                 }}
               >
                 <Avatar img={userData.photoUrl}  username={userData.username} />
-                <h3 style={{marginLeft: '10px'}}>{userData.username}</h3>
+                <h3 css={{marginLeft: '10px'}}>{userData.username}</h3>
               </div>
               <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
             </div>
-            <div className="NewPic_Comments" style={{padding: "8px", height: '100%'}}>
+            <div className="NewPic_Comments" css={{padding: "8px", height: '100%'}}>
               {post.comments.items
               .sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0))
               .map(comment => (
-                <div style={{display: 'flex', marginBottom: '8px'}}  key={comment.id}>
+                <div css={{display: 'flex', marginBottom: '8px'}}  key={comment.id}>
                   <Avatar img={comment.user.photoUrl} username={comment.user.username} />
-                  <div className="NewPic_CommentBox" style={{marginLeft: '10px'}}>
-                    <div style={{display: 'flex', alignItems: 'baseline'}}>
-                      <h4 style={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>{comment.user.username}</h4>
-                      <p style={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>{comment.content}</p>
+                  <div className="NewPic_CommentBox" css={{marginLeft: '10px'}}>
+                    <div css={{display: 'flex', alignItems: 'baseline'}}>
+                      <h4 css={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>{comment.user.username}</h4>
+                      <p css={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>{comment.content}</p>
                     </div>
-                    <p style={{fontSize: '11px', color: 'grey'}}>{moment(comment.timeCreated).fromNow()}</p>
+                    <p css={{fontSize: '11px', color: 'grey'}}>{moment(comment.timeCreated).fromNow()}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <form onSubmit={handleSubmit} style={{width: '100%'}}>
+            <form onSubmit={handleSubmit} css={{width: '100%'}}>
               <input 
                 type="text" 
                 placeholder="Add comment" 
                 onChange={handleChange}
                 value={inputText}
-                style={{
+                css={{
                   border: 0,
                   borderTop: '1px solid lightgrey',
                   padding: '18px 14px',

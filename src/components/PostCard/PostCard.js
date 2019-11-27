@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import { API, Storage, Cache } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
@@ -7,7 +8,7 @@ import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
 import Like from '../Like/Like';
 import { Icon } from 'antd';
-import styled from 'styled-components/macro';
+import { css, jsx } from '@emotion/core';
 
 function PostCard(
   {
@@ -89,7 +90,7 @@ function PostCard(
   return (
     <section 
       className="PostCard"
-      css={`
+      css={css`
         display: flex;
         background: inherit;
         justify-content: center;
@@ -103,7 +104,7 @@ function PostCard(
       `}
     >
       <div
-        css={`
+        css={css`
           overflow: hidden;
           border-radius: 4px 0 0 4px;
           background: orange;
@@ -135,7 +136,7 @@ function PostCard(
           src={imgKey}
           style={isImgLoaded ? null : {filter: 'blur(15px)'}}
           onLoad={e => setIsImgLoaded(true)}
-          css={`
+          css={css`
             width: 100%;
             height: 100%;
             max-height: 700px;
@@ -145,7 +146,7 @@ function PostCard(
         />
       </div>
       <div
-        css={`
+        css={css`
           min-width: 335px;
           background: white;
           display: flex;
@@ -158,7 +159,7 @@ function PostCard(
         `}
       >
         <div
-          css={`
+          css={css`
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -169,9 +170,9 @@ function PostCard(
             border-radius: 0 4px 0 0;
           `}
         >
-          <div css={`display: flex; align-items: center;`}>
+          <div css={css`display: flex; align-items: center;`}>
             <Avatar img={userData.photoUrl}  username={userData.username} rainbow />
-            <h3 css={`margin: 0 0 0 10px;`}>{userData.username}</h3>
+            <h3 css={css`margin: 0 0 0 10px;`}>{userData.username}</h3>
           </div>
           <PostOptions 
             userData={userData} 
@@ -183,9 +184,9 @@ function PostCard(
         <CommentList comments={comments} />
         <div 
           className="PostCard_stats" 
-          css={`border-top: 1px solid lightgrey; padding: 8px;`}
+          css={css`border-top: 1px solid lightgrey; padding: 8px;`}
         >
-          <div className="PostCard_stats_icons" css={`display: flex;`}>
+          <div className="PostCard_stats_icons" css={css`display: flex;`}>
             <Like 
               postId={postId} 
               loggedInUserData={loggedInUserData} 
@@ -195,23 +196,23 @@ function PostCard(
             />
             <Icon 
               type="message" 
-              css={`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
+              css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
             />
           </div>
-          <h4 css={`font-weight: 700; margin: 0`}>
+          <h4 css={css`font-weight: 700; margin: 0`}>
             {likes.length} {likes.length > 1 ? 'likes' : 'like'}
           </h4>
-          <span css={`color: grey; font-size: 12px;`}>
+          <span css={css`color: grey; font-size: 12px;`}>
             {moment(timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
-        <form onSubmit={handleSubmit} css={`width: 100%;`}>
+        <form onSubmit={handleSubmit} css={css`width: 100%;`}>
           <input 
             type="text" 
             placeholder="Add comment" 
             onChange={handleChange}
             value={inputText}
-            css={`
+            css={css`
               border: 0;
               border-top: 1px solid lightgrey;
               padding: 18px 14px;

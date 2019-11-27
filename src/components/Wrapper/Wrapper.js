@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 
 function Wrapper({children}) {
   return (
     <div 
-      css={`
+      css={css`
         max-width: 1000px; 
         margin: 80px auto;
 

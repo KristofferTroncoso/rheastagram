@@ -1,8 +1,10 @@
+/** @jsx jsx */
 import React from 'react';
 import PicGrid from '../../components/PicGrid/PicGrid';
 import InfoHeader from '../../components/InfoHeader/InfoHeader';
 import { API, graphqlOperation } from 'aws-amplify';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 
 const StyledDiv = styled.div`

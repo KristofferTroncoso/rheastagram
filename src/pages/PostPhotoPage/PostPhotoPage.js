@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { PhotoPicker } from 'aws-amplify-react';
@@ -6,7 +7,8 @@ import { Button, Icon } from 'antd';
 import { createPost } from '../../graphql/mutations';
 import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 const StyledPageWrapper = styled.div`
   padding: 40px 0;

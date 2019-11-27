@@ -1,8 +1,10 @@
+/** @jsx jsx */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaPlusSquare, FaRegPlusSquare, FaUser, FaRegUser } from 'react-icons/fa';
 import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 
 const StyledNav = styled.nav`
   background: white;
@@ -36,8 +38,8 @@ function MobileNavbar({userData}) {
         style={{padding: '4px 40px'}}
       >
         {currentPage === 'home'
-          ? <AiFillHome style={{fontSize: '34px', color: '#3b3b3b'}} />
-          : <AiOutlineHome style={{fontSize: '34px', color: '#3b3b3b'}} />
+          ? <AiFillHome css={{fontSize: '34px', color: '#3b3b3b'}} />
+          : <AiOutlineHome css={{fontSize: '34px', color: '#3b3b3b'}} />
         }
       </NavLink>
       <NavLink 
@@ -52,8 +54,8 @@ function MobileNavbar({userData}) {
         style={{padding: '0 40px'}}
       >
         {currentPage === 'post'
-          ? <FaPlusSquare style={{fontSize: '38px', color: '#3b3b3b'}} />
-          : <FaRegPlusSquare style={{fontSize: '38px', color: '#3b3b3b'}} />
+          ? <FaPlusSquare css={{fontSize: '38px', color: '#3b3b3b'}} />
+          : <FaRegPlusSquare css={{fontSize: '38px', color: '#3b3b3b'}} />
         }
       </NavLink>
       <NavLink 
@@ -65,11 +67,11 @@ function MobileNavbar({userData}) {
             return null
           }
         }}
-        style={{padding: '4px 40px'}}
+        css={{padding: '4px 40px'}}
       >
         {currentPage === 'user'
-          ? <FaUser style={{fontSize: '30px', color: '#3b3b3b'}} />
-          : <FaRegUser style={{fontSize: '30px', color: '#3b3b3b'}} />
+          ? <FaUser css={{fontSize: '30px', color: '#3b3b3b'}} />
+          : <FaRegUser css={{fontSize: '30px', color: '#3b3b3b'}} />
         }
       </NavLink>
     </StyledNav>

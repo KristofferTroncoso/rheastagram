@@ -1,6 +1,8 @@
+/** @jsx jsx */
 import React from 'react';
 import { Drawer, Button, Icon } from 'antd';
 import PostPhotoForm from '../PostPhotoForm/PostPhotoForm';
+import { css, jsx } from '@emotion/core';
 
 function PostPhotoButton({userData}) {
   const [isVisible, changeIsVisible] = React.useState(false);
@@ -17,12 +19,12 @@ function PostPhotoButton({userData}) {
     <div>
       <Button 
         onClick={showDrawer} 
-        style={{
+        css={{
           margin: '0 10px'
         }}
       >
         <Icon type="camera" />
-        <span style={{margin: '0 5px'}}>Post Photo</span>
+        <span css={{margin: '0 5px'}}>Post Photo</span>
       </Button>
       <Drawer
         title="Post Photo"

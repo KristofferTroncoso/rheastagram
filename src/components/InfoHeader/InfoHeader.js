@@ -1,8 +1,9 @@
+/** @jsx jsx */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Storage, Cache } from 'aws-amplify';
 import SettingsModal from '../SettingsModal/SettingsModal';
-import styled from 'styled-components/macro';
+import { jsx, css } from '@emotion/core';
 
 
 function InfoHeader({userData, loggedInUserData}) {
@@ -32,7 +33,7 @@ function InfoHeader({userData, loggedInUserData}) {
   return (
     <div 
       className="InfoHeader"
-      css={`
+      css={css`
         height: 200px;
         display: flex;
         align-items: center;
@@ -51,7 +52,7 @@ function InfoHeader({userData, loggedInUserData}) {
     >
       <div 
         className="InfoHeader_img_container"
-        css={`
+        css={css`
           background: lightgrey;
           clip-path: circle(77px at center);
           height: 100%;
@@ -66,7 +67,7 @@ function InfoHeader({userData, loggedInUserData}) {
           className="InfoHeader_img" 
           alt={imgKey} 
           src={imgKey} 
-          css={`
+          css={css`
             height: 100%;
             clip-path: circle(76px at center);
             
@@ -80,7 +81,7 @@ function InfoHeader({userData, loggedInUserData}) {
       <div>
         <div 
           className="InfoHeader_username_container"
-          css={`
+          css={css`
             display: flex;
             align-content: center;
             align-items: center;
@@ -93,7 +94,7 @@ function InfoHeader({userData, loggedInUserData}) {
         >
           <h1 
             className="InfoHeader_username" 
-            css={`
+            css={css`
               font-weight: 300;
               font-size: 34px;
               margin-bottom: 5px;
@@ -104,7 +105,7 @@ function InfoHeader({userData, loggedInUserData}) {
           {userData.username === loggedInUserData.username 
             ? <>
                 <Link to="/editprofile">
-                  <button style={{padding: '2px 6px', margin: '0 20px', color: 'black', borderRadius: '4px'}}>
+                  <button css={{padding: '2px 6px', margin: '0 20px', color: 'black', borderRadius: '4px'}}>
                     Edit Profile
                   </button>
                 </Link>

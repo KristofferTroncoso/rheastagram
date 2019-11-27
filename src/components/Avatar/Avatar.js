@@ -1,8 +1,9 @@
+/** @jsx jsx */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar as AntAvatar } from 'antd';
 import { Storage, Cache } from 'aws-amplify';
-import styled from 'styled-components/macro';
+import { jsx } from '@emotion/core';
 
 function Avatar({img, username, large, rainbow}) {
   const [imgKey, changeImgKey] = React.useState();
@@ -33,32 +34,36 @@ function Avatar({img, username, large, rainbow}) {
   return (
     <Link to={`/user/${username}`}>
       <div 
-        className="AvatarIcon" 
-        rainbow={rainbow}
-        css={`
-          ${props => props.rainbow
-            ? `background: #f09433; 
-              background: -moz-linear-gradient(45deg, #f0ab33 0%, #e68e3c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-              background: -webkit-linear-gradient(45deg, #f0ab33 0%,#e68e3c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
-              background: linear-gradient(45deg, #f0ab33 0%,#e68e3c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); `
-            : `background: none;`
+        css={[
+          rainbow 
+          ? {
+              background: [
+                '#f09433',
+                '-moz-linear-gradient(45deg, #f0ab33 0%, #e68e3c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+                '-webkit-linear-gradient(45deg, #f0ab33 0%,#e68e3c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)',
+                'linear-gradient(45deg, #f0ab33 0%,#e68e3c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)'
+              ],
+              padding: '2px',
+            }
+          : {
+              background: 'none',
+              padding: 0
+            }
+          ,{
+            borderRadius: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignContent: 'center'
           }
-          padding: ${props => props.rainbow ? "2px" : "0"};
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          align-content: center;
-        `}
+        ]}
       >
         <AntAvatar 
           icon="user" 
           src={imgKey && imgKey} 
           size={large ? "large" : "default"}
           rainbow={rainbow}
-          css={`
-            border: ${props => props.rainbow ? "2px solid white" : "1px solid lightgrey"};
-          `}
+          css={rainbow ? {border: '2px solid white'} : {border: '1px solid lightgrey'}}
         />
       </div>
     </Link>
