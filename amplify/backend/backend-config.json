@@ -22,5 +22,11 @@
 				}
 			}
 		}
+	},
+	"storage": {
+		"rheas3storage": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }
