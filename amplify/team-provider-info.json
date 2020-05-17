@@ -1,0 +1,15 @@
+{
+    "rheaenvone": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-rheastagram-rheaenvone-71647-authRole",
+            "UnauthRoleArn": "arn:aws:iam::375497050422:role/amplify-rheastagram-rheaenvone-71647-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::375497050422:role/amplify-rheastagram-rheaenvone-71647-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-rheastagram-rheaenvone-71647-deployment",
+            "UnauthRoleName": "amplify-rheastagram-rheaenvone-71647-unauthRole",
+            "StackName": "amplify-rheastagram-rheaenvone-71647",
+            "StackId": "arn:aws:cloudformation:us-east-1:375497050422:stack/amplify-rheastagram-rheaenvone-71647/e7643390-982f-11ea-9270-0e3b177c99d5",
+            "AmplifyAppId": "dlbcnwjuwkd26"
+        }
+    }
+}
