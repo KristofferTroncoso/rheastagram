@@ -1,252 +1,487 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createUser = `mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
-    id
-    username
-    name
-    bio
-    email
-    photoUrl
-    userPosts {
-      items {
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      username
+      name
+      bio
+      email
+      photoUrl
+      timeCreated
+      type
+      userPosts {
+        items {
+          id
+          picUrl
+          type
+          visibility
+          timeCreated
+          userId
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          content
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      username
+      name
+      bio
+      email
+      photoUrl
+      timeCreated
+      type
+      userPosts {
+        items {
+          id
+          picUrl
+          type
+          visibility
+          timeCreated
+          userId
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          content
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      username
+      name
+      bio
+      email
+      photoUrl
+      timeCreated
+      type
+      userPosts {
+        items {
+          id
+          picUrl
+          type
+          visibility
+          timeCreated
+          userId
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          content
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createPost = /* GraphQL */ `
+  mutation CreatePost(
+    $input: CreatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    createPost(input: $input, condition: $condition) {
+      id
+      picUrl
+      type
+      visibility
+      timeCreated
+      userId
+      user {
+        id
+        username
+        name
+        bio
+        email
+        photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      comments {
+        items {
+          id
+          content
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updatePost = /* GraphQL */ `
+  mutation UpdatePost(
+    $input: UpdatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    updatePost(input: $input, condition: $condition) {
+      id
+      picUrl
+      type
+      visibility
+      timeCreated
+      userId
+      user {
+        id
+        username
+        name
+        bio
+        email
+        photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      comments {
+        items {
+          id
+          content
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deletePost = /* GraphQL */ `
+  mutation DeletePost(
+    $input: DeletePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    deletePost(input: $input, condition: $condition) {
+      id
+      picUrl
+      type
+      visibility
+      timeCreated
+      userId
+      user {
+        id
+        username
+        name
+        bio
+        email
+        photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      comments {
+        items {
+          id
+          content
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          timeCreated
+          userId
+          postId
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createComment = /* GraphQL */ `
+  mutation CreateComment(
+    $input: CreateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    createComment(input: $input, condition: $condition) {
+      id
+      content
+      timeCreated
+      userId
+      postId
+      user {
+        id
+        username
+        name
+        bio
+        email
+        photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      post {
         id
         picUrl
+        type
+        visibility
         timeCreated
+        userId
+        user {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+          timeCreated
+          type
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      nextToken
-    }
-    comments {
-      items {
-        id
-        content
-        timeCreated
-      }
-      nextToken
-    }
-    likes {
-      items {
-        id
-        timeCreated
-      }
-      nextToken
     }
   }
-}
 `;
-export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
-    id
-    username
-    name
-    bio
-    email
-    photoUrl
-    userPosts {
-      items {
+export const updateComment = /* GraphQL */ `
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    updateComment(input: $input, condition: $condition) {
+      id
+      content
+      timeCreated
+      userId
+      postId
+      user {
+        id
+        username
+        name
+        bio
+        email
+        photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      post {
         id
         picUrl
+        type
+        visibility
         timeCreated
+        userId
+        user {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+          timeCreated
+          type
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      nextToken
-    }
-    comments {
-      items {
-        id
-        content
-        timeCreated
-      }
-      nextToken
-    }
-    likes {
-      items {
-        id
-        timeCreated
-      }
-      nextToken
     }
   }
-}
 `;
-export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
-  deleteUser(input: $input) {
-    id
-    username
-    name
-    bio
-    email
-    photoUrl
-    userPosts {
-      items {
+export const deleteComment = /* GraphQL */ `
+  mutation DeleteComment(
+    $input: DeleteCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
+    deleteComment(input: $input, condition: $condition) {
+      id
+      content
+      timeCreated
+      userId
+      postId
+      user {
+        id
+        username
+        name
+        bio
+        email
+        photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+      }
+      post {
         id
         picUrl
+        type
+        visibility
         timeCreated
+        userId
+        user {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+          timeCreated
+          type
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      nextToken
-    }
-    comments {
-      items {
-        id
-        content
-        timeCreated
-      }
-      nextToken
-    }
-    likes {
-      items {
-        id
-        timeCreated
-      }
-      nextToken
     }
   }
-}
 `;
-export const createPost = `mutation CreatePost($input: CreatePostInput!) {
-  createPost(input: $input) {
-    id
-    picUrl
-    user {
+export const createLike = /* GraphQL */ `
+  mutation CreateLike(
+    $input: CreateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    createLike(input: $input, condition: $condition) {
       id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-        timeCreated
-      }
-      nextToken
-    }
-    likes {
-      items {
-        id
-        timeCreated
-      }
-      nextToken
-    }
-    timeCreated
-  }
-}
-`;
-export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
-  updatePost(input: $input) {
-    id
-    picUrl
-    user {
-      id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-        timeCreated
-      }
-      nextToken
-    }
-    likes {
-      items {
-        id
-        timeCreated
-      }
-      nextToken
-    }
-    timeCreated
-  }
-}
-`;
-export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
-  deletePost(input: $input) {
-    id
-    picUrl
-    user {
-      id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    comments {
-      items {
-        id
-        content
-        timeCreated
-      }
-      nextToken
-    }
-    likes {
-      items {
-        id
-        timeCreated
-      }
-      nextToken
-    }
-    timeCreated
-  }
-}
-`;
-export const createComment = `mutation CreateComment($input: CreateCommentInput!) {
-  createComment(input: $input) {
-    id
-    content
-    user {
-      id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    post {
-      id
-      picUrl
+      timeCreated
+      userId
+      postId
       user {
         id
         username
@@ -254,43 +489,55 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
         bio
         email
         photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      comments {
-        nextToken
+      post {
+        id
+        picUrl
+        type
+        visibility
+        timeCreated
+        userId
+        user {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+          timeCreated
+          type
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      likes {
-        nextToken
-      }
-      timeCreated
     }
-    timeCreated
   }
-}
 `;
-export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!) {
-  updateComment(input: $input) {
-    id
-    content
-    user {
+export const updateLike = /* GraphQL */ `
+  mutation UpdateLike(
+    $input: UpdateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    updateLike(input: $input, condition: $condition) {
       id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    post {
-      id
-      picUrl
+      timeCreated
+      userId
+      postId
       user {
         id
         username
@@ -298,43 +545,55 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
         bio
         email
         photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      comments {
-        nextToken
+      post {
+        id
+        picUrl
+        type
+        visibility
+        timeCreated
+        userId
+        user {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+          timeCreated
+          type
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      likes {
-        nextToken
-      }
-      timeCreated
     }
-    timeCreated
   }
-}
 `;
-export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!) {
-  deleteComment(input: $input) {
-    id
-    content
-    user {
+export const deleteLike = /* GraphQL */ `
+  mutation DeleteLike(
+    $input: DeleteLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    deleteLike(input: $input, condition: $condition) {
       id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    post {
-      id
-      picUrl
+      timeCreated
+      userId
+      postId
       user {
         id
         username
@@ -342,145 +601,42 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
         bio
         email
         photoUrl
+        timeCreated
+        type
+        userPosts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-      timeCreated
-    }
-    timeCreated
-  }
-}
-`;
-export const createLike = `mutation CreateLike($input: CreateLikeInput!) {
-  createLike(input: $input) {
-    id
-    user {
-      id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    post {
-      id
-      picUrl
-      user {
+      post {
         id
-        username
-        name
-        bio
-        email
-        photoUrl
+        picUrl
+        type
+        visibility
+        timeCreated
+        userId
+        user {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+          timeCreated
+          type
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
       }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-      timeCreated
     }
-    timeCreated
   }
-}
-`;
-export const updateLike = `mutation UpdateLike($input: UpdateLikeInput!) {
-  updateLike(input: $input) {
-    id
-    user {
-      id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    post {
-      id
-      picUrl
-      user {
-        id
-        username
-        name
-        bio
-        email
-        photoUrl
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-      timeCreated
-    }
-    timeCreated
-  }
-}
-`;
-export const deleteLike = `mutation DeleteLike($input: DeleteLikeInput!) {
-  deleteLike(input: $input) {
-    id
-    user {
-      id
-      username
-      name
-      bio
-      email
-      photoUrl
-      userPosts {
-        nextToken
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-    }
-    post {
-      id
-      picUrl
-      user {
-        id
-        username
-        name
-        bio
-        email
-        photoUrl
-      }
-      comments {
-        nextToken
-      }
-      likes {
-        nextToken
-      }
-      timeCreated
-    }
-    timeCreated
-  }
-}
 `;
