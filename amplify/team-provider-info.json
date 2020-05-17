@@ -10,6 +10,11 @@
             "StackName": "amplify-rheastagram-rheaenvone-71647",
             "StackId": "arn:aws:cloudformation:us-east-1:375497050422:stack/amplify-rheastagram-rheaenvone-71647/e7643390-982f-11ea-9270-0e3b177c99d5",
             "AmplifyAppId": "dlbcnwjuwkd26"
+        },
+        "categories": {
+            "auth": {
+                "rheastagram2d41cbd8": {}
+            }
         }
     }
 }

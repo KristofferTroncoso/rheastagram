@@ -1,1 +1,9 @@
-{}
+{
+	"auth": {
+		"rheastagram2d41cbd8": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}
