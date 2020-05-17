@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "rheastagramapi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authrheastagram2d41cbd8",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

@@ -25,7 +25,7 @@ yarn-error.log*
 #custom
 kanban.md
 notes.md
-amplify/backend/api/newinstatestapi/schema.graphql
+amplify/backend/api/rheastagramapi/schema.graphql
 
 #amplify
 amplify/\#current-cloud-backend
