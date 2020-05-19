@@ -14,36 +14,25 @@ function Like({postId, likeId, loggedInUserData, arrOfLikes, getPostData, getNew
   }, [arrOfLikes, postId]);
   
   const createLikeMutation = `
-    mutation CreateLike($likeId: ID, $timeCreated: String, $likeUserId: ID, $likePostId: ID) {
+    mutation CreateLike($likeId: ID, $timeCreated: String, $userId: ID!, $postId: ID!) {
       createLike(input: {
         id: $likeId
         timeCreated: $timeCreated
-        likeUserId: $likeUserId
-        likePostId: $likePostId
+        userId: $userId
+        postId: $postId
       }) {
         id
       }
     }
   `;
   
-  // const deleteLikeMutation = `
-  //   mutation DeleteLike($likeId: ID) {
-  //     deleteLike(input: {id: $likeId}) {
-  //       id
-  //     }
-  //   }
-  // `;
   
   const createLikeVariables = {
     likeId: `likeid:${genUUID()}`,
     timeCreated: getISODate(),
-    likeUserId: loggedInUserData.id,
-    likePostId: postId
+    userId: loggedInUserData.id,
+    postId: postId
   }
-  
-  // const deleteLikeVariables = {
-  //   likeId
-  // }
   
   const handleToggle = async e => {
     let res = await API.graphql({query: createLikeMutation, variables: createLikeVariables});

@@ -11,8 +11,26 @@ import PostPhotoPage from './pages/PostPhotoPage/PostPhotoPage';
 import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
-import { createUser } from './graphql/mutations';
 import Wrapper from './components/Wrapper/Wrapper';
+import { getISODate } from './utils';
+
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      username
+      name
+      bio
+      email
+      photoUrl
+      timeCreated
+      type
+    }
+  }
+`;
 
 const customGetUserQuery = `
   query GetUser($id: ID!) {
@@ -86,6 +104,8 @@ function App() {
       email,
       name: username,
       bio: `Hello my name is ${username} :)`,
+      type: "user",
+      timeCreated: getISODate()
     };
     console.log(createUserInput);
     const response = await API.graphql(graphqlOperation(createUser, {input: createUserInput}));
@@ -108,7 +128,6 @@ function App() {
       Auth.currentAuthenticatedUser().then(d => {
         postUser(identityId, d.username, d.attributes.email)
       })
-
     } else {
       console.log('App: Found user on DynamoDB database!')
       let {bio, comments, id, likes, name, photoUrl, userPosts, username} = response.data.getUser;

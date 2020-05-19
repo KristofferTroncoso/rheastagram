@@ -32,29 +32,35 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
     
     const query = `
       mutation CreateComment(
-        $id: ID!
+        $id: ID
         $content: String
         $timeCreated: String
-        $commentUserId: ID
-        $commentPostId: ID
+        $userId: ID!
+        $postId: ID!
+        $condition: ModelCommentConditionInput
       ) {
         createComment(input: {
           id: $id
           content: $content
           timeCreated: $timeCreated
-          commentUserId: $commentUserId
-          commentPostId: $commentPostId
-        }) {
+          userId: $userId
+          postId: $postId
+        }, condition: $condition) {
           id
+          content
+          timeCreated
+          userId
+          postId
         }
       }
-    `
+    `;
+
     const variables = {
       id: `commentid:${genUUID()}`,
       content: inputText,
       timeCreated: getISODate(),
-      commentUserId: loggedInUserData.id,
-      commentPostId: postId
+      userId: loggedInUserData.id,
+      postId: postId
     }
     
     API.graphql({query, variables})

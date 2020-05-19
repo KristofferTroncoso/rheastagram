@@ -56,7 +56,9 @@ function PostPhotoPage({userData}) {
     let createPostInput = {
       id: `postid:${genUUID()}`,
       picUrl: imgKey,
-      postUserId: userData.id,
+      type: "post",
+      visibility: "public",
+      userId: userData.id,
       timeCreated: getISODate()
     };
     const data = await API.graphql(graphqlOperation(createPost, {input: createPostInput}))

@@ -32,33 +32,40 @@ function PostCard(
   
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     const query = `
       mutation CreateComment(
-        $id: ID!
+        $id: ID
         $content: String
         $timeCreated: String
-        $commentUserId: ID
-        $commentPostId: ID
+        $userId: ID!
+        $postId: ID!
+        $condition: ModelCommentConditionInput
       ) {
         createComment(input: {
           id: $id
           content: $content
           timeCreated: $timeCreated
-          commentUserId: $commentUserId
-          commentPostId: $commentPostId
-        }) {
+          userId: $userId
+          postId: $postId
+        }, condition: $condition) {
           id
+          content
+          timeCreated
+          userId
+          postId
         }
       }
-    `
+    `;
+
     const variables = {
       id: `commentid:${genUUID()}`,
       content: inputText,
       timeCreated: getISODate(),
-      commentUserId: loggedInUserData.id,
-      commentPostId: postId
+      userId: loggedInUserData.id,
+      postId: postId
     }
+  
     
     API.graphql({query, variables})
     .then(res => {
@@ -192,10 +199,18 @@ function PostCard(
             {moment(timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
-        <form onSubmit={handleSubmit} css={css`width: 100%;`}>
+        <form 
+          onSubmit={handleSubmit} 
+          css={css`
+            width: 100%; 
+            *:focus {
+              outline: none;
+            }
+          `}
+        >
           <input 
             type="text" 
-            placeholder="Add comment" 
+            placeholder="Add a comment..." 
             onChange={handleChange}
             value={inputText}
             css={css`
