@@ -33,7 +33,11 @@ export const Button = {
   borderRadius: '4px'
 };
 export const PhotoPickerButton = {
-  display: 'none'
+  background: `linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(255,157,45,.8), rgba(255,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%)`,
+  borderRadius: '4px',
+  marginBottom: '10px' 
 };
 export const PhotoPlaceholder = {
 };
