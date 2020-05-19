@@ -116,7 +116,7 @@ function App() {
   const getAuthenticatedUserAndData = () => {
     Auth.currentCredentials()
     .then(res => {
-      getUserData(res.data.IdentityId);
+      getUserData(res.identityId);
     })
     .catch(err => console.log(err))
   }
