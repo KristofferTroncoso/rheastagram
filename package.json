@@ -1,6 +1,6 @@
 {
-  "name": "Rheastagram",
-  "version": "1.0.0",
+  "name": "rheastagram",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.28",
