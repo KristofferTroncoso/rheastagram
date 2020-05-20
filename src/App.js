@@ -14,7 +14,7 @@ import PostPage from './pages/PostPage/PostPage';
 import Wrapper from './components/Wrapper/Wrapper';
 import { getISODate } from './utils';
 
-export const createUser = /* GraphQL */ `
+export const createUser = `
   mutation CreateUser(
     $input: CreateUserInput!
     $condition: ModelUserConditionInput
