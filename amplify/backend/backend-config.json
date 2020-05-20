@@ -1,9 +1,10 @@
 {
 	"auth": {
-		"rheastagram2d41cbd8": {
+		"rheastagram82890e9b": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": []
+			"dependsOn": [],
+			"customAuth": false
 		}
 	},
 	"api": {
@@ -16,7 +17,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authrheastagram2d41cbd8"
+							"userPoolId": "authrheastagram82890e9b"
 						}
 					}
 				}
