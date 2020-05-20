@@ -2,15 +2,15 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:9d06f80a-9d2d-4ade-a1b8-d274e7811e0c",
+    "aws_cognito_identity_pool_id": "us-east-1:dd7356cd-ed86-4be7-89e0-29cbbfb8caa2",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_8Ix2inKCM",
-    "aws_user_pools_web_client_id": "4jqb3oeu3e8t5b4hee0s10ianp",
+    "aws_user_pools_id": "us-east-1_OBoFu0FCd",
+    "aws_user_pools_web_client_id": "2tu44uhel5t5l8i5dugffvit87",
     "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://rkkippbrebhchcqdiprxswivhy.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://o3zfucejebc2pc5rb74iqpyeae.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_user_files_s3_bucket": "rheastagramc4a0440b1bb24ac0abe378970ca4413a73840-rheaenvone",
+    "aws_user_files_s3_bucket": "rheastagram41e3f306f04e4fbc9c9cfb35e3d3ed0d110609-rheaenvone",
     "aws_user_files_s3_bucket_region": "us-east-1"
 };
 
