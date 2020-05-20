@@ -1,19 +1,19 @@
 {
     "rheaenvone": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-rheastagram-rheaenvone-110609-authRole",
-            "UnauthRoleArn": "arn:aws:iam::375497050422:role/amplify-rheastagram-rheaenvone-110609-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::375497050422:role/amplify-rheastagram-rheaenvone-110609-authRole",
+            "AuthRoleName": "amplify-rheastagram-rheaenvone-124335-authRole",
+            "UnauthRoleArn": "arn:aws:iam::375497050422:role/amplify-rheastagram-rheaenvone-124335-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::375497050422:role/amplify-rheastagram-rheaenvone-124335-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-rheastagram-rheaenvone-110609-deployment",
-            "UnauthRoleName": "amplify-rheastagram-rheaenvone-110609-unauthRole",
-            "StackName": "amplify-rheastagram-rheaenvone-110609",
-            "StackId": "arn:aws:cloudformation:us-east-1:375497050422:stack/amplify-rheastagram-rheaenvone-110609/70dda340-9aab-11ea-837e-0a87c278b5b5",
-            "AmplifyAppId": "dmgol7dleves9"
+            "DeploymentBucketName": "amplify-rheastagram-rheaenvone-124335-deployment",
+            "UnauthRoleName": "amplify-rheastagram-rheaenvone-124335-unauthRole",
+            "StackName": "amplify-rheastagram-rheaenvone-124335",
+            "StackId": "arn:aws:cloudformation:us-east-1:375497050422:stack/amplify-rheastagram-rheaenvone-124335/0de7e530-9ab9-11ea-8c07-0a1f955da693",
+            "AmplifyAppId": "d2f7z4fxf9cz8c"
         },
         "categories": {
             "auth": {
-                "rheastagramdbf0a15d": {}
+                "rheastagram2f6e2c8c": {}
             }
         }
     }

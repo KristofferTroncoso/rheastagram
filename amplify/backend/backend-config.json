@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"rheastagramdbf0a15d": {
+		"rheastagram2f6e2c8c": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
@@ -17,7 +17,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authrheastagramdbf0a15d"
+							"userPoolId": "authrheastagram2f6e2c8c"
 						}
 					}
 				}
@@ -25,7 +25,7 @@
 		}
 	},
 	"storage": {
-		"rheapicsstorage": {
+		"rheacontentstorage": {
 			"service": "S3",
 			"providerPlugin": "awscloudformation"
 		}
