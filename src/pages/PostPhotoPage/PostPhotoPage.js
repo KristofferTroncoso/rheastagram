@@ -38,7 +38,7 @@ function PostPhotoPage({userData}) {
   
   const handlePick = data => {
     console.log(data);
-    if (data.size > 300000) {
+    if (data.size > 3000000) {
       changeIsTooBig(true);
       changeImgKey(null);
     } else {
