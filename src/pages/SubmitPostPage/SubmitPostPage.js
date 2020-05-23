@@ -31,7 +31,7 @@ const StyledH2 = styled.h2`
 `;
 
 
-function PostPhotoPage({userData}) {
+function SubmitPostPage({userData}) {
   const [imgKey, changeImgKey] = React.useState();
   const [isTooBig, changeIsTooBig] = React.useState();
   const history = useHistory();
@@ -93,4 +93,4 @@ function PostPhotoPage({userData}) {
   )
 }
 
-export default PostPhotoPage;
+export default SubmitPostPage;

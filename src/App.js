@@ -6,7 +6,7 @@ import awsCustomTheme from './awsCustomTheme';
 import Navbar from './components/Navbar/Navbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
 import HomePage from './pages/HomePage/HomePage';
-import PostPhotoPage from './pages/PostPhotoPage/PostPhotoPage';
+import SubmitPostPage from './pages/SubmitPostPage/SubmitPostPage';
 import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
@@ -173,7 +173,7 @@ function App() {
               />
             } 
           />
-          <Route path="/post" render={props => <PostPhotoPage userData={userData} />} />
+          <Route path="/post" render={props => <SubmitPostPage userData={userData} />} />
           <Route 
             path="/p/:postId" 
             render={props => <PostPage props={props} loggedInUserData={userData} />} 
