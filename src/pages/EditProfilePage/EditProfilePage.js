@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
 import { Button, Form, Input, Upload } from 'antd';
-import { updateUser } from '../../graphql/mutations';
 import { API, Storage, graphqlOperation } from 'aws-amplify';
 // import { useHistory } from "react-router";
 // import { S3Image } from 'aws-amplify-react';
@@ -46,6 +45,23 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   const handleSubmit = async e => {
     e.preventDefault();
     console.log(formData);
+
+    const updateUser = `
+      mutation UpdateUser(
+        $input: UpdateUserInput!
+        $condition: ModelUserConditionInput
+      ) {
+        updateUser(input: $input, condition: $condition) {
+          id
+          username
+          name
+          bio
+          email
+          photoUrl
+        }
+      }
+    `;
+
     let updateUserInput = {
       id: userData.id,
       name: formData.name,

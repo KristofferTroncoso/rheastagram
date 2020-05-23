@@ -4,7 +4,6 @@ import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { PhotoPicker } from 'aws-amplify-react';
 import awsCustomTheme from '../../awsCustomTheme';
 import { Button, Icon } from 'antd';
-import { createPost } from '../../graphql/mutations';
 import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
 import styled from '@emotion/styled';
@@ -53,6 +52,22 @@ function SubmitPostPage({userData}) {
   }
   
   const handleSave = async(e) => {
+    const createPost = `
+      mutation CreatePost(
+        $input: CreatePostInput!
+        $condition: ModelPostConditionInput
+      ) {
+        createPost(input: $input, condition: $condition) {
+          id
+          picUrl
+          type
+          visibility
+          timeCreated
+          userId
+        }
+      }
+    `;
+
     let createPostInput = {
       id: `postid:${genUUID()}`,
       picUrl: imgKey,

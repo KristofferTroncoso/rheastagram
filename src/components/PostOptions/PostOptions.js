@@ -2,7 +2,6 @@
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
-import { deletePost } from '../../graphql/mutations';
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -47,6 +46,18 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
   
   const handleDelete = async e => {
     console.log(`deleting ${id}`);
+
+    const deletePost = `
+      mutation DeletePost(
+        $input: DeletePostInput!
+        $condition: ModelPostConditionInput
+      ) {
+        deletePost(input: $input, condition: $condition) {
+          id
+        }
+      }
+    `;
+
     let deletePostInput = {
       id: id
     }
