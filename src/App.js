@@ -6,7 +6,6 @@ import awsCustomTheme from './awsCustomTheme';
 import Navbar from './components/Navbar/Navbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
 import HomePage from './pages/HomePage/HomePage';
-import PublicPage from './pages/PublicPage/PublicPage';
 import PostPhotoPage from './pages/PostPhotoPage/PostPhotoPage';
 import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
@@ -161,7 +160,6 @@ function App() {
               />
             } 
           />
-          <Route path="/public" render={props => <PublicPage userData={userData} />} />
           <Route 
             path="/user/:id" 
             render={props => <UserPage loggedInUserData={userData} props={props} />} 
