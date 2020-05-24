@@ -6,21 +6,21 @@ function useSignedS3Url(imgKey) {
   
   React.useEffect(() => {
     if (!imgKey) {
-      console.log('undefined')
+      console.log("image key is undefined")
     } else {
       let cacheRes = Cache.getItem(imgKey);
       if (cacheRes === null) {
-        console.log('getting new signedUrl')
+        console.log('getting new signed url for image')
         Storage.get(imgKey)
-        .then(d => {
-          setSignedUrl(d);
+        .then(data => {
+          setSignedUrl(data);
           let dateNow = new Date();
           let expirationTime = dateNow.getTime() + 900000;
-          Cache.setItem(imgKey, d, {expires: expirationTime });
+          Cache.setItem(imgKey, data, {expires: expirationTime });
         })
         .catch(err => console.log(err));
       } else {
-        console.log('img is cached')
+        console.log("Image is in cache (You saved bandwidth!)")
         setSignedUrl(cacheRes);
       }
     }
