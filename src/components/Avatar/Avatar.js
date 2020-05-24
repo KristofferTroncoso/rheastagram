@@ -38,7 +38,6 @@ function Avatar({img, username, large, rainbow}) {
           icon="user" 
           src={imgKey && imgKey} 
           size={large ? "large" : "default"}
-          rainbow={rainbow}
           css={rainbow ? {border: '2px solid white'} : {border: '1px solid lightgrey'}}
         />
       </div>
