@@ -74,8 +74,8 @@ function InfoHeader({userData, loggedInUserData}) {
             className="InfoHeader_username" 
             css={css`
               font-weight: 300;
-              font-size: 34px;
-              margin-bottom: 5px;
+              font-size: 32px;
+              margin-bottom: 6px;
             `}
           >
             {userData.username}
@@ -83,7 +83,15 @@ function InfoHeader({userData, loggedInUserData}) {
           {userData.username === loggedInUserData.username 
             ? <Fragment>
                 <Link to="/editprofile">
-                  <button css={{padding: '2px 6px', margin: '0 20px', color: 'black', borderRadius: '4px'}}>
+                  <button 
+                    css={{
+                      padding: '3px 8px', 
+                      margin: '2px 20px', 
+                      color: '#262626', 
+                      borderRadius: '4px',
+                      fontWeight: '500'
+                    }}
+                  >
                     Edit Profile
                   </button>
                 </Link>
@@ -92,7 +100,7 @@ function InfoHeader({userData, loggedInUserData}) {
             : null
           }
         </div>
-        <h3>{userData.name}</h3>
+        <h3 css={{marginBottom: '4px'}}>{userData.name}</h3>
         <p>{userData.bio}</p>
       </div>
     </div>
