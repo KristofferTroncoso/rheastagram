@@ -15,7 +15,7 @@ Live Demo: https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 - [x] Storage and uploads (Amazon S3)
 - [x] Data persistence / database (Amazon DynamoDB/NoSQL)
 - [x] Serverless and flexible API (AWS AppSync/GraphQL)
-- [x] Conflict-free styling (Styled-Components/CSS-In-JS)
+- [x] Conflict-free styling (Emotion/CSS-In-JS)
 - [x] Responsive, modern layout (CSS Grid and Flexbox)
 - [x] CRUD operations (create, read, update, and delete User, Posts, and Comments)
 - [x] CI/CD (AWS Amplify Console)
@@ -29,6 +29,7 @@ Live Demo: https://master.d3bmzm8bmp8ok9.amplifyapp.com/
 
 ## frontend
 * React
+* Emotion/CSS-In-JS
 * Ant-Design components
 * AWS Amplify components
 * CSS Grid and Flexbox
