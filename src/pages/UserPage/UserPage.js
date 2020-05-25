@@ -105,7 +105,7 @@ function UserPage({loggedInUserData, props}) {
   return (
     <StyledDiv>
       {isFound 
-      ? <Wrapper>
+      ? <>
           <InfoHeader userData={foundUserData} loggedInUserData={loggedInUserData} />
           <PicGrid 
             pics={foundUserData.posts} 
@@ -113,15 +113,15 @@ function UserPage({loggedInUserData, props}) {
             loggedInUserData={loggedInUserData}
             getUser={getUser} 
           />
-        </Wrapper> 
-      : <Wrapper>
+        </> 
+      : <>
           <StyledH1>User not found</StyledH1>
           <StyledBtnDiv>
             <Link to={"/"}>
               <Button type="primary">Go home</Button>
             </Link>
           </StyledBtnDiv>
-        </Wrapper>
+        </>
       }
     </StyledDiv>
   )
