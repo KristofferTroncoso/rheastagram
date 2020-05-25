@@ -3,7 +3,7 @@
 # Rheastagram
 Full Stack serverless Instagram clone (named after Rhea, the Lab Mix)
 
-Live Demo: https://master.d3bmzm8bmp8ok9.amplifyapp.com/
+Live Demo: https://rheaprod.d2f7z4fxf9cz8c.amplifyapp.com/
 
 ## Overview
 * React frontend
