@@ -7,7 +7,7 @@ import CommentList from '../CommentList/CommentList';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
 import Like from '../Like/Like';
-import { Icon } from 'antd';
+import { Icon, Button } from 'antd';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 
@@ -87,19 +87,23 @@ function PostCard(
         display: flex;
         background: inherit;
         justify-content: center;
-        border-radius: 4px;
         max-width: 950px;
         margin: 0 auto;
+        border-radius: 7px 4px 4px 7px;
         
         @media (max-width: 768px){ 
           flex-direction: column;
+          border-radius: 0;
         }
       `}
     >
       <div
         css={css`
           overflow: hidden;
-          border-radius: 4px 0 0 4px;
+          border-top-left-radius: inherit;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: inherit;
           background: orange;
           background-image: radial-gradient(
               closest-corner circle at 30% 70%,
@@ -145,10 +149,12 @@ function PostCard(
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          border-radius: 4px;
           border: 1px solid lightgrey;
           border-left: 0;
-          border-radius: inherit;
+          border-top-left-radius: 0;
+          border-top-right-radius: inherit;
+          border-bottom-right-radius: inherit;
+          border-bottom-left-radius: 0;
         `}
       >
         <div
@@ -156,11 +162,10 @@ function PostCard(
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 60px;
-            padding: 5px;
+            padding: 16px 10px;
             border-bottom: 1px solid lightgrey;
-            background: white;     
-            border-radius: 0 4px 0 0;
+            background: white;  
+            border-top-right-radius: inherit;   
           `}
         >
           <div css={css`display: flex; align-items: center;`}>
@@ -177,7 +182,7 @@ function PostCard(
         <CommentList comments={comments} />
         <div 
           className="PostCard_stats" 
-          css={css`border-top: 1px solid lightgrey; padding: 8px;`}
+          css={css`border-top: 1px solid lightgrey; padding: 12px;`}
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
             <Like 
@@ -200,9 +205,14 @@ function PostCard(
           </span>
         </div>
         <form 
-          onSubmit={handleSubmit} 
+          onSubmit={inputText && handleSubmit} 
           css={css`
             width: 100%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-right-radius: inherit;
+            border-top: 1px solid lightgrey;
             *:focus {
               outline: none;
             }
@@ -215,11 +225,25 @@ function PostCard(
             value={inputText}
             css={css`
               border: 0;
-              border-top: 1px solid lightgrey;
+              border-bottom-right-radius: inherit;
               padding: 18px 14px;
               width: 100%;
             `}
           />
+          <button
+            onClick={handleSubmit} 
+            css={css`
+              border: none;
+              padding: 15px 20px;
+              background: inherit;
+              color: ${inputText ? 'dodgerblue' : '#8ce2ff'};
+              font-weight: 500;
+              font-size: 14px;
+            `}
+            disabled={inputText ? false : true}
+          >
+            Post
+          </button>
         </form>
       </div>
     </section>    
