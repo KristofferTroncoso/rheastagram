@@ -7,7 +7,7 @@ import CommentList from '../CommentList/CommentList';
 import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
 import Like from '../Like/Like';
-import { Icon, Button } from 'antd';
+import { Icon } from 'antd';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 
