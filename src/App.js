@@ -185,5 +185,8 @@ function App() {
   );
 }
 
+const signUpConfig = {
+  hiddenDefaults: ['phone_number']
+};
 
-export default withAuthenticator(App, false, [], null, awsCustomTheme);
+export default withAuthenticator(App, {signUpConfig, theme: awsCustomTheme});
