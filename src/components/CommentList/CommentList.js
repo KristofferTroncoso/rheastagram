@@ -6,7 +6,7 @@ function CommentList({comments}) {
   return (
     <div 
       className="CommentList" 
-      css={css`padding: 8px; height: 100%; overflow: auto;`}
+      css={css`padding: 10px; height: 100%; overflow: auto;`}
     >
       {comments
       .sort((a, b) => (a.timeCreated < b.timeCreated) 
