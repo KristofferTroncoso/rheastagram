@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
@@ -12,6 +13,7 @@ import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
 import Wrapper from './components/Wrapper/Wrapper';
 import { getISODate } from './utils';
+import { jsx } from '@emotion/core';
 
 export const createUser = `
   mutation CreateUser(
@@ -145,7 +147,7 @@ function App() {
   
   return (
     <Router>
-      <div className="App">
+      <div className="App" css={{width: '100vw'}}>
         <Navbar userData={userData} />
         <Wrapper>
           <Route 
