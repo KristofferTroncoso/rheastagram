@@ -5,7 +5,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import styled from '@emotion/styled';
-import Wrapper from '../../components/Wrapper/Wrapper';
 
 const StyledDiv = styled.div`
   padding: 15px 0 200px;
