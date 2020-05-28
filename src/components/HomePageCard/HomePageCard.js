@@ -62,7 +62,7 @@ const StyledImg = styled.img`
   border-bottom: 1px solid #e6e6e6;
 `;
 
-function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
+function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
   const imgKey = useSignedS3Url(imgUrl);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
 
@@ -110,4 +110,4 @@ function FoodCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUser
 }
 
 
-export default FoodCard;
+export default HomePageCard;

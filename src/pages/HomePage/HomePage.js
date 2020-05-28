@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import FoodCard from '../../components/FoodCard/FoodCard';
+import HomePageCard from '../../components/HomePageCard/HomePageCard';
 import { css, jsx } from '@emotion/core';
 
 
@@ -67,7 +67,7 @@ const HomePage = ({ userData }) => {
       `}
     >
       {allPosts.map(post => (
-        <FoodCard
+        <HomePageCard
           key={post.id}
           id={post.id}
           imgUrl={post.picUrl}
