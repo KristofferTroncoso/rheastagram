@@ -9,7 +9,7 @@ import moment from 'moment';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 
-function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId, getUser}) {
+function PicModal({img, hearts, comments, post, userData, loggedInUserData, postId, getUser}) {
   const [visible, changeVisible] = React.useState(false);
   const [inputText, changeInputText] = React.useState('');
 
@@ -78,7 +78,7 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
   
 
   return (
-    <div className="NewPic" css={css`
+    <div className="PicModal" css={css`
       display: block;
       height: 31vw;
       max-height: 288px;
@@ -122,7 +122,7 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
         width="900px"
         height="900px"
       >
-        <div className="NewPicCard" 
+        <div className="PicModalCard" 
           css={css`
             display: flex;
             background: white;
@@ -171,13 +171,13 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
               </div>
               <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
             </div>
-            <div className="NewPic_Comments" css={{padding: "8px", height: '100%'}}>
+            <div className="PicModal_Comments" css={{padding: "8px", height: '100%'}}>
               {post.comments.items
               .sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0))
               .map(comment => (
                 <div css={{display: 'flex', marginBottom: '8px'}}  key={comment.id}>
                   <Avatar img={comment.user.photoUrl} username={comment.user.username} />
-                  <div className="NewPic_CommentBox" css={{marginLeft: '10px'}}>
+                  <div className="PicModal_CommentBox" css={{marginLeft: '10px'}}>
                     <div css={{display: 'flex', alignItems: 'baseline'}}>
                       <h4 css={{marginRight: '5px', fontSize: '12px', margin: '0 8px 0 0'}}>{comment.user.username}</h4>
                       <p css={{fontSize: '12px', color: '#2b2b2b', margin: 0}}>{comment.content}</p>
@@ -208,4 +208,4 @@ function NewPic({img, hearts, comments, post, userData, loggedInUserData, postId
   );   
 }
 
-export default NewPic;
+export default PicModal;

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import NewPic from '../NewPic/NewPic';
+import PicModal from '../PicModal/PicModal';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
 
@@ -30,7 +30,7 @@ function PicGrid({pics, modalStatus, userData, loggedInUserData, getUser}) {
     <StyledPicGridWrapper className="PicGridWrapper">
       <StyledPicGrid className="PicGrid">
         {sortedPics.map((pic) => (
-          <NewPic 
+          <PicModal 
             key={pic.id} 
             postId={pic.id}
             img={pic.picUrl} 

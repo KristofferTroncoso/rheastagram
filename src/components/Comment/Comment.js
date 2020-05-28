@@ -7,7 +7,7 @@ function Comment({comment}) {
   return (
     <div css={css`display: flex; margin-bottom: 8px; padding: 4px 2px;`}>
       <Avatar img={comment.user.photoUrl} username={comment.user.username} />
-      <div className="NewPic_CommentBox" css={css`margin-left: 10px`}>
+      <div className="PicModal_CommentBox" css={css`margin-left: 10px`}>
         <div css={css`display: flex; align-items: baseline`}>
           <h4 css={css`margin-right: 5px; font-size: 14px; margin: 0 8px 0 0;`}>
             {comment.user.username}
