@@ -1,9 +1,11 @@
 /** @jsx jsx */
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Button } from 'antd';
 import Avatar from '../Avatar/Avatar';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
 
 const StyledDiv = styled.div`
   background: white; 
@@ -121,7 +123,8 @@ const StyledPostPhotoButton = styled(Button)`
   }
 `;
 
-function Navbar({userData}) {
+function Navbar() {
+  const { loggedInUserData } = useContext(LoggedInUserContext);
 
   return (
     <StyledDiv className="Navbar">
@@ -137,7 +140,7 @@ function Navbar({userData}) {
         <StyledSearchForm className="Search" onSubmit={e => e.preventDefault()}>
           <StyledSearchInput type="text" className="Search_Box" placeholder="Search" />
         </StyledSearchForm>
-        {userData       
+        {loggedInUserData       
         ? (
           <div style={{display: 'flex', alignItems: 'center'}}>
             <StyledLink to="/post" className="PostPhotoButton">
@@ -147,8 +150,8 @@ function Navbar({userData}) {
               </StyledPostPhotoButton>
             </StyledLink>
             <Avatar 
-              img={userData.photoUrl} 
-              username={userData.username} 
+              img={loggedInUserData.photoUrl} 
+              username={loggedInUserData.username} 
               rainbow
               large
             />

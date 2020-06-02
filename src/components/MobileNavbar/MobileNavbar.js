@@ -5,6 +5,7 @@ import { FaPlusSquare, FaRegPlusSquare, FaUser, FaRegUser } from 'react-icons/fa
 import { AiFillHome, AiOutlineHome } from 'react-icons/ai';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
 
 const StyledNav = styled.nav`
   background: white;
@@ -20,9 +21,10 @@ const StyledNav = styled.nav`
 `;
 
 
-function MobileNavbar({userData}) {
+function MobileNavbar() {
   const [currentPage, changeCurrentPage] = React.useState();
-
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  
   return (
     <StyledNav className="MobileNavbar">
       <NavLink 
@@ -59,7 +61,7 @@ function MobileNavbar({userData}) {
         }
       </NavLink>
       <NavLink 
-        to={`/user/${userData.username}`}
+        to={`/user/${loggedInUserData.username}`}
         isActive={(match, location) => {
           if (match) {
             changeCurrentPage('user')

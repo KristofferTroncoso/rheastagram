@@ -205,7 +205,7 @@ function PostCard(
           </span>
         </div>
         <form 
-          onSubmit={inputText && handleSubmit} 
+          onSubmit={inputText ? handleSubmit : e => console.log(e)} 
           css={css`
             width: 100%; 
             display: flex;

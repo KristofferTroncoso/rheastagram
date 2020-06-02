@@ -169,7 +169,7 @@ function PicModal({img, hearts, comments, post, userData, loggedInUserData, post
                 <Avatar img={userData.photoUrl}  username={userData.username} />
                 <h3 css={{marginLeft: '10px'}}>{userData.username}</h3>
               </div>
-              <PostOptions userData={userData} id={post.id} imgKey={img} loggedInUserData={loggedInUserData} />
+              <PostOptions userData={userData} postId={post.id} />
             </div>
             <div className="PicModal_Comments" css={{padding: "8px", height: '100%'}}>
               {post.comments.items

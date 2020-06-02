@@ -4,6 +4,7 @@ import { API } from 'aws-amplify';
 import PostCard from '../../components/PostCard/PostCard';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
 
 const StyledDiv = styled.div`
   padding: 50px 0 60px;
@@ -15,7 +16,7 @@ const StyledDiv = styled.div`
   }
 `;
 
-function PostPage({props, loggedInUserData}) {
+function PostPage({props}) {
   const [findPostState, changeFindPostState] = React.useState('loading');
   const [arrOfLikes, changeArrOfLikes] = React.useState([]);
   const [postData, changePostData] = React.useState({
@@ -26,6 +27,8 @@ function PostPage({props, loggedInUserData}) {
     comments: {items: []},
     likes: {items: []}
   });
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+
   const paramsPostId = props.match.params.postId;
   
   const getPostData = async (paramsPostId) => {
@@ -94,7 +97,7 @@ function PostPage({props, loggedInUserData}) {
     console.log("PostPage: useEffect");
     let res = getPostData(paramsPostId);
     res.then(d => changeFindPostState(d));
-    getNewArrOfLikes();
+    // getNewArrOfLikes();
   }, [paramsPostId, loggedInUserData]);
   
   return (

@@ -8,6 +8,7 @@ import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
 
 const StyledPageWrapper = styled.div`
   padding: 40px 0;
@@ -30,9 +31,10 @@ const StyledH2 = styled.h2`
 `;
 
 
-function SubmitPostPage({userData}) {
+function SubmitPostPage() {
   const [imgKey, changeImgKey] = React.useState();
   const [isTooBig, changeIsTooBig] = React.useState();
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
   const history = useHistory();
   
   const handlePick = data => {
@@ -42,7 +44,7 @@ function SubmitPostPage({userData}) {
       changeImgKey(null);
     } else {
       changeIsTooBig(false);
-      Storage.put(`${userData.id}/${genUUID()}-${data.name}`, data.file, {
+      Storage.put(`${loggedInUserData.id}/${genUUID()}-${data.name}`, data.file, {
           level: 'public',
           contentType: data.type
       })
@@ -73,7 +75,7 @@ function SubmitPostPage({userData}) {
       picUrl: imgKey,
       type: "post",
       visibility: "public",
-      userId: userData.id,
+      userId: loggedInUserData.id,
       timeCreated: getISODate()
     };
     const data = await API.graphql(graphqlOperation(createPost, {input: createPostInput}))

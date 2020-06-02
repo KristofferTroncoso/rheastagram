@@ -6,25 +6,28 @@ import { API, Storage, graphqlOperation } from 'aws-amplify';
 // import { S3Image } from 'aws-amplify-react';
 import Avatar from '../../components/Avatar/Avatar';
 import { css, jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
 
-function EditProfilePage({userData, getAuthenticatedUserAndData}) {
+
+function EditProfilePage() {
+  const { loggedInUserData, getAuthenticatedUserAndData } = React.useContext(LoggedInUserContext);
   React.useEffect(() => {
     console.log('edit page affecting!');
-    if (userData.id === null) {
+    if (loggedInUserData.id === null) {
       console.log('not found yet');
     } else {
       console.log('found');
       changeInitialData({
-        name: userData.name,
-        bio: userData.bio
+        name: loggedInUserData.name,
+        bio: loggedInUserData.bio
       });
       changeFormData({
-        name: userData.name,
-        bio: userData.bio
+        name: loggedInUserData.name,
+        bio: loggedInUserData.bio
       })
       changeIsUserFound(true);
     }
-  }, [userData])
+  }, [loggedInUserData])
   
   
   // const history = useHistory();
@@ -37,8 +40,8 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   });
   
   const [formData, changeFormData] = React.useState({
-    name: userData.name,
-    bio: userData.bio
+    name: loggedInUserData.name,
+    bio: loggedInUserData.bio
   });
   
 
@@ -63,7 +66,7 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
     `;
 
     let updateUserInput = {
-      id: userData.id,
+      id: loggedInUserData.id,
       name: formData.name,
       bio: formData.bio
     };
@@ -75,14 +78,14 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
   
   const handlePicUpload = file => {
     console.log(file)
-    Storage.put(`${userData.id}/${file.name}`, file, {
+    Storage.put(`${loggedInUserData.id}/${file.name}`, file, {
       level: 'public',
       contentType: file.type
     })
     .then (result => {
       let imgKey = result.key;
       let updateUserInput = {
-        id: userData.id,
+        id: loggedInUserData.id,
         photoUrl: imgKey
       };
       
@@ -122,9 +125,9 @@ function EditProfilePage({userData, getAuthenticatedUserAndData}) {
         >
           <h1>Edit Profile</h1>
           <div css={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
-            <Avatar img={userData.photoUrl} css={{alignContent: 'center'}} username={userData.username} large />
+            <Avatar img={loggedInUserData.photoUrl} css={{alignContent: 'center'}} username={loggedInUserData.username} large />
             <div css={{padding: '0 10px'}}>
-              <h2 css={{margin: 0, padding: 0}}>{userData.username}</h2>
+              <h2 css={{margin: 0, padding: 0}}>{loggedInUserData.username}</h2>
               <Upload 
                 accept="image/*" 
                 showUploadList={false}

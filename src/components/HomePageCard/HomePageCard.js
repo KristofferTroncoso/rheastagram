@@ -62,7 +62,7 @@ const StyledImg = styled.img`
   border-bottom: 1px solid #e6e6e6;
 `;
 
-function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedInUserData}) {
+function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt }) {
   const imgKey = useSignedS3Url(imgUrl);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
 
@@ -81,8 +81,7 @@ function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt, loggedIn
         </div>
         <PostOptions 
           userData={userData} 
-          id={id} imgKey={imgKey} 
-          loggedInUserData={loggedInUserData}
+          postId={id}
         />
       </StyledDiv>
       <div style={{overflow: 'hidden'}}>

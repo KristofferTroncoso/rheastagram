@@ -14,6 +14,7 @@ import PostPage from './pages/PostPage/PostPage';
 import Wrapper from './components/Wrapper/Wrapper';
 import { getISODate } from './utils';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from './user-context';
 
 export const createUser = `
   mutation CreateUser(
@@ -82,7 +83,7 @@ const customGetUserQuery = `
 `
 
 function App() {
-  const [userData, changeUserData] = React.useState({
+  const [loggedInUserData, setLoggedInUserData] = React.useState({
     id: null,
     name: '',
     posts: [],
@@ -90,7 +91,6 @@ function App() {
     likes: [],
     bio: ''
   });
-  // const [arrOfLikes, changeArrOfLikes] = React.useState([]);
 
   React.useEffect(() => {
     console.log("App-useEffect: Getting Auth Data for current logged-in user!")
@@ -132,7 +132,7 @@ function App() {
     } else {
       console.log('App: Found user on DynamoDB database!')
       let {bio, comments, id, likes, name, photoUrl, userPosts, username} = response.data.getUser;
-      changeUserData({
+      setLoggedInUserData({
         id,
         name,
         bio,
@@ -147,42 +147,19 @@ function App() {
   
   return (
     <Router>
-      <div className="App" css={{width: '100vw'}}>
-        <Navbar userData={userData} />
-        <Wrapper>
-          <Route 
-            path="/" 
-            exact 
-            render={props => 
-              <HomePage 
-                username={userData.name} 
-                post={postUser} 
-                getUserData={getUserData} 
-                userData={userData} 
-              />
-            } 
-          />
-          <Route 
-            path="/user/:id" 
-            render={props => <UserPage loggedInUserData={userData} props={props} />} 
-          />
-          <Route 
-            path="/editprofile" 
-            render={props => 
-              <EditProfilePage 
-                userData={userData} 
-                getAuthenticatedUserAndData={getAuthenticatedUserAndData} 
-              />
-            } 
-          />
-          <Route path="/post" render={props => <SubmitPostPage userData={userData} />} />
-          <Route 
-            path="/p/:postId" 
-            render={props => <PostPage props={props} loggedInUserData={userData} />} 
-          />
-        </Wrapper>
-        {window.innerWidth < 600 && <MobileNavbar userData={userData} /> }
-      </div>
+      <LoggedInUserContext.Provider value={{loggedInUserData, getAuthenticatedUserAndData}}>
+        <div className="App" css={{width: '100vw'}}>
+          <Navbar />
+          <Wrapper>
+            <Route path="/" exact render={props => <HomePage />} />
+            <Route path="/user/:id" render={props => <UserPage props={props} />} />
+            <Route path="/editprofile" render={props => <EditProfilePage />} />
+            <Route path="/post" render={props => <SubmitPostPage />} />
+            <Route path="/p/:postId" render={props => <PostPage props={props} />} />
+          </Wrapper>
+          {window.innerWidth < 600 && <MobileNavbar /> }
+        </div>        
+      </LoggedInUserContext.Provider>
     </Router>
   );
 }

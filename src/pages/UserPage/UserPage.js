@@ -5,6 +5,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import styled from '@emotion/styled';
+import { LoggedInUserContext } from '../../user-context';
 
 const StyledDiv = styled.div`
   padding: 15px 0 200px;
@@ -23,9 +24,10 @@ const StyledBtnDiv = styled.div`
   text-align: center;
 `;
 
-function UserPage({loggedInUserData, props}) {
+function UserPage({props}) {
   const [foundUserData, changeFoundUserData] = React.useState({posts: []})
   const [isFound, changeIsFound] = React.useState(true);
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
   
   React.useEffect(() => {
     getUser(props.match.params.id);

@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
 
 const StyledButton = styled.button`
   border: 0;
@@ -28,10 +29,10 @@ const StyledModalButton = styled(Button)`
   }
 `;
 
-function PostOptions({id, imgKey, userData, loggedInUserData}) {
+function PostOptions({postId, imgKey, userData}) {
   const [visible, changeVisible] = React.useState(false);
   const history = useHistory();
-
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
   const showModal = () => {
     changeVisible(true)
   };
@@ -45,7 +46,7 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
   };
   
   const handleDelete = async e => {
-    console.log(`deleting ${id}`);
+    console.log(`deleting ${postId}`);
 
     const deletePost = `
       mutation DeletePost(
@@ -59,7 +60,7 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
     `;
 
     let deletePostInput = {
-      id: id
+      id: postId
     }
     const response = await API.graphql(graphqlOperation(deletePost, {input: deletePostInput}));
     console.log(response);
@@ -98,9 +99,9 @@ function PostOptions({id, imgKey, userData, loggedInUserData}) {
         >
           Copy Link
         </StyledModalButton>
-        <Link to={`/p/${id}`}>
+        <Link to={`/p/${postId}`}>
           <StyledModalButton 
-            onClick={e => console.log(id)}
+            onClick={e => console.log(postId)}
             block
           >
             Go to Post

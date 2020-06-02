@@ -5,7 +5,7 @@ import HomePageCard from '../../components/HomePageCard/HomePageCard';
 import { css, jsx } from '@emotion/core';
 
 
-const HomePage = ({ userData }) => {
+const HomePage = () => {
   React.useEffect(() => {
     getAllPosts();
   }, [])
@@ -73,7 +73,6 @@ const HomePage = ({ userData }) => {
           imgUrl={post.picUrl}
           createdAt={post.timeCreated}
           userData={post.user}
-          loggedInUserData={userData}
         />
       ))}
     </div>
