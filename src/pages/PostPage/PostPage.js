@@ -18,7 +18,6 @@ const StyledDiv = styled.div`
 
 function PostPage({props}) {
   const [findPostState, changeFindPostState] = React.useState('loading');
-  const [arrOfLikes, changeArrOfLikes] = React.useState([]);
   const [postData, changePostData] = React.useState({
     id: '',
     picUrl: '',
@@ -82,22 +81,13 @@ function PostPage({props}) {
     }
   }
   
-  const reduceUserLikes = (loggedInUserData) => {
-    return loggedInUserData.likes.reduce((acc, currVal) => {
-    	acc.push(currVal.post.id);
-    	return acc;
-    }, []);
-  }
-  
-  const getNewArrOfLikes = () => {
-    changeArrOfLikes(reduceUserLikes(loggedInUserData));
-  }
+
+
   
   React.useEffect(() => {
     console.log("PostPage: useEffect");
     let res = getPostData(paramsPostId);
     res.then(d => changeFindPostState(d));
-    // getNewArrOfLikes();
   }, [paramsPostId, loggedInUserData]);
   
   return (
@@ -111,10 +101,8 @@ function PostPage({props}) {
                   likes={postData.likes.items}
                   comments={postData.comments.items}
                   getPostData={getPostData}
-                  arrOfLikes={arrOfLikes}
                   timeCreated={postData.timeCreated}
                   likeId={postData.likes.items.id}
-                  getNewArrOfLikes={getNewArrOfLikes}
                 />,
         notfound: <h1>Post not found</h1>
       }[findPostState]}

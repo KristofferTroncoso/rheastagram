@@ -19,11 +19,8 @@ function PostCard(
     userData, 
     loggedInUserData, 
     postId, 
-    getUser, 
-    getPostData, 
-    arrOfLikes, 
+    getPostData,  
     timeCreated, 
-    getNewArrOfLikes
   }) {
   const [inputText, changeInputText] = React.useState('');
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
@@ -32,7 +29,6 @@ function PostCard(
   
   const handleSubmit = e => {
     e.preventDefault();
-
     const query = `
       mutation CreateComment(
         $id: ID
@@ -185,13 +181,7 @@ function PostCard(
           css={css`border-top: 1px solid lightgrey; padding: 12px;`}
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
-            <Like 
-              postId={postId} 
-              loggedInUserData={loggedInUserData} 
-              arrOfLikes={arrOfLikes} 
-              getPostData={getPostData} 
-              getNewArrOfLikes={getNewArrOfLikes} 
-            />
+            <Like postId={postId} />
             <Icon 
               type="message" 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}

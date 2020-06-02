@@ -36,3 +36,7 @@ a {
   color: white;
   text-decoration: none;
 }
+
+*,*:focus,*:hover{
+  outline:none;
+}
