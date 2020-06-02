@@ -10,22 +10,80 @@ import Like from '../Like/Like';
 import { Icon } from 'antd';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
+import { LoggedInUserContext } from '../../user-context';
 
-function PostCard(
-  {
-    postImgUrl, 
-    likes, 
-    comments, 
-    userData, 
-    loggedInUserData, 
-    postId, 
-    getPostData,  
-    timeCreated, 
-  }) {
+
+function PostCard({postId}) {
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  const [findPostState, changeFindPostState] = React.useState('loading');
   const [inputText, changeInputText] = React.useState('');
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
+  const [postData, changePostData] = React.useState({
+    id: '',
+    picUrl: '',
+    timeCreated: '',
+    user: {},
+    comments: {items: []},
+    likes: {items: []}
+  });
 
-  const imgKey = useSignedS3Url(postImgUrl);
+  const getPostData = async (postId) => {
+    const query = `
+      query GetPost($postId: ID!) {
+        getPost(id: $postId) {
+          id
+          picUrl
+          timeCreated
+          user {
+            id
+            username
+            photoUrl
+          }
+          comments {
+            items {
+              id
+              content
+              timeCreated
+              user {
+                id
+                photoUrl
+                username
+              }
+            }
+          }
+          likes {
+            items {
+              id
+              user {
+                id
+              }
+            }
+          }
+        }
+      }
+    `;
+    
+    const variables = {
+      postId: postId
+    }
+    
+    console.log("Getting post data.");
+
+    const res = await API.graphql({query, variables});
+    if (res.data.getPost) {
+      changePostData(res.data.getPost);
+      return 'found';
+    } else {
+      return 'notfound';
+    }
+  }
+
+  React.useEffect(() => {
+    let res = getPostData(postId);
+    res.then(d => changeFindPostState(d));
+  }, [postId, loggedInUserData]);
+
+  const imgKey = useSignedS3Url(postData.picUrl);
   
   const handleSubmit = e => {
     e.preventDefault();
@@ -165,17 +223,17 @@ function PostCard(
           `}
         >
           <div css={css`display: flex; align-items: center;`}>
-            <Avatar img={userData.photoUrl}  username={userData.username} rainbow />
-            <h3 css={css`margin: 0 0 0 10px;`}>{userData.username}</h3>
+            <Avatar img={loggedInUserData.photoUrl}  username={loggedInUserData.username} rainbow />
+            <h3 css={css`margin: 0 0 0 10px;`}>{loggedInUserData.username}</h3>
           </div>
           <PostOptions 
-            userData={userData} 
+            userData={loggedInUserData} 
             id={postId} 
             imgKey={imgKey} 
             loggedInUserData={loggedInUserData} 
           />
         </div>
-        <CommentList comments={comments} />
+        <CommentList comments={postData.comments.items} />
         <div 
           className="PostCard_stats" 
           css={css`border-top: 1px solid lightgrey; padding: 12px;`}
@@ -188,10 +246,10 @@ function PostCard(
             />
           </div>
           <h4 css={css`font-weight: 700; margin: 0`}>
-            {likes.length} {likes.length > 1 ? 'likes' : 'like'}
+            {postData.likes.length} {postData.likes.length > 1 ? 'likes' : 'like'}
           </h4>
           <span css={css`color: grey; font-size: 12px;`}>
-            {moment(timeCreated).format('MMMM D, YYYY')}
+            {moment(postData.timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
         <form 
