@@ -4,19 +4,17 @@ import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import CommentList from '../CommentList/CommentList';
-import { genUUID, getISODate } from '../../utils';
 import moment from 'moment';
 import Like from '../Like/Like';
 import { Icon } from 'antd';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 import { LoggedInUserContext } from '../../user-context';
-
+import CommentForm from '../CommentForm/CommentForm';
 
 function PostCard({postId}) {
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
   const [findPostState, changeFindPostState] = React.useState('loading');
-  const [inputText, changeInputText] = React.useState('');
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   const [postData, changePostData] = React.useState({
     id: '',
@@ -85,55 +83,7 @@ function PostCard({postId}) {
 
   const imgKey = useSignedS3Url(postData.picUrl);
   
-  const handleSubmit = e => {
-    e.preventDefault();
-    const query = `
-      mutation CreateComment(
-        $id: ID
-        $content: String
-        $timeCreated: String
-        $userId: ID!
-        $postId: ID!
-        $condition: ModelCommentConditionInput
-      ) {
-        createComment(input: {
-          id: $id
-          content: $content
-          timeCreated: $timeCreated
-          userId: $userId
-          postId: $postId
-        }, condition: $condition) {
-          id
-          content
-          timeCreated
-          userId
-          postId
-        }
-      }
-    `;
 
-    const variables = {
-      id: `commentid:${genUUID()}`,
-      content: inputText,
-      timeCreated: getISODate(),
-      userId: loggedInUserData.id,
-      postId: postId
-    }
-  
-    
-    API.graphql({query, variables})
-    .then(res => {
-      console.log(res);
-      getPostData(postId);
-    })
-    .catch(err => console.log(err));
-    changeInputText('');
-  }
-  
-  const handleChange = e => {
-    changeInputText(e.target.value);
-  }
-  
   return (
     <section 
       className="PostCard"
@@ -252,47 +202,7 @@ function PostCard({postId}) {
             {moment(postData.timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
-        <form 
-          onSubmit={inputText ? handleSubmit : e => console.log(e)} 
-          css={css`
-            width: 100%; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom-right-radius: inherit;
-            border-top: 1px solid lightgrey;
-            *:focus {
-              outline: none;
-            }
-          `}
-        >
-          <input 
-            type="text" 
-            placeholder="Add a comment..." 
-            onChange={handleChange}
-            value={inputText}
-            css={css`
-              border: 0;
-              border-bottom-right-radius: inherit;
-              padding: 18px 14px;
-              width: 100%;
-            `}
-          />
-          <button
-            onClick={handleSubmit} 
-            css={css`
-              border: none;
-              padding: 15px 20px;
-              background: inherit;
-              color: ${inputText ? 'dodgerblue' : '#8ce2ff'};
-              font-weight: 500;
-              font-size: 14px;
-            `}
-            disabled={inputText ? false : true}
-          >
-            Post
-          </button>
-        </form>
+        <CommentForm postId={postId} getPostData={getPostData} /> 
       </div>
     </section>    
   )
