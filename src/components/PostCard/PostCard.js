@@ -79,7 +79,7 @@ function PostCard({postId}) {
   React.useEffect(() => {
     let res = getPostData(postId);
     res.then(d => changeFindPostState(d));
-  }, [postId, loggedInUserData]);
+  }, [postId, loggedInUserData, postData]);
 
   const imgKey = useSignedS3Url(postData.picUrl);
   
@@ -189,14 +189,14 @@ function PostCard({postId}) {
           css={css`border-top: 1px solid lightgrey; padding: 12px;`}
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
-            <Like postId={postId} />
+            <Like postId={postId} getPostData={getPostData} />
             <Icon 
               type="message" 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
             />
           </div>
           <h4 css={css`font-weight: 700; margin: 0`}>
-            {postData.likes.length} {postData.likes.length > 1 ? 'likes' : 'like'}
+            {postData.likes.items.length} {postData.likes.items.length > 1 ? 'likes' : 'like'}
           </h4>
           <span css={css`color: grey; font-size: 12px;`}>
             {moment(postData.timeCreated).format('MMMM D, YYYY')}

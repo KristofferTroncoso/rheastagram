@@ -6,7 +6,7 @@ import { genUUID, getISODate } from '../../utils';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 
-function Like({postId}) {
+function Like({postId, getPostData}) {
   const [liked, toggleLiked] = React.useState(false);
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
   const [currentLikeId, setCurrentLikeId] = React.useState();
@@ -88,6 +88,7 @@ function Like({postId}) {
     }
 
     liked ? deleteLike() : createLike();
+    getPostData();
   }
   
   return (
