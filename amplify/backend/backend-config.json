@@ -1,33 +1,37 @@
 {
-	"auth": {
-		"rheastagram2f6e2c8c": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
-		}
-	},
-	"api": {
-		"rheaapi": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
-						"userPoolConfig": {
-							"userPoolId": "authrheastagram2f6e2c8c"
-						}
-					}
-				}
-			}
-		}
-	},
-	"storage": {
-		"rheacontentstorage": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+    "auth": {
+        "rheastagram2f6e2c8c": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
+        }
+    },
+    "api": {
+        "rheaapi": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [
+                        {
+                            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                            "userPoolConfig": {
+                                "userPoolId": "authrheastagram2f6e2c8c"
+                            }
+                        }
+                    ],
+                    "defaultAuthentication": {
+                        "authenticationType": "AWS_IAM"
+                    }
+                }
+            }
+        }
+    },
+    "storage": {
+        "rheacontentstorage": {
+            "service": "S3",
+            "providerPlugin": "awscloudformation"
+        }
+    }
 }
