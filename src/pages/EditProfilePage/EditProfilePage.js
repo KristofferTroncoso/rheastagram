@@ -2,12 +2,9 @@
 import React from 'react';
 import { Button, Form, Input, Upload } from 'antd';
 import { API, Storage, graphqlOperation } from 'aws-amplify';
-// import { useHistory } from "react-router";
-// import { S3Image } from 'aws-amplify-react';
 import Avatar from '../../components/Avatar/Avatar';
 import { css, jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
-
 
 function EditProfilePage() {
   const { loggedInUserData, getAuthenticatedUserAndData } = React.useContext(LoggedInUserContext);
@@ -28,10 +25,6 @@ function EditProfilePage() {
       changeIsUserFound(true);
     }
   }, [loggedInUserData])
-  
-  
-  // const history = useHistory();
-
   
   const [isUserFound, changeIsUserFound] = React.useState(false);
   const [initialData, changeInitialData] = React.useState({
@@ -159,6 +152,5 @@ function EditProfilePage() {
     </div>
   )
 }
-
 
 export default EditProfilePage;
