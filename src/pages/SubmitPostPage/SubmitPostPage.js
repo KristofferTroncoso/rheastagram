@@ -10,6 +10,7 @@ import { useHistory } from "react-router"
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
+import PicUploader from '../../components/PicUploader/PicUploader';
 
 const StyledPageWrapper = styled.div`
   padding: 40px 0;
@@ -33,6 +34,7 @@ const StyledH2 = styled.h2`
 
 
 function SubmitPostPage() {
+  const [imgFile, changeImgFile] = React.useState();
   const [imgKey, changeImgKey] = React.useState();
   const [isTooBig, changeIsTooBig] = React.useState();
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
@@ -45,62 +47,57 @@ function SubmitPostPage() {
       changeImgKey(null);
     } else {
       changeIsTooBig(false);
-      Storage.put(`${loggedInUserData.id}/${genUUID()}-${data.name}`, data.file, {
-          level: 'public',
-          contentType: data.type
-      })
-      .then (result => changeImgKey(result.key))
-      .catch(err => console.log(err));     
+      console.log(data.file);
     }
   }
   
-  const handleSave = async(e) => {
-    const createPost = `
-      mutation CreatePost(
-        $input: CreatePostInput!
-        $condition: ModelPostConditionInput
-      ) {
-        createPost(input: $input, condition: $condition) {
-          id
-          picUrl
-          type
-          visibility
-          timeCreated
-          userId
-        }
-      }
-    `;
+  const handleSave = e => {
+    Storage.put(`${loggedInUserData.id}/${genUUID()}-${imgFile.name}`, imgFile, {
+      level: 'public',
+      contentType: imgFile.type
+    })
+    .then (result => {
 
-    let createPostInput = {
-      id: `postid:${genUUID()}`,
-      picUrl: imgKey,
-      type: "post",
-      visibility: "public",
-      userId: loggedInUserData.id,
-      timeCreated: getISODate()
-    };
-    const data = await API.graphql(graphqlOperation(createPost, {input: createPostInput}))
-    console.log(data);
-    history.push("/");
+      const createPost = `
+        mutation CreatePost(
+          $input: CreatePostInput!
+          $condition: ModelPostConditionInput
+        ) {
+          createPost(input: $input, condition: $condition) {
+            id
+            picUrl
+            type
+            visibility
+            timeCreated
+            userId
+          }
+        }
+      `;
+
+      let createPostInput = {
+        id: `postid:${genUUID()}`,
+        picUrl: result.key,
+        type: "post",
+        visibility: "public",
+        userId: loggedInUserData.id,
+        timeCreated: getISODate()
+      };
+
+      API.graphql(graphqlOperation(createPost, {input: createPostInput}))
+        .then(res => {history.push("/")})
+        .catch(err => {console.log(err)})
+    })
+    .catch(err => console.log(err)); 
   }
   
   return (
     <StyledPageWrapper>
-      <PhotoPicker 
-        preview 
-        theme={{...awsCustomTheme, formSection: {padding: '10px 15px 0'}}} 
-        onPick={handlePick} 
-      />
       <StyledDiv>
-        {isTooBig && 
-          <StyledH2>
-            Photo is too large. Please upload a smaller photo.
-          </StyledH2>
-        }
+        <PicUploader changeImgFile={changeImgFile} />
         <Button 
           block 
           onClick={handleSave} 
-          disabled={imgKey ? false : true} 
+          disabled={imgFile ? false : true} 
           type="primary" size="large"
         >
           <SaveOutlined />
