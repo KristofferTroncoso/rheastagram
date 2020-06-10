@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import Avatar from '../Avatar/Avatar';
-import { Icon } from 'antd';
+import { MessageOutlined, UploadOutlined, HeartOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
 import { Link } from 'react-router-dom';
@@ -45,7 +45,19 @@ const StyledTimestamp = styled.p`
   margin: 12px 10px 6px;
 `;
 
-const StyledIcon = styled(Icon)`
+const StyledHeartOutlined = styled(HeartOutlined)`
+  font-size: 24px;
+  margin: 0 8px;
+  color: #5c5c5c;
+`;
+
+const StyledMessageOutlined = styled(MessageOutlined)`
+  font-size: 24px;
+  margin: 0 8px;
+  color: #5c5c5c;
+`;
+
+const StyledUploadOutlined = styled(UploadOutlined)`
   font-size: 24px;
   margin: 0 8px;
   color: #5c5c5c;
@@ -94,14 +106,10 @@ function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt }) {
       </div>
       <div style={{padding: '15px'}}>
         <button onClick={handleLike} style={{border: 0, padding: 0, outline: 0}}>
-          <StyledIcon 
-            type="heart" 
-            theme={true ? null : "twoTone"} 
-            twoToneColor="salmon" 
-          />
+          <StyledHeartOutlined />
         </button>
-        <StyledIcon type="message" />
-        <StyledIcon type="upload" />
+        <StyledMessageOutlined />
+        <StyledUploadOutlined />
         <StyledTimestamp>{moment(createdAt).fromNow().toUpperCase()}</StyledTimestamp>
       </div>
     </StyledSection>

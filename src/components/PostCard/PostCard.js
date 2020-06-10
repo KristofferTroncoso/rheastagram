@@ -3,10 +3,10 @@ import React from 'react';
 import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
+import { MessageOutlined } from '@ant-design/icons';
 import CommentList from '../CommentList/CommentList';
 import moment from 'moment';
 import Like from '../Like/Like';
-import { Icon } from 'antd';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 import { LoggedInUserContext } from '../../user-context';
@@ -190,8 +190,7 @@ function PostCard({postId}) {
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
             <Like postId={postId} getPostData={getPostData} />
-            <Icon 
-              type="message" 
+            <MessageOutlined 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
             />
           </div>

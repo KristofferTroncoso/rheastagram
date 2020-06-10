@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
-import { Icon } from 'antd';
 import { API } from 'aws-amplify';
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
@@ -97,12 +97,10 @@ function Like({postId, getPostData}) {
       css={{border: 0, margin: 0, padding: 0}} 
       className="LikeBtn"
     >
-      <Icon 
-        type="heart" 
-        theme={liked ? "twoTone" : null} 
-        twoToneColor="red" 
-        css={{fontSize: '26px', color: '#5c5c5c'}} 
-      />
+      {liked
+      ? <HeartFilled style={{fontSize: '26px', color: 'red'}} />
+      : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} />
+      }
     </button>
   )
 }

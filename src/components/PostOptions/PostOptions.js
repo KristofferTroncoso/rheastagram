@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import { Modal, Icon, Button } from 'antd';
+import { Modal, Button } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -13,7 +14,7 @@ const StyledButton = styled.button`
   outline: 0;
 `;
 
-const StyledIcon = styled(Icon)`
+const StyledEllipsisOutlined = styled(EllipsisOutlined)`
   font-size: 24px;
   color: #212121;
 `;
@@ -73,7 +74,7 @@ function PostOptions({postId, imgKey, userData}) {
   return (
     <div>
       <StyledButton onClick={showModal}>
-        <StyledIcon type="ellipsis" />
+        <StyledEllipsisOutlined />
       </StyledButton>
       <Modal
         visible={visible}

@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React from 'react';
 import { Auth } from 'aws-amplify';
-import { Modal, Icon, Button } from 'antd';
+import { Modal, Button } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 import { useHistory } from 'react-router-dom';
@@ -37,7 +38,7 @@ function SettingsModal() {
         onClick={showModal}
         css={{border: 0, outline: 0, padding: '8px 5px 5px'}}
       >
-        <Icon type="setting" css={{fontSize: '22px'}} />
+        <SettingOutlined css={{fontSize: '22px'}} />
       </button>
       <Modal
         visible={visible}

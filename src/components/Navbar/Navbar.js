@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Button } from 'antd';
+import { Button } from 'antd';
 import Avatar from '../Avatar/Avatar';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { InstagramOutlined, CameraOutlined } from '@ant-design/icons';
 import { LoggedInUserContext } from '../../user-context';
 
 const StyledDiv = styled.div`
@@ -51,7 +52,7 @@ const StyledSpan = styled.span`
   } 
 `;
 
-const StyledIcon = styled(Icon)`
+const StyledInstagramOutlined = styled(InstagramOutlined)`
   font-size: 32px;
   color: #3b3b3b;
   border-right: 1px solid #4a4a4a;
@@ -131,7 +132,7 @@ function Navbar() {
       <StyledNav>
         <Link to="/">
           <StyledLogoAndTitle className="LogoAndTitle">
-            <StyledIcon className="Navbar_Instagram_icon" type="instagram" />
+            <StyledInstagramOutlined className="Navbar_Instagram_icon" />
             <StyledSpan className="Title">
               Rheastagram
             </StyledSpan>
@@ -145,7 +146,7 @@ function Navbar() {
           <div style={{display: 'flex', alignItems: 'center'}}>
             <StyledLink to="/post" className="PostPhotoButton">
               <StyledPostPhotoButton>
-                <Icon type="camera" />
+                <CameraOutlined />
                 <span css={{margin: '0 5px'}}>Post Photo</span>
               </StyledPostPhotoButton>
             </StyledLink>

@@ -3,7 +3,8 @@ import React from 'react';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { PhotoPicker } from 'aws-amplify-react';
 import awsCustomTheme from '../../awsCustomTheme';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
+import { SaveOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
 import styled from '@emotion/styled';
@@ -102,7 +103,7 @@ function SubmitPostPage() {
           disabled={imgKey ? false : true} 
           type="primary" size="large"
         >
-          <Icon type="save" />
+          <SaveOutlined />
           Submit
         </Button>
       </StyledDiv>

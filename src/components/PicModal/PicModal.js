@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
-import { Modal, Icon } from 'antd';
+import { Modal } from 'antd';
+import { HeartFilled, MessageFilled } from '@ant-design/icons';
 import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
@@ -108,8 +109,8 @@ function PicModal({img, hearts, comments, post, userData, loggedInUserData, post
             opacity: 1;
           }
         `}>
-          <span css={css`margin: 0 5px`}><Icon type="heart" theme="filled" css={css`padding: 0 5px`} />{hearts}</span> 
-          <span css={css`margin: 0 5px`}><Icon type="message" theme="filled" css={css`padding: 0 5px`} />{comments}</span>
+          <span css={css`margin: 0 5px`}><HeartFilled css={css`padding: 0 5px`} />{hearts}</span> 
+          <span css={css`margin: 0 5px`}><MessageFilled css={css`padding: 0 5px`} />{comments}</span>
         </h2>
       </div>
       <Modal
