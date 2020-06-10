@@ -5,9 +5,10 @@ import { API, Storage, graphqlOperation } from 'aws-amplify';
 import Avatar from '../../components/Avatar/Avatar';
 import { css, jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
+import { Redirect } from 'react-router-dom';
 
 function EditProfilePage() {
-  const { loggedInUserData, getAuthenticatedUserAndData } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, getAuthenticatedUserAndData, isAuthenticated } = React.useContext(LoggedInUserContext);
   React.useEffect(() => {
     console.log('edit page affecting!');
     if (loggedInUserData.id === null) {
@@ -101,7 +102,8 @@ function EditProfilePage() {
   }
   
   return (
-    <div
+    isAuthenticated
+    ? <div
       css={css`
         padding: 20px;
       `}
@@ -150,6 +152,7 @@ function EditProfilePage() {
       : null
       }
     </div>
+    : <Redirect to="/" />
   )
 }
 
