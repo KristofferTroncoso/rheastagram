@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { Link } from 'react-router-dom';
 import { Avatar as AntAvatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 
@@ -35,7 +36,7 @@ function Avatar({img, username, large, rainbow}) {
         ]}
       >
         <AntAvatar 
-          icon="user" 
+          icon={<UserOutlined />}
           src={imgKey && imgKey} 
           size={large ? "large" : "default"}
           css={rainbow ? {border: '2px solid white'} : {border: '1px solid lightgrey'}}
