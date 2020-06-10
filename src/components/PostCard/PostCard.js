@@ -77,9 +77,9 @@ function PostCard({postId}) {
   }
 
   React.useEffect(() => {
-    let res = getPostData(postId);
-    res.then(d => changeFindPostState(d));
-  }, [postId, loggedInUserData, postData]);
+    getPostData(postId)
+      .then(d => changeFindPostState(d));
+  }, [postId]);
 
   const imgKey = useSignedS3Url(postData.picUrl);
   
@@ -207,17 +207,5 @@ function PostCard({postId}) {
     </section>    
   )
 }
-
-
-PostCard.defaultProps = {
-  postImgUrl: '',
-  likes: [],
-  comments: [], 
-  userData: {
-    username: "Unknown"
-  },
-  loggedInUserData: {}, 
-  postId: ''
-};
 
 export default PostCard;
