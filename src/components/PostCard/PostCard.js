@@ -173,8 +173,8 @@ function PostCard({postId}) {
           `}
         >
           <div css={css`display: flex; align-items: center;`}>
-            <Avatar img={loggedInUserData.photoUrl}  username={loggedInUserData.username} rainbow />
-            <h3 css={css`margin: 0 0 0 10px;`}>{loggedInUserData.username}</h3>
+            <Avatar img={postData.user.photoUrl}  username={postData.user.username} rainbow />
+            <h3 css={css`margin: 0 0 0 10px;`}>{postData.user.username}</h3>
           </div>
           <PostOptions 
             userData={loggedInUserData} 
