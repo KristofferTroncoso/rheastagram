@@ -124,7 +124,7 @@ const StyledPostPhotoButton = styled(Button)`
 `;
 
 function Navbar() {
-  const { loggedInUserData } = useContext(LoggedInUserContext);
+  const { loggedInUserData, isAuthenticated } = useContext(LoggedInUserContext);
 
   return (
     <StyledDiv className="Navbar">
@@ -140,7 +140,7 @@ function Navbar() {
         <StyledSearchForm className="Search" onSubmit={e => e.preventDefault()}>
           <StyledSearchInput type="text" className="Search_Box" placeholder="Search" />
         </StyledSearchForm>
-        {loggedInUserData       
+        {isAuthenticated
         ? (
           <div style={{display: 'flex', alignItems: 'center'}}>
             <StyledLink to="/post" className="PostPhotoButton">
@@ -158,8 +158,8 @@ function Navbar() {
           </div>
           )
         : <div>
-            <StyledLogInBtn className="LogInBtn">Log In</StyledLogInBtn>
-            <StyledSignUpBtn className="SignUpBtn">Sign Up</StyledSignUpBtn>
+            <Link to="/login"><StyledLogInBtn className="LogInBtn">Log In</StyledLogInBtn></Link>
+            <Link to="/login"><StyledSignUpBtn className="SignUpBtn">Sign Up</StyledSignUpBtn></Link>
           </div>
         }
       </StyledNav>

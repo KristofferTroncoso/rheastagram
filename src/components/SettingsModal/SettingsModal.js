@@ -3,9 +3,13 @@ import React from 'react';
 import { Auth } from 'aws-amplify';
 import { Modal, Icon, Button } from 'antd';
 import { jsx } from '@emotion/core';
+import { LoggedInUserContext } from '../../user-context';
+import { useHistory } from 'react-router-dom';
 
 function SettingsModal() {
+  const { setIsAuthenticated } = React.useContext(LoggedInUserContext);
   const [visible, changeVisible] = React.useState(false);
+  const history = useHistory();
 
   const showModal = () => {
     changeVisible(true)
@@ -20,7 +24,11 @@ function SettingsModal() {
   };
   
   const handleLogOut = e => {
-    Auth.signOut().then(d => console.log(d))
+    Auth.signOut()
+      .then(d => {
+        setIsAuthenticated(false);
+        history.push("/");
+    });
   }
   
   return (
