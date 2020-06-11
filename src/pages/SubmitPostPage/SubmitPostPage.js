@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { PhotoPicker } from 'aws-amplify-react';
-import awsCustomTheme from '../../awsCustomTheme';
 import { Button } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
@@ -28,28 +26,11 @@ const StyledDiv = styled.div`
   padding: 0 5px;
 `;
 
-const StyledH2 = styled.h2`
-  color: tomato;
-`;
-
 
 function SubmitPostPage() {
   const [imgFile, changeImgFile] = React.useState();
-  const [imgKey, changeImgKey] = React.useState();
-  const [isTooBig, changeIsTooBig] = React.useState();
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
   const history = useHistory();
-  
-  const handlePick = data => {
-    console.log(data);
-    if (data.size > 3000000) {
-      changeIsTooBig(true);
-      changeImgKey(null);
-    } else {
-      changeIsTooBig(false);
-      console.log(data.file);
-    }
-  }
   
   const handleSave = e => {
     Storage.put(`${loggedInUserData.id}/${genUUID()}-${imgFile.name}`, imgFile, {
@@ -57,7 +38,6 @@ function SubmitPostPage() {
       contentType: imgFile.type
     })
     .then (result => {
-
       const createPost = `
         mutation CreatePost(
           $input: CreatePostInput!

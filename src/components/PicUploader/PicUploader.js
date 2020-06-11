@@ -10,7 +10,6 @@ function PicUploader({changeImgFile}) {
   const [imageUrl, setImageUrl] = React.useState();
   
   function beforeUpload(file) {
-    console.log('beforeUpload');
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
       message.error('You can only upload JPG/PNG file!');
@@ -23,15 +22,12 @@ function PicUploader({changeImgFile}) {
   }
 
   function getBase64(img, callback) {
-    console.log('getBase64');
     const reader = new FileReader();
-    console.log(img);
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
   }
 
   const handleChange = info => {
-    console.log('handleChange')
     getBase64(info.file.originFileObj, imageUrl => {
       changeImgFile(info.file.originFileObj);
       setImageUrl(imageUrl);
@@ -62,7 +58,6 @@ function PicUploader({changeImgFile}) {
           showUploadList={false}
           beforeUpload={beforeUpload}
           onChange={handleChange}
-          previewFile={preview => console.log(preview)}
           customRequest={dummyRequest}
           css={css`
             .ant-upload {
