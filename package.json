@@ -10,7 +10,6 @@
     "antd": "^4.3.3",
     "antd-img-crop": "^3.4.1",
     "aws-amplify": "^3.0.17",
-    "aws-amplify-react": "^2.6.3",
     "kht-ui": "^1.0.6",
     "moment": "^2.26.0",
     "react": "^16.13.1",
