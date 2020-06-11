@@ -14,7 +14,7 @@ function PicUploader({changeImgFile}) {
     if (!isJpgOrPng) {
       message.error('You can only upload JPG/PNG file!');
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 5;
     if (!isLt2M) {
       message.error('Image must smaller than 2MB!');
     }
@@ -50,27 +50,31 @@ function PicUploader({changeImgFile}) {
   );
   
   return (
-    <div>
-      <ImgCrop rotate zoom>
-        <Upload
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-          customRequest={dummyRequest}
-          css={css`
-            .ant-upload {
-              width: 400px;
-              height: 400px;
-              background: white;
-            }
-          `}
-        >
-          {imageUrl ? <img src={imageUrl} alt="pictureupload" style={{ width: '100%' }} /> : uploadButton}
-        </Upload>
-      </ImgCrop>
-    </div>
+    <ImgCrop rotate zoom>
+      <Upload
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        beforeUpload={beforeUpload}
+        onChange={handleChange}
+        customRequest={dummyRequest}
+        css={css`
+          text-align: center;
+          margin: 0 auto;
+          width: 100%;
+
+          .ant-upload {
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            height: 350px;
+            background: white;
+          }
+        `}
+      >
+        {imageUrl ? <img src={imageUrl} alt="pictureupload" style={{ width: '100%' }} /> : uploadButton}
+      </Upload>
+    </ImgCrop>
   );
 }
 
