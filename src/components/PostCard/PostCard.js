@@ -140,6 +140,8 @@ function PostCard({postId}) {
           css={css`
             width: 100%;
             height: 100%;
+            min-height: 400px;
+            min-width: 400px;
             max-height: 700px;
             object-fit: cover;
             border: 1px solid lightgrey;
