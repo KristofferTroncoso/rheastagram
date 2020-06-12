@@ -144,7 +144,7 @@ function PostCard({postId}) {
             min-width: 400px;
             max-height: 700px;
             object-fit: cover;
-            border: 1px solid lightgrey;
+            border: 1px solid #dedede;
           `}
         />
       </div>
@@ -155,7 +155,7 @@ function PostCard({postId}) {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          border: 1px solid lightgrey;
+          border: 1px solid #dedede;
           border-left: 0;
           border-top-left-radius: 0;
           border-top-right-radius: inherit;
@@ -169,7 +169,7 @@ function PostCard({postId}) {
             justify-content: space-between;
             align-items: center;
             padding: 16px 10px;
-            border-bottom: 1px solid lightgrey;
+            border-bottom: 1px solid #efefef;
             background: white;  
             border-top-right-radius: inherit;   
           `}
@@ -188,7 +188,7 @@ function PostCard({postId}) {
         <CommentList comments={postData.comments.items} />
         <div 
           className="PostCard_stats" 
-          css={css`border-top: 1px solid lightgrey; padding: 12px;`}
+          css={css`border-top: 1px solid #efefef; padding: 12px;`}
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
             <Like postId={postId} getPostData={getPostData} />

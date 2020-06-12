@@ -68,7 +68,7 @@ function CommentForm({postId, getPostData}) {
         justify-content: space-between;
         align-items: center;
         border-bottom-right-radius: inherit;
-        border-top: 1px solid lightgrey;
+        border-top: 1px solid #efefef;
         *:focus {
           outline: none;
         }

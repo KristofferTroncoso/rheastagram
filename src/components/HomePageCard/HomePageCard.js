@@ -14,14 +14,14 @@ const StyledSection = styled.section`
   border: 1px solid #e6e6e6;
   border-radius: 3px;
   padding: 0;
-  margin: 10px auto;
+  margin: 10px auto 50px;
   max-width: 600px;
   
   @media (max-width: 500px){
     background: inherit;
     border: 0;
     border-radius: 0;
-    margin: 0 auto;
+    margin: 10px auto 15px;
   }
 `;
 

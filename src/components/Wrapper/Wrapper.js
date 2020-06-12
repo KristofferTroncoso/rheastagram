@@ -6,8 +6,8 @@ function Wrapper({children}) {
     <div 
       className="Wrapper"
       css={css`
-        max-width: 1000px; 
-        margin: 80px auto;
+        max-width: 975px; 
+        margin: 60px auto;
 
         @media (max-width: 768px){ 
           margin: 60px auto 0;

@@ -6,6 +6,7 @@ import Avatar from '../Avatar/Avatar';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
 import { InstagramOutlined, CameraOutlined } from '@ant-design/icons';
+import { FaDog } from 'react-icons/fa'
 import { LoggedInUserContext } from '../../user-context';
 
 const StyledDiv = styled.div`
@@ -22,12 +23,12 @@ const StyledDiv = styled.div`
 `;
 
 const StyledNav = styled.nav`
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 975px;
   
   @media (max-width: 768px){ 
     height: 60px;
@@ -42,9 +43,10 @@ const StyledLogoAndTitle = styled.div`
 
 const StyledSpan = styled.span`
   font-family: 'Cookie', cursive;
-  font-size: 34px;
+  font-size: 32px;
   color: black;
-  padding-left: 16px;
+  padding-left: 12px;
+  padding-top: 6px;
 
   @media (max-width: 768px){ 
     font-size: 28px;
@@ -52,11 +54,10 @@ const StyledSpan = styled.span`
   } 
 `;
 
-const StyledInstagramOutlined = styled(InstagramOutlined)`
+const StyledFaDog = styled(FaDog)`
   font-size: 32px;
   color: #3b3b3b;
-  border-right: 1px solid #4a4a4a;
-  padding-right: 16px;
+  padding-right: 10px;
   
   @media (max-width: 768px){ 
     font-size: 28px;
@@ -72,7 +73,7 @@ const StyledSearchForm = styled.form`
 `;
 
 const StyledSearchInput = styled.input`
-  width: 200px;
+  width: 215px;
   border: 1px solid #E0E0E0;
   padding: 3px 6px;
   border-radius: 2px;
@@ -117,10 +118,13 @@ const StyledSignUpBtn = styled.button`
 
 const StyledPostPhotoButton = styled(Button)`
   margin: 0 10px;
+  border: 0;
+  box-shadow: none;
+
   :hover {
     color: white;
-    border: white;
-    background: salmon;
+    border: none;
+    background: #6eccff;
   }
 `;
 
@@ -132,7 +136,7 @@ function Navbar() {
       <StyledNav>
         <Link to="/">
           <StyledLogoAndTitle className="LogoAndTitle">
-            <StyledInstagramOutlined className="Navbar_Instagram_icon" />
+            <StyledFaDog />
             <StyledSpan className="Title">
               Rheastagram
             </StyledSpan>
@@ -143,18 +147,16 @@ function Navbar() {
         </StyledSearchForm>
         {isAuthenticated
         ? (
-          <div style={{display: 'flex', alignItems: 'center'}}>
+          <div css={{display: 'flex', alignItems: 'center', marginRight: '20px'}}>
             <StyledLink to="/post" className="PostPhotoButton">
               <StyledPostPhotoButton>
-                <CameraOutlined />
-                <span css={{margin: '0 5px'}}>Post Photo</span>
+                <CameraOutlined style={{color: '#424242', fontSize: '25px', fontWeight: '400'}}/>
+                {/* <span css={{margin: '0 5px'}}>Post Photo</span> */}
               </StyledPostPhotoButton>
             </StyledLink>
             <Avatar 
               img={loggedInUserData.photoUrl} 
               username={loggedInUserData.username} 
-              rainbow
-              large
             />
           </div>
           )

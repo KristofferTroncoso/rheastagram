@@ -12,11 +12,11 @@ function InfoHeader({userData, loggedInUserData}) {
     <div 
       className="InfoHeader"
       css={css`
-        height: 200px;
+        height: 180px;
         display: flex;
         align-items: center;
         padding: 10px;
-        margin: 30px auto 10px;
+        margin: 5px auto 10px;
         max-width: 800px;
         margin-bottom: 30px;
         
