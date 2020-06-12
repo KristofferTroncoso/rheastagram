@@ -14,6 +14,7 @@ import Wrapper from './components/Wrapper/Wrapper';
 import { getISODate } from './utils';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from './user-context';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 function App() {
   const [loggedInUserData, setLoggedInUserData] = React.useState({});
@@ -143,6 +144,7 @@ function App() {
     <Router>
       <LoggedInUserContext.Provider value={{loggedInUserData, getAuthenticatedUserAndData, isAuthenticated, setIsAuthenticated}}>
         <div className="App" css={{width: '100vw'}}>
+          <ScrollToTop />
           <Navbar />
           <Wrapper>
             <Route path="/" exact render={props => <HomePage />} />
