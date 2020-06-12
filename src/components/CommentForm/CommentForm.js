@@ -84,6 +84,14 @@ function CommentForm({postId, getPostData}) {
           border-bottom-right-radius: inherit;
           padding: 18px 14px;
           width: 100%;
+          
+          @media (max-width: 768px){ 
+            font-size: 18px;
+
+            ::placeholder {
+              font-size: 14px;
+            }
+          } 
         `}
       />
       <button
@@ -95,6 +103,10 @@ function CommentForm({postId, getPostData}) {
           color: ${inputText ? 'dodgerblue' : '#8ce2ff'};
           font-weight: 500;
           font-size: 14px;
+
+          @media (max-width: 768px){ 
+            font-size: 16px;
+          } 
         `}
         disabled={inputText ? false : true}
       >
