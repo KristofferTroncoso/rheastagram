@@ -94,7 +94,7 @@ function PostCard({postId}) {
         max-width: 950px;
         margin: 0 auto;
         border-radius: 7px 4px 4px 7px;
-        
+
         @media (max-width: 768px){ 
           flex-direction: column;
           border-radius: 0;
@@ -145,6 +145,10 @@ function PostCard({postId}) {
             max-height: 700px;
             object-fit: cover;
             border: 1px solid #dedede;
+
+            @media (max-width: 768px){ 
+              border: none;
+            } 
           `}
         />
       </div>

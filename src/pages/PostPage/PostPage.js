@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
 
 const StyledDiv = styled.div`
-  padding: 50px 0 60px;
+  padding: 50px 0 0;
   margin: 0 auto;
   max-width: 1000px;
   
@@ -19,7 +19,7 @@ function PostPage({props}) {
 
   return (
     <StyledDiv className="PostPage">
-      <PostCard postId={paramsPostId} />,
+      <PostCard postId={paramsPostId} />
     </StyledDiv>
   )
 }
