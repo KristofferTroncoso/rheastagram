@@ -23,8 +23,8 @@ const StyledPageWrapper = styled.div`
 const StyledDiv = styled.div`
   margin: 0 auto;
   text-align: center;
-  max-width: 400px;
-  padding: 0 5px;
+  max-width: 360px;
+  padding: 0 15px;
 `;
 
 
@@ -87,7 +87,8 @@ function SubmitPostPage() {
           block 
           onClick={handleSave} 
           disabled={imgFile ? false : true} 
-          type="primary" size="large"
+          type="primary" 
+          size="large"
         >
           <SaveOutlined />
           Submit

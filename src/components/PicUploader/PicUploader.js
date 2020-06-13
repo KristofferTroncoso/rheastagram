@@ -67,8 +67,12 @@ function PicUploader({changeImgFile}) {
             margin: 10px auto;
             text-align: center;
             width: 100%;
-            height: 350px;
+            height: 300px;
             background: white;
+
+            @media(max-width: 768px) {
+              height: 220px;
+            }
           }
         `}
       >

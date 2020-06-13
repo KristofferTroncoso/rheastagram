@@ -2,7 +2,6 @@
 import React from 'react';
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import ImgCrop from 'antd-img-crop';
 import { css, jsx } from '@emotion/core';
 
 function PicUploaderCompatibilityMode({changeImgFile}) {
@@ -63,13 +62,17 @@ function PicUploaderCompatibilityMode({changeImgFile}) {
           margin: 0 auto;
           width: 100%;
 
-          .ant-upload {
+          .ant-upload-select {
             margin: 10px auto;
             text-align: center;
             width: 100%;
-            height: 350px;
+            height: 300px;
             background: white;
-            border: 1px dashed dodgerblue;
+            border: 4px dashed dodgerblue;
+            
+            @media(max-width: 768px) {
+              height: 220px;
+            }
           }
         `}
       >
