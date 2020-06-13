@@ -1,11 +1,10 @@
 /** @jsx jsx */
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
 import Avatar from '../Avatar/Avatar';
 import styled from '@emotion/styled';
-import { jsx } from '@emotion/core';
-import { InstagramOutlined, CameraOutlined } from '@ant-design/icons';
+import { jsx, css } from '@emotion/core';
+import { CameraOutlined, HomeOutlined } from '@ant-design/icons';
 import { FaDog } from 'react-icons/fa'
 import { LoggedInUserContext } from '../../user-context';
 
@@ -44,7 +43,7 @@ const StyledLogoAndTitle = styled.div`
 const StyledSpan = styled.span`
   font-family: 'Cookie', cursive;
   font-size: 32px;
-  color: black;
+  color: #2e2e2e;
   padding-left: 12px;
   padding-top: 6px;
 
@@ -56,7 +55,7 @@ const StyledSpan = styled.span`
 
 const StyledFaDog = styled(FaDog)`
   font-size: 32px;
-  color: #3b3b3b;
+  color: #2e2e2e;
   padding-right: 10px;
   
   @media (max-width: 768px){ 
@@ -94,12 +93,6 @@ const StyledSearchInput = styled.input`
   }
 `;
 
-const StyledLink = styled(Link)`
-  @media (max-width: 768px){ 
-    display: none;
-  }
-`;
-
 const StyledLogInBtn = styled.button`
   background: #039BE5;
   color: white;
@@ -114,18 +107,6 @@ const StyledSignUpBtn = styled.button`
   border: none;
   padding: 6px 10px;
   border-radius: 3px;
-`;
-
-const StyledPostPhotoButton = styled(Button)`
-  margin: 0 10px;
-  border: 0;
-  box-shadow: none;
-
-  :hover {
-    color: white;
-    border: none;
-    background: #6eccff;
-  }
 `;
 
 function Navbar() {
@@ -148,12 +129,24 @@ function Navbar() {
         {isAuthenticated
         ? (
           <div css={{display: 'flex', alignItems: 'center', marginRight: '20px'}}>
-            <StyledLink to="/post" className="PostPhotoButton">
-              <StyledPostPhotoButton>
-                <CameraOutlined style={{color: '#424242', fontSize: '25px', fontWeight: '400'}}/>
-                {/* <span css={{margin: '0 5px'}}>Post Photo</span> */}
-              </StyledPostPhotoButton>
-            </StyledLink>
+            <div 
+              css={css`
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+
+                @media (max-width: 768px){ 
+                  display: none;
+                }
+              `}
+            >
+              <Link to="/" style={{padding: '5px 10px', margin: '0 5px'}}>
+                <HomeOutlined style={{color: '#2e2e2e', fontSize: '21px', paddingTop: '6px'}} />
+              </Link>
+              <Link to="/post" style={{padding: '5px 10px', margin: '0 5px'}} className="PostPhotoButton">
+                <CameraOutlined style={{color: '#2e2e2e', fontSize: '23px', paddingTop: '8px'}} />
+              </Link>
+            </div>
             <Avatar 
               img={loggedInUserData.photoUrl} 
               username={loggedInUserData.username} 
