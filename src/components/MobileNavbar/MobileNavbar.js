@@ -41,7 +41,7 @@ function MobileNavbar() {
       >
         {currentPage === 'home'
           ? <AiFillHome css={{fontSize: '28px', color: '#3b3b3b'}} />
-          : <AiOutlineHome css={{fontSize: '28', color: '#3b3b3b'}} />
+          : <AiOutlineHome css={{fontSize: '28px', color: '#3b3b3b'}} />
         }
       </NavLink>
       <NavLink 
