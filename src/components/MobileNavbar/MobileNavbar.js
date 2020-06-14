@@ -23,7 +23,7 @@ const StyledNav = styled.nav`
 
 function MobileNavbar() {
   const [currentPage, changeCurrentPage] = React.useState();
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
   
   return (
     <StyledNav className="MobileNavbar">
@@ -40,8 +40,8 @@ function MobileNavbar() {
         style={{padding: '4px 40px'}}
       >
         {currentPage === 'home'
-          ? <AiFillHome css={{fontSize: '34px', color: '#3b3b3b'}} />
-          : <AiOutlineHome css={{fontSize: '34px', color: '#3b3b3b'}} />
+          ? <AiFillHome css={{fontSize: '28px', color: '#3b3b3b'}} />
+          : <AiOutlineHome css={{fontSize: '28', color: '#3b3b3b'}} />
         }
       </NavLink>
       <NavLink 
@@ -56,11 +56,12 @@ function MobileNavbar() {
         style={{padding: '0 40px'}}
       >
         {currentPage === 'post'
-          ? <FaPlusSquare css={{fontSize: '38px', color: '#3b3b3b'}} />
-          : <FaRegPlusSquare css={{fontSize: '38px', color: '#3b3b3b'}} />
+          ? <FaPlusSquare css={{fontSize: '30px', color: '#3b3b3b'}} />
+          : <FaRegPlusSquare css={{fontSize: '30px', color: '#3b3b3b'}} />
         }
       </NavLink>
-      <NavLink 
+      {isAuthenticated
+      ?<NavLink 
         to={`/user/${loggedInUserData.username}`}
         isActive={(match, location) => {
           if (match) {
@@ -72,10 +73,11 @@ function MobileNavbar() {
         css={{padding: '4px 40px'}}
       >
         {currentPage === 'user'
-          ? <FaUser css={{fontSize: '30px', color: '#3b3b3b'}} />
-          : <FaRegUser css={{fontSize: '30px', color: '#3b3b3b'}} />
+          ? <FaUser css={{fontSize: '26px', color: '#3b3b3b'}} />
+          : <FaRegUser css={{fontSize: '26px', color: '#3b3b3b'}} />
         }
       </NavLink>
+      :<FaRegUser css={{fontSize: '26px', color: '#a6a6a6', margin: '4px 40px 6px'}} />}
     </StyledNav>
   )
 }
