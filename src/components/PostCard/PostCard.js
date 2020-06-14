@@ -207,7 +207,20 @@ function PostCard({postId}) {
             {moment(postData.timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
-        <CommentForm postId={postId} getPostData={getPostData} /> 
+        <div 
+          css={css`
+            width: 100%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-right-radius: inherit;
+            border-top: 1px solid #efefef;
+            height: 100px;
+            padding: 0 2px 0 10px;
+          `}
+        >
+          <CommentForm postId={postId} getPostData={getPostData} /> 
+        </div>
       </div>
     </section>    
   )

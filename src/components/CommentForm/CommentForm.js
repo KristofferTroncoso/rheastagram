@@ -4,11 +4,11 @@ import { css, jsx } from '@emotion/core';
 import { API } from 'aws-amplify'
 import { genUUID, getISODate } from '../../utils';
 import { LoggedInUserContext } from '../../user-context';
+import { Link } from 'react-router-dom';
 
 function CommentForm({postId, getPostData}) {
-
   const [inputText, changeInputText] = React.useState('');
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -59,16 +59,15 @@ function CommentForm({postId, getPostData}) {
   }
   
   return (
-
-    <form 
+    isAuthenticated
+    ?<form 
       onSubmit={inputText ? handleSubmit : e => console.log(e)} 
       css={css`
         width: 100%; 
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom-right-radius: inherit;
-        border-top: 1px solid #efefef;
+
         *:focus {
           outline: none;
         }
@@ -82,7 +81,7 @@ function CommentForm({postId, getPostData}) {
         css={css`
           border: 0;
           border-bottom-right-radius: inherit;
-          padding: 18px 14px;
+          padding: 8px 5px;
           width: 100%;
           
           @media (max-width: 768px){ 
@@ -113,6 +112,9 @@ function CommentForm({postId, getPostData}) {
         Post
       </button>
     </form>
+    : <span>
+        You must be <Link to="/login">logged in</Link> to comment
+      </span>
   )
 }
 
