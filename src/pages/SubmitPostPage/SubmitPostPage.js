@@ -5,6 +5,7 @@ import { Button, Switch } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
 import { useHistory } from "react-router"
+import { Redirect } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
@@ -31,7 +32,7 @@ const StyledDiv = styled.div`
 function SubmitPostPage() {
   const [imgFile, changeImgFile] = React.useState();
   const [isOnCompatibilityMode, setIsOnCompatibilityMode] = React.useState(false);
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
   const history = useHistory();
   
   const handleCompatibilityModeToggle = checked => {
@@ -77,7 +78,8 @@ function SubmitPostPage() {
   }
   
   return (
-    <StyledPageWrapper>
+    isAuthenticated
+    ?<StyledPageWrapper>
       <StyledDiv>
         {isOnCompatibilityMode
         ? <PicUploaderCompatibilityMode changeImgFile={changeImgFile} />
@@ -99,6 +101,7 @@ function SubmitPostPage() {
         </div>
       </StyledDiv>
     </StyledPageWrapper>
+    :<Redirect to="/login" />
   )
 }
 
