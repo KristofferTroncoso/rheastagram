@@ -6,7 +6,8 @@ function useSignedS3Url(imgKey) {
   
   React.useEffect(() => {
     if (!imgKey) {
-      console.log("image key is undefined")
+      console.log("image key is undefined");
+      setSignedUrl(undefined);
     } else {
       let cacheRes = Cache.getItem(imgKey);
       if (cacheRes === null) {
