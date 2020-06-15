@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import SettingsModal from '../SettingsModal/SettingsModal';
 import { jsx, css } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
+import { Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 function InfoHeader({userData, loggedInUserData}) {
   const imgKey = useSignedS3Url(userData.photoUrl);
@@ -28,33 +30,35 @@ function InfoHeader({userData, loggedInUserData}) {
         }
       `}
     >
-      <div 
-        className="InfoHeader_img_container"
-        css={css`
-          background: lightgrey;
-          clip-path: circle(77px at center);
-          height: 100%;
-          
-          @media (max-width: 768px){ 
-              height: 70px;
-              clip-path: circle(36px at center);
-          }
-        `}
-      >
-        <img 
-          className="InfoHeader_img" 
-          alt={imgKey} 
-          src={imgKey} 
+      <div css={{margin: '0 40px'}}>
+        <Avatar 
+          src={imgKey}
+          alt={imgKey}
+          icon={
+            <UserOutlined 
+              css={css`
+                height: 100%;
+                width: 100%;
+               
+                svg {
+                  height: 60%; 
+                  width: 60%; 
+                  margin: 20%;
+                }
+              `} 
+            />
+          } 
           css={css`
-            height: 100%;
-            clip-path: circle(76px at center);
-            
+            border: 1px solid lightgrey;
+            width: 150px;
+            height: 150px;
+
             @media (max-width: 768px){ 
-              height: 70px;
-              clip-path: circle(35px at center);
+              height: 80px;
+              width: 80px;
             }
           `}
-        /> 
+        />
       </div>
       <div>
         <div 
