@@ -1,8 +1,10 @@
 import React from 'react';
-import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp, withAuthenticator} from '@aws-amplify/ui-react';
 import { LoggedInUserContext } from '../../user-context';
 import { Redirect } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
+/*
 function LoginPage() {
   const { isAuthenticated, setIsAuthenticated } = React.useContext(LoggedInUserContext);
 
@@ -48,5 +50,42 @@ function LoginPage() {
     </div>
   )
 }
+*/
 
-export default LoginPage;
+
+//temporary fix for broken LoginPage authenticator. 
+/*
+Problem:
+handleAuthStateChange doesn't function as I'd thought. It's more clearly "handleAuthenticatorStateChange".
+It fires when changing to the forgotpassword form or signup form. Therefore i was mistakenly changing
+isAuthenticated state to true when clicking on "sign up" form.
+
+Temporary Fix: 
+Use withAuthenticator HOC.
+withAuthenticator doesnt load LoginPage unless authenticated. when succesfully
+signed in, it will run useEffect (changing isAuthenticated to true) and redirect to homepage.
+
+Future Fix:
+We can remake this by either making a new authenticator from scratch OR
+we can use the authenticator components as a separate custom Authenticator component
+that wraps this LoginPage. That way the components will be more customizable.
+*/
+function LoginPage() {
+  const { setIsAuthenticated } = React.useContext(LoggedInUserContext);
+  React.useEffect(() => {
+    Auth.currentCredentials()
+    .then(res => {
+      res.authenticated ? setIsAuthenticated(true) : setIsAuthenticated(false);
+    })
+    .catch(err => {
+      console.log(err);
+      setIsAuthenticated(false);
+    })
+  }, [setIsAuthenticated]);
+
+  return (
+    <Redirect to="/" />
+  )
+}
+
+export default withAuthenticator(LoginPage);

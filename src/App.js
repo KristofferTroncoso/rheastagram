@@ -63,9 +63,13 @@ function App() {
   const getAuthenticatedUserAndData = () => {
     Auth.currentCredentials()
     .then(res => {
+      res.authenticated ? setIsAuthenticated(true) : setIsAuthenticated(false);
       getUserData(res.identityId);
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err);
+      setIsAuthenticated(false);
+    })
   }
   
   const getUserData = async(identityId) => {
