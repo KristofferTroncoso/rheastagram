@@ -50,7 +50,7 @@ function App() {
       username,
       email,
       name: username,
-      bio: `Hello my name is ${username} :)`,
+      bio: `Hello my name is ${username} and Rhea is awesome`,
       type: "user",
       timeCreated: getISODate()
     };
