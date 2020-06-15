@@ -4,8 +4,10 @@ import InfoHeader from '../../components/InfoHeader/InfoHeader';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import { PictureOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import { LoggedInUserContext } from '../../user-context';
+
 
 const StyledDiv = styled.div`
   padding: 15px 0 200px;
@@ -108,12 +110,31 @@ function UserPage({props}) {
       {isFound 
       ? <>
           <InfoHeader userData={foundUserData} loggedInUserData={loggedInUserData} />
-          <PicGrid 
-            pics={foundUserData.posts} 
-            userData={foundUserData} 
-            loggedInUserData={loggedInUserData}
-            getUser={getUser} 
-          />
+          {foundUserData.posts.length > 0 
+          ? <PicGrid 
+              pics={foundUserData.posts} 
+              userData={foundUserData} 
+              loggedInUserData={loggedInUserData}
+              getUser={getUser} 
+            />
+          : <Link to="/post">
+              <Button 
+                style={{
+                  height: '200px', 
+                  width: '200px', 
+                  display: 'flex',
+                  flexDirection: 'column', 
+                  justifyContent: 'center', 
+                  alignItems: 'center',
+                  margin: '10px 20px'
+                }}
+                type="dashed"
+              >
+                <PictureOutlined style={{fontSize: '120px'}} />
+                Upload your first photo!
+              </Button>            
+            </Link>
+          }
         </> 
       : <>
           <StyledH1>User not found</StyledH1>
