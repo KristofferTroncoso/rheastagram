@@ -30,7 +30,15 @@ function InfoHeader({userData, loggedInUserData}) {
         }
       `}
     >
-      <div css={{margin: '0 40px'}}>
+      <div 
+        css={css`
+          margin: 0 40px 0 10px;
+
+          @media (max-width: 768px){ 
+            margin: 0 10px;
+          }
+        `}
+      >
         <Avatar 
           src={imgKey}
           alt={imgKey}
@@ -54,8 +62,8 @@ function InfoHeader({userData, loggedInUserData}) {
             height: 150px;
 
             @media (max-width: 768px){ 
-              height: 80px;
-              width: 80px;
+              height: 70px;
+              width: 70px;
             }
           `}
         />
@@ -88,13 +96,18 @@ function InfoHeader({userData, loggedInUserData}) {
             ? <Fragment>
                 <Link to="/editprofile">
                   <button 
-                    css={{
-                      padding: '3px 8px', 
-                      margin: '2px 20px', 
-                      color: '#262626', 
-                      borderRadius: '4px',
-                      fontWeight: '500'
-                    }}
+                    css={css`
+                      padding: 3px 8px;
+                      margin: 2px 20px;
+                      color: #262626;
+                      border-radius: 4px;
+                      font-weight: 500;
+
+                      @media (max-width: 768px){ 
+                        padding: 1px 3px;
+                        margin: 2px 6px;
+                      }
+                    `}
                   >
                     Edit Profile
                   </button>
