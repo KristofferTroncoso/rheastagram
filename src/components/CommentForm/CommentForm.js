@@ -78,6 +78,7 @@ function CommentForm({postId, getPostData}) {
         placeholder="Add a comment..." 
         onChange={handleChange}
         value={inputText}
+        id="CommentForm_input"
         css={css`
           border: 0;
           border-bottom-right-radius: inherit;

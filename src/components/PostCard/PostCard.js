@@ -199,6 +199,7 @@ function PostCard({postId}) {
             <Like postId={postId} getPostData={getPostData} />
             <MessageOutlined 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
+              onClick={e => document.querySelector("#CommentForm_input").focus()}
             />
           </div>
           <h4 css={css`font-weight: 700; margin: 0`}>
