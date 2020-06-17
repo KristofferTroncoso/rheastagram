@@ -64,6 +64,7 @@ function Like({postId, getPostData}) {
       }
 
       let res = await API.graphql({query: createLikeMutation, variables: createLikeVariables});
+      res.then(res => console.log(res)).catch(err => console.log(err));
       toggleLiked(true);
     }
 
@@ -84,6 +85,7 @@ function Like({postId, getPostData}) {
       }
 
       let res = await API.graphql({query: deleteLikeMutation, variables: variables});
+      res.then(res => console.log(res)).catch(err => console.log(err));
       toggleLiked(false);
     }
 

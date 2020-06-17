@@ -1,5 +1,6 @@
 import React from 'react';
-import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp, withAuthenticator} from '@aws-amplify/ui-react';
+//import { AmplifyAuthenticator, AmplifySignIn, AmplifySignUp } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import { LoggedInUserContext } from '../../user-context';
 import { Redirect } from 'react-router-dom';
 import { Auth } from 'aws-amplify';

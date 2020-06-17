@@ -4,7 +4,6 @@ import Avatar from '../Avatar/Avatar';
 import { MessageOutlined, UploadOutlined, HeartOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
-import { Link } from 'react-router-dom';
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import useSignedS3Url from '../../hooks/useSignedS3Url';

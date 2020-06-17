@@ -15,7 +15,6 @@ import UsernameLink from '../UsernameLink/UsernameLink';
 
 function PostCard({postId}) {
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
-  const [findPostState, changeFindPostState] = React.useState('loading');
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   const [postData, changePostData] = React.useState({
     id: '',
@@ -78,8 +77,7 @@ function PostCard({postId}) {
   }
 
   React.useEffect(() => {
-    getPostData(postId)
-      .then(d => changeFindPostState(d));
+    getPostData(postId);
   }, [postId]);
 
   const imgKey = useSignedS3Url(postData.picUrl);
