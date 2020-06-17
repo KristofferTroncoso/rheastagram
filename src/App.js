@@ -25,123 +25,147 @@ function App() {
     getAuthenticatedUserAndData();
   }, [isAuthenticated]);
   
-
-  const postUser = async(identityId, username, email) => {
-    const createUser = `
-      mutation CreateUser(
-        $input: CreateUserInput!
-        $condition: ModelUserConditionInput
-      ) {
-        createUser(input: $input, condition: $condition) {
-          id
-          username
-          name
-          bio
-          email
-          photoUrl
-          timeCreated
-          type
-        }
-      }
-    `;
-
-    const createUserInput = {
-      id: identityId,
-      username,
-      email,
-      name: username,
-      bio: `Hello my name is ${username} and Rhea is awesome`,
-      type: "user",
-      timeCreated: getISODate()
-    };
-    console.log(createUserInput);
-    const response = await API.graphql(graphqlOperation(createUser, {input: createUserInput}));
-    console.log(response);
-    getUserData(identityId);
-  }
-  
   const getAuthenticatedUserAndData = () => {
     Auth.currentCredentials()
     .then(res => {
-      res.authenticated ? setIsAuthenticated(true) : setIsAuthenticated(false);
-      getUserData(res.identityId);
-    })
-    .catch(err => {
-      console.log(err);
-      setIsAuthenticated(false);
-    })
-  }
-  
-  const getUserData = async(identityId) => {
-    const customGetUserQuery = `
-      query GetUser($id: ID!) {
-        getUser(id: $id) {
-          id
-          username
-          name
-          bio
-          email
-          photoUrl
-          userPosts {
-            items {
-              id
-              picUrl
-              timeCreated
-              comments {
-                items {
-                  id
-                }
-              }
-              likes {
-                items {
-                  id
-                }
-              }
-            }
-            nextToken
-          }
-          comments {
-            items {
-              id
-              content
-              timeCreated
-            }
-            nextToken
-          }
-          likes {
-            items {
-              id
-              post {
+      const customGetUserQuery = `
+        query GetUser($id: ID!) {
+          getUser(id: $id) {
+            id
+            username
+            name
+            bio
+            email
+            photoUrl
+            userPosts {
+              items {
                 id
+                picUrl
+                timeCreated
+                comments {
+                  items {
+                    id
+                  }
+                }
+                likes {
+                  items {
+                    id
+                  }
+                }
               }
+              nextToken
             }
-            nextToken
+            comments {
+              items {
+                id
+                content
+                timeCreated
+              }
+              nextToken
+            }
+            likes {
+              items {
+                id
+                post {
+                  id
+                }
+              }
+              nextToken
+            }
           }
         }
-      }
-    `;
+      `;
 
-    const response = await API.graphql(graphqlOperation(customGetUserQuery, {id: identityId}));
-    if (response.data.getUser === null) {
-      console.log("Not found. Create new profile on database");
-      Auth.currentAuthenticatedUser().then(d => {
-        postUser(identityId, d.username, d.attributes.email)
+      API.graphql(graphqlOperation(customGetUserQuery, {id: res.identityId}))
+      .then(response => {
+        if (response.data.getUser === null) {
+          console.log("Not found. Create new profile on database");
+          Auth.currentAuthenticatedUser()
+          .then(d => {
+            const query = `
+              mutation CreateUser(
+                $input: CreateUserInput!
+                $condition: ModelUserConditionInput
+              ) {
+                createUser(input: $input, condition: $condition) {
+                  id
+                  name
+                  bio
+                  username
+                  photoUrl
+                  type
+                  email
+                  userPosts {
+                    items {
+                      id
+                    }
+                  }
+                  comments {
+                    items {
+                      id
+                    }
+                  }
+                  likes {
+                    items {
+                      id
+                    }
+                  }
+                }
+              }
+            `;
+        
+            const variables = {
+              id: res.identityId,
+              username: d.username,
+              email: d.attributes.email,
+              name: d.username,
+              bio: `Hello my name is ${d.username} and Rhea is awesome`,
+              type: "user",
+              timeCreated: getISODate()
+            };
+            console.log('youre authenticated. trying to create record on db')
+            API.graphql(graphqlOperation(query, {input: variables}))
+            .then(res => {
+              console.log(res);
+              let {bio, comments, id, likes, name, photoUrl, userPosts, username, type, email} = res.data.createUser;
+              setLoggedInUserData({
+                id,
+                name,
+                bio,
+                username,
+                photoUrl,
+                type,
+                email,
+                posts: userPosts.items,
+                comments: comments.items,
+                likes: likes.items
+              });
+            })
+            .catch(err => console.log(err));
+          })
+        } else {
+          console.log('App: Found user on DynamoDB database!')
+          let {bio, comments, id, likes, name, photoUrl, userPosts, username, type, email} = response.data.getUser;
+          setLoggedInUserData({
+            id,
+            name,
+            bio,
+            username,
+            photoUrl,
+            type,
+            email,
+            posts: userPosts.items,
+            comments: comments.items,
+            likes: likes.items
+          });
+          setIsAuthenticated(true);
+        }
       })
-    } else {
-      console.log('App: Found user on DynamoDB database!')
-      let {bio, comments, id, likes, name, photoUrl, userPosts, username} = response.data.getUser;
-      setLoggedInUserData({
-        id,
-        name,
-        bio,
-        username,
-        photoUrl,
-        posts: userPosts.items,
-        comments: comments.items,
-        likes: likes.items
-      });
-      setIsAuthenticated(true);
-    }
+      .catch(err => console.log(err))
+    })
+    .catch(err => {
+      setIsAuthenticated(false);
+    })
   }
   
   return (
