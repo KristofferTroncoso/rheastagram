@@ -11,6 +11,7 @@ import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 import { LoggedInUserContext } from '../../user-context';
 import CommentForm from '../CommentForm/CommentForm';
+import UsernameLink from '../UsernameLink/UsernameLink';
 
 function PostCard({postId}) {
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
@@ -179,8 +180,10 @@ function PostCard({postId}) {
           `}
         >
           <div css={css`display: flex; align-items: center;`}>
-            <Avatar img={postData.user.photoUrl}  username={postData.user.username} rainbow />
-            <h3 css={css`margin: 0 0 0 10px;`}>{postData.user.username}</h3>
+            <div css={{marginRight: '10px'}}>
+              <Avatar img={postData.user.photoUrl}  username={postData.user.username} rainbow />
+            </div>
+            <UsernameLink>{postData.user.username}</UsernameLink>
           </div>
           <PostOptions 
             userData={loggedInUserData} 

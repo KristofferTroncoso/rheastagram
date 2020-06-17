@@ -2,6 +2,7 @@
 import moment from 'moment';
 import Avatar from '../Avatar/Avatar';
 import { jsx, css } from '@emotion/core';
+import UsernameLink from '../UsernameLink/UsernameLink';
 
 function Comment({comment}) {
   return (
@@ -9,9 +10,7 @@ function Comment({comment}) {
       <Avatar img={comment.user.photoUrl} username={comment.user.username} />
       <div className="PicModal_CommentBox" css={css`margin-left: 10px`}>
         <div css={css`display: flex; align-items: baseline`}>
-          <h4 css={css`margin-right: 5px; font-size: 14px; margin: 0 8px 0 0;`}>
-            {comment.user.username}
-          </h4>
+          <UsernameLink>{comment.user.username}</UsernameLink>
           <p css={css`font-size: 14px; color: #2b2b2b; margin: 0`}>
             {comment.content}
           </p>

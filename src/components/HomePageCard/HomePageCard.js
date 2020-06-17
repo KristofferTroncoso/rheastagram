@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
+import UsernameLink from '../UsernameLink/UsernameLink';
 
 const StyledSection = styled.section`
   background: white;
@@ -32,11 +33,6 @@ const StyledDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   align-content: center;
-`;
-
-const StyledH3 = styled.h3`
-  padding: 0 15px;
-  margin: 0;
 `;
 
 const StyledTimestamp = styled.p`
@@ -86,10 +82,10 @@ function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt }) {
     <StyledSection className="wrapper">
       <StyledDiv>
         <div style={{display: 'flex', alignItems: 'center'}}>
-          <Avatar img={userData.photoUrl}  username={userData.username} rainbow large />
-          <Link to={`/user/${userData.username}`}>
-            <StyledH3>{userData.username}</StyledH3>
-          </Link>
+          <div css={{marginRight: '10px'}}>
+            <Avatar img={userData.photoUrl}  username={userData.username} rainbow large />
+          </div>
+          <UsernameLink>{userData.username}</UsernameLink>
         </div>
         <PostOptions 
           userData={userData} 
