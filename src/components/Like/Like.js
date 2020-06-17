@@ -63,9 +63,9 @@ function Like({postId, getPostData}) {
         postId: postId
       }
 
-      let res = await API.graphql({query: createLikeMutation, variables: createLikeVariables});
-      res.then(res => console.log(res)).catch(err => console.log(err));
-      toggleLiked(true);
+      API.graphql({query: createLikeMutation, variables: createLikeVariables})
+      .then(res => toggleLiked(true))
+      .catch(err => console.log(err));
     }
 
     const deleteLike = async () => {
@@ -84,9 +84,9 @@ function Like({postId, getPostData}) {
         likeId: currentLikeId
       }
 
-      let res = await API.graphql({query: deleteLikeMutation, variables: variables});
-      res.then(res => console.log(res)).catch(err => console.log(err));
-      toggleLiked(false);
+      API.graphql({query: deleteLikeMutation, variables: variables})
+      .then(res => toggleLiked(false))
+      .catch(err => console.log(err));
     }
 
     liked ? deleteLike() : createLike();
@@ -100,7 +100,7 @@ function Like({postId, getPostData}) {
       className="LikeBtn"
     >
       {liked
-      ? <HeartFilled style={{fontSize: '26px', color: 'red'}} />
+      ? <HeartFilled style={{fontSize: '26px', color: 'rgb(237, 73, 86)'}} />
       : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} />
       }
     </button>
