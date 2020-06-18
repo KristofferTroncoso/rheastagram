@@ -19,7 +19,10 @@ function PostCard({postId}) {
   const [postData, changePostData] = React.useState({
     id: '',
     picUrl: '',
+    type: '',
+    visibility: '',
     timeCreated: '',
+    userId: '',
     user: {},
     comments: {items: []},
     likes: {items: []}
@@ -31,7 +34,10 @@ function PostCard({postId}) {
         getPost(id: $postId) {
           id
           picUrl
+          type
+          visibility
           timeCreated
+          userId
           user {
             id
             username
@@ -65,15 +71,11 @@ function PostCard({postId}) {
       postId: postId
     }
     
-    console.log("Getting post data.");
-
-    const res = await API.graphql({query, variables});
-    if (res.data.getPost) {
+    API.graphql({query, variables})
+    .then(res => {
       changePostData(res.data.getPost);
-      return 'found';
-    } else {
-      return 'notfound';
-    }
+    })
+    .catch(err => console.log(err));
   }
 
   React.useEffect(() => {

@@ -38,7 +38,7 @@ function Like({postId, getPostData}) {
       } else {
         toggleLiked(false);
       }
-    })
+    });
   }, [loggedInUserData, postId, liked])
 
 
@@ -65,7 +65,7 @@ function Like({postId, getPostData}) {
       }
 
       API.graphql({query: createLikeMutation, variables: createLikeVariables})
-      .then(res => toggleLiked(true))
+      .then(res => {toggleLiked(true); getPostData(postId);})
       .catch(err => console.log(err));
     }
 
@@ -86,12 +86,11 @@ function Like({postId, getPostData}) {
       }
 
       API.graphql({query: deleteLikeMutation, variables: variables})
-      .then(res => toggleLiked(false))
+      .then(res => {toggleLiked(false); getPostData(postId);})
       .catch(err => console.log(err));
     }
 
     liked ? deleteLike() : createLike();
-    getPostData();
   }
   
   return (
