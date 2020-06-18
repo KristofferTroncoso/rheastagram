@@ -26,7 +26,7 @@ function PostCard({postId}) {
     userId: '',
     user: {},
     comments: {items: []},
-    likes: {items: [{user: {username: ''}}]}
+    likes: {items: [{user: {id: '', photoUrl: '', username: ''}}]}
   });
 
   const getPostData = async (postId) => {
@@ -207,25 +207,33 @@ function PostCard({postId}) {
               onClick={e => document.querySelector("#CommentForm_input").focus()}
             />
           </div>
-          <div css={css`display: flex; align-content: center; align-items: center; margin: 5px 0`}>
-            <div css={css`margin-right: 5px`}><Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} /></div>
-            <span>
-              Liked by <UsernameLink>{postData.likes.items[0].user.username}</UsernameLink>
-              and 
-              <Popover 
-                trigger="hover"
-                content={
-                  <div>
-                    {postData.likes.items.slice(1).map(item => (
-                      <div><UsernameLink key={item.id}>{item.user.username}</UsernameLink></div>
-                    ))}
-                  </div>
+          {postData.likes.items.length > 0 &&
+            <div css={css`display: flex; align-content: center; align-items: center; margin: 5px 0`}>
+              <div css={css`margin-right: 5px`}><Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} /></div>
+              <span>
+                Liked by <UsernameLink>{postData.likes.items[0].user.username}</UsernameLink>
+                {postData.likes.items.length > 1 &&
+                  <span>
+                    and 
+                    <Popover 
+                      trigger="hover"
+                      content={
+                        <div>
+                          {postData.likes.items.slice(1).map(item => (
+                            <div key={item.id}><UsernameLink>{item.user.username}</UsernameLink></div>
+                          ))}
+                        </div>
+                      }
+                    >
+                      <span css={{fontWeight: '600', color: 'black', marginLeft: '4px'}}>
+                        {postData.likes.items.length - 1} {postData.likes.items.length === 2 ? 'other' : 'others'}
+                      </span>
+                    </Popover>
+                  </span>
                 }
-              >
-                <span css={{fontWeight: '600', color: 'black', marginLeft: '4px'}}>{postData.likes.items.length - 1} others</span>
-              </Popover>
-            </span>
-          </div>
+              </span>
+            </div>
+          }
           <span css={css`color: grey; font-size: 12px;`}>
             {moment(postData.timeCreated).format('MMMM D, YYYY')}
           </span>
