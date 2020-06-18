@@ -5,6 +5,7 @@ import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
+import { motion } from "framer-motion";
 
 function Like({postId, getPostData}) {
   const [liked, toggleLiked] = React.useState(false);
@@ -99,10 +100,12 @@ function Like({postId, getPostData}) {
       css={{border: 0, margin: 0, padding: 0}} 
       className="LikeBtn"
     >
-      {liked
-      ? <HeartFilled style={{fontSize: '26px', color: 'rgb(237, 73, 86)'}} />
-      : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} />
-      }
+      <motion.div whileHover={{ scale: 0.9 }} whileTap={{ scale: 1.2 }}>
+        {liked
+        ? <HeartFilled style={{fontSize: '26px', color: 'rgb(237, 73, 86)'}} />
+        : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} />
+        }
+      </motion.div>
     </button>
   )
 }
