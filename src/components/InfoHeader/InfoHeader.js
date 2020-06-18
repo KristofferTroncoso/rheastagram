@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React from 'react';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import SettingsModal from '../SettingsModal/SettingsModal';
@@ -6,9 +7,11 @@ import { jsx, css } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { LoggedInUserContext } from '../../user-context';
 
-function InfoHeader({userData, loggedInUserData}) {
+function InfoHeader({userData}) {
   const imgKey = useSignedS3Url(userData.photoUrl);
+  const { loggedInUserData } = React.useContext(LoggedInUserContext);
   
   return (
     <div 

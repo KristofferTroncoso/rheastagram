@@ -109,7 +109,7 @@ function UserPage({props}) {
     <StyledDiv>
       {isFound 
       ? <>
-          <InfoHeader userData={foundUserData} loggedInUserData={loggedInUserData} />
+          <InfoHeader userData={foundUserData} />
           {foundUserData.posts.length > 0 
           ? <PicGrid 
               pics={foundUserData.posts} 
