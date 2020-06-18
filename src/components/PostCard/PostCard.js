@@ -4,6 +4,7 @@ import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
 import { MessageOutlined } from '@ant-design/icons';
+import { Popover } from 'antd';
 import CommentList from '../CommentList/CommentList';
 import moment from 'moment';
 import Like from '../Like/Like';
@@ -25,7 +26,7 @@ function PostCard({postId}) {
     userId: '',
     user: {},
     comments: {items: []},
-    likes: {items: []}
+    likes: {items: [{user: {username: ''}}]}
   });
 
   const getPostData = async (postId) => {
@@ -60,6 +61,8 @@ function PostCard({postId}) {
               id
               user {
                 id
+                username
+                photoUrl
               }
             }
           }
@@ -204,9 +207,25 @@ function PostCard({postId}) {
               onClick={e => document.querySelector("#CommentForm_input").focus()}
             />
           </div>
-          <h4 css={css`font-weight: 700; margin: 0`}>
-            {postData.likes.items.length} {postData.likes.items.length > 1 ? 'likes' : 'like'}
-          </h4>
+          <div css={css`display: flex; align-content: center; align-items: center; margin: 5px 0`}>
+            <div css={css`margin-right: 5px`}><Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} /></div>
+            <span>
+              Liked by <UsernameLink>{postData.likes.items[0].user.username}</UsernameLink>
+              and 
+              <Popover 
+                trigger="hover"
+                content={
+                  <div>
+                    {postData.likes.items.slice(1).map(item => (
+                      <div><UsernameLink key={item.id}>{item.user.username}</UsernameLink></div>
+                    ))}
+                  </div>
+                }
+              >
+                <span css={{fontWeight: '600', color: 'black', marginLeft: '4px'}}>{postData.likes.items.length - 1} others</span>
+              </Popover>
+            </span>
+          </div>
           <span css={css`color: grey; font-size: 12px;`}>
             {moment(postData.timeCreated).format('MMMM D, YYYY')}
           </span>
