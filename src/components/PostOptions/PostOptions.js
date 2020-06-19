@@ -30,7 +30,7 @@ const StyledModalButton = styled(Button)`
   }
 `;
 
-function PostOptions({postId, imgKey, userData}) {
+function PostOptions({postId, imgKey, userDataId}) {
   const [visible, changeVisible] = React.useState(false);
   const history = useHistory();
   const { loggedInUserData } = React.useContext(LoggedInUserContext);
@@ -85,7 +85,7 @@ function PostOptions({postId, imgKey, userData}) {
         closable={false}
       >
         {
-          loggedInUserData.id === userData.id 
+          loggedInUserData.id === userDataId 
           ? <StyledModalButton 
               onClick={handleDelete}
               block 

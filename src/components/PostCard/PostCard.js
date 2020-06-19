@@ -10,12 +10,10 @@ import moment from 'moment';
 import Like from '../Like/Like';
 import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
-import { LoggedInUserContext } from '../../user-context';
 import CommentForm from '../CommentForm/CommentForm';
 import UsernameLink from '../UsernameLink/UsernameLink';
 
 function PostCard({postId}) {
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   const [postData, changePostData] = React.useState({
     id: '',
@@ -189,10 +187,9 @@ function PostCard({postId}) {
             <UsernameLink>{postData.user.username}</UsernameLink>
           </div>
           <PostOptions 
-            userData={loggedInUserData} 
-            id={postId} 
+            userDataId={postData.userId} 
+            postId={postId} 
             imgKey={imgKey} 
-            loggedInUserData={loggedInUserData} 
           />
         </div>
         <CommentList comments={postData.comments.items} />
