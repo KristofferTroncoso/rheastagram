@@ -87,7 +87,7 @@ function HomePageCard({ id, imgUrl, likes, hearts, userData, createdAt }) {
           <UsernameLink>{userData.username}</UsernameLink>
         </div>
         <PostOptions 
-          userData={userData} 
+          userDataId={userData.id} 
           postId={id}
         />
       </StyledDiv>
