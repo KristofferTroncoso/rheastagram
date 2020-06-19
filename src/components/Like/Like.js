@@ -38,7 +38,8 @@ function Like({postId, getPostData}) {
       } else {
         toggleLiked(false);
       }
-    });
+    })
+    .catch(err => console.log(err));
   }, [loggedInUserData, postId, liked])
 
 
