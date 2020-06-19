@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { PictureOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
-import { LoggedInUserContext } from '../../user-context';
+
 
 
 const StyledDiv = styled.div`
@@ -29,7 +29,6 @@ const StyledBtnDiv = styled.div`
 function UserPage({props}) {
   const [foundUserData, changeFoundUserData] = React.useState({posts: []})
   const [isFound, changeIsFound] = React.useState(true);
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
   
   React.useEffect(() => {
     getUser(props.match.params.id);
@@ -56,13 +55,6 @@ function UserPage({props}) {
                 comments {
                   items {
                     id
-                    content
-                    user {
-                      id
-                      username
-                      photoUrl
-                    }
-                    timeCreated
                   }
                 }
                 likes {
@@ -112,9 +104,7 @@ function UserPage({props}) {
           <InfoHeader userData={foundUserData} />
           {foundUserData.posts.length > 0 
           ? <PicGrid 
-              pics={foundUserData.posts} 
               userData={foundUserData} 
-              loggedInUserData={loggedInUserData}
               getUser={getUser} 
             />
           : <Link to="/post">

@@ -23,23 +23,19 @@ const StyledPicGrid = styled.div`
   }
 `;
 
-function PicGrid({pics, modalStatus, userData, loggedInUserData, getUser}) {
-  let sortedPics = pics.sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0)).reverse();
+function PicGrid({userData}) {
+  let sortedPosts = userData.posts.sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0)).reverse();
   
   return (
     <StyledPicGridWrapper className="PicGridWrapper">
       <StyledPicGrid className="PicGrid">
-        {sortedPics.map((pic) => (
+        {sortedPosts.map((post) => (
           <PicModal 
-            key={pic.id} 
-            postId={pic.id}
-            img={pic.picUrl} 
-            post={pic} 
-            userData={userData} 
-            loggedInUserData={loggedInUserData} 
-            hearts={pic.likes.items.length}
-            comments={pic.comments.items.length}j
-            getUser={getUser}
+            key={post.id} 
+            img={post.picUrl} 
+            post={post} 
+            hearts={post.likes.items.length}
+            comments={post.comments.items.length}
           />
         ))}
       </StyledPicGrid>
