@@ -40,9 +40,11 @@ function SubmitPostPage() {
   }
 
   const handleSave = e => {
+    let hoursToCacheImageInBrowser = 12;
     Storage.put(`${loggedInUserData.id}/${genUUID()}-${imgFile.name}`, imgFile, {
       level: 'public',
-      contentType: imgFile.type
+      contentType: imgFile.type,
+      cacheControl: `max-age=${3600 * hoursToCacheImageInBrowser}`
     })
     .then (result => {
       const createPost = `
