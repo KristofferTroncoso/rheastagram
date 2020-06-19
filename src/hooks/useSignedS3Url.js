@@ -15,8 +15,10 @@ function useSignedS3Url(imgKey) {
         Storage.get(imgKey)
         .then(data => {
           setSignedUrl(data);
-          let dateNow = new Date();
-          let expirationTime = dateNow.getTime() + 900000;
+          // caching will also need to be done on the s3 bucket through AWS console
+          let minutesToCache = 720;
+          const dateNow = new Date();
+          const expirationTime = dateNow.getTime() + (60000 * minutesToCache);
           Cache.setItem(imgKey, data, {expires: expirationTime });
         })
         .catch(err => console.log(err));
