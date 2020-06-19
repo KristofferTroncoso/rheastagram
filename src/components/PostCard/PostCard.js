@@ -213,7 +213,7 @@ function PostCard({postId}) {
                   <span>
                     and 
                     <Popover 
-                      trigger="hover"
+                      trigger="click"
                       content={
                         <div>
                           {postData.likes.items.slice(1).map(item => (
