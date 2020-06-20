@@ -16,7 +16,7 @@ function useSignedS3Url(imgKey) {
         .then(data => {
           setSignedUrl(data);
           // hoursToCacheSignedUrl should be less than or equal to how long the image is cached in the browser
-          let hoursToCacheSignedUrl = 11;
+          let hoursToCacheSignedUrl = 0.2;
           const dateNow = new Date();
           const expirationTime = dateNow.getTime() + (3600000 * hoursToCacheSignedUrl);
           Cache.setItem(imgKey, data, {expires: expirationTime });
