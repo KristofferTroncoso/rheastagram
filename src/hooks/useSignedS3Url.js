@@ -10,29 +10,6 @@ let hoursToCacheSignedUrl = 11;
 function useSignedS3Url(imgKey) {
   const [signedUrl, setSignedUrl] = React.useState();
   
-  // React.useEffect(() => {
-  //   if (!imgKey) {
-  //     console.log("image key is undefined");
-  //     setSignedUrl(undefined);
-  //   } else {
-  //     let cacheRes = Cache.getItem(imgKey);
-  //     if (cacheRes === null) {
-  //       console.log('getting new signed url for image')
-  //       Storage.get(imgKey, { expires: 3600 * hoursTillSignedUrlExpires })
-  //       .then(data => {
-  //         setSignedUrl(data);
-  //         const dateNow = new Date();
-  //         const expirationTime = dateNow.getTime() + (3600000 * hoursToCacheSignedUrl);
-  //         Cache.setItem(imgKey, data, {expires: expirationTime });
-  //       })
-  //       .catch(err => console.log(err));
-  //     } else {
-  //       console.log("Image is in cache (You saved bandwidth!)")
-  //       setSignedUrl(cacheRes);
-  //     }
-  //   }
-  // }, [imgKey]);
-
   React.useEffect(() => {
     if (!imgKey) {
       console.log("image key is undefined");
@@ -49,20 +26,13 @@ function useSignedS3Url(imgKey) {
           Cache.setItem(imgKey, data, {expires: expirationTime });
         })
         .catch(err => console.log(err));
-      } else {   
-        Storage.get(imgKey, { expires: 3600 * hoursTillSignedUrlExpires })
-        .then(data => {
-          setSignedUrl(data);
-          const dateNow = new Date();
-          const expirationTime = dateNow.getTime() + (3600000 * hoursToCacheSignedUrl);
-          Cache.setItem(imgKey, data, {expires: expirationTime });
-        })
-        .catch(err => console.log(err));
+      } else {
+        console.log("Image is in cache (You saved bandwidth!)")
+        setSignedUrl(cacheRes);
       }
     }
   }, [imgKey]);
 
-  
   return signedUrl;
 }
 
