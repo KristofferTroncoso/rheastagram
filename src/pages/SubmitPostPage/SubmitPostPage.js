@@ -40,7 +40,7 @@ function SubmitPostPage() {
   }
 
   const handleSave = e => {
-    let hoursToCacheImageInBrowser = 12;
+    let hoursToCacheImageInBrowser = 2;
     Storage.put(`${loggedInUserData.id}/${genUUID()}-${imgFile.name}`, imgFile, {
       level: 'public',
       contentType: imgFile.type,

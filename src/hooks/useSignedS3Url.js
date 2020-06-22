@@ -3,9 +3,9 @@ import { Storage, Cache } from 'aws-amplify';
 
 // hoursToCacheImageInBrowser is located in SubmitPostPage.js
 // how long the signed url is valid for
-let hoursTillSignedUrlExpires = 12
+let hoursTillSignedUrlExpires = 2;
 // hoursToCacheSignedUrl should be less than or equal to hoursTillSignedUrlExpires
-let hoursToCacheSignedUrl = 11;
+let hoursToCacheSignedUrl = 2;
 
 function useSignedS3Url(imgKey) {
   const [signedUrl, setSignedUrl] = React.useState();
