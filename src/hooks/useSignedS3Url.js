@@ -19,7 +19,8 @@ function useSignedS3Url(imgKey) {
       console.log("image key is undefined");
       setSignedUrl(undefined);
     } else {
-      let cacheRes = Cache.getItem(`${loggedInUserData.id || 'temp'}/${imgKey}`);
+      let cacheKey = `_${loggedInUserData.id || 'temp'}/${imgKey}`
+      let cacheRes = Cache.getItem(cacheKey);
       if (cacheRes === null) {
         console.log('getting new signed url for image')
         Storage.get(imgKey, { expires: 3600 * hoursTillSignedUrlExpires })
@@ -27,7 +28,7 @@ function useSignedS3Url(imgKey) {
           setSignedUrl(data);
           const dateNow = new Date();
           const expirationTime = dateNow.getTime() + (3600000 * hoursToCacheSignedUrl);
-          Cache.setItem(`${loggedInUserData.id || 'temp'}/${imgKey}`, data, {expires: expirationTime });
+          Cache.setItem(cacheKey, data, {expires: expirationTime });
         })
         .catch(err => console.log(err));
       } else {

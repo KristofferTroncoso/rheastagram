@@ -170,7 +170,7 @@ function App() {
   
   return (
     <Router>
-      <LoggedInUserContext.Provider value={{loggedInUserData, getAuthenticatedUserAndData, isAuthenticated, setIsAuthenticated}}>
+      <LoggedInUserContext.Provider value={{loggedInUserData, getAuthenticatedUserAndData, isAuthenticated, setIsAuthenticated, setLoggedInUserData}}>
         <div className="App" css={{width: '100vw'}}>
           <ScrollToTop />
           <Navbar />
