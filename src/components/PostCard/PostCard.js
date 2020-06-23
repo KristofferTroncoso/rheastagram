@@ -201,7 +201,7 @@ function PostCard({postId}) {
             <Like postId={postId} getPostData={getPostData} />
             <MessageOutlined 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
-              onClick={e => document.querySelector("#CommentForm_input").focus()}
+              onClick={e => document.getElementById(`CommentForm_input_${postId}`).focus()}
             />
           </div>
           {postData.likes.items.length > 0 &&
