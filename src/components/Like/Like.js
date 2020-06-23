@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 function Like({postId, getPostData}) {
   const [liked, toggleLiked] = React.useState(false);
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
   const [currentLikeId, setCurrentLikeId] = React.useState();
   
   React.useEffect(() => {
@@ -99,6 +99,7 @@ function Like({postId, getPostData}) {
       onClick={handleToggle} 
       css={{border: 0, margin: 0, padding: 0}} 
       className="LikeBtn"
+      disabled={isAuthenticated ? false : true}
     >
       <motion.div whileHover={{ scale: 0.9 }} whileTap={{ scale: 1.2 }}>
         {liked

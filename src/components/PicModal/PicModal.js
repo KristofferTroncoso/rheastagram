@@ -67,7 +67,6 @@ function PicModal({img, hearts, comments, post}) {
         style={window.innerWidth < 600 && {top: 0}}
         closeIcon={<CloseSquareTwoTone style={{fontSize: '30px'}} twoToneColor="blue" />}
         width="900px"
-        height="900px"
       >
         <PostCard postId={post.id} />
       </Modal>

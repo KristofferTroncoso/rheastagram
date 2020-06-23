@@ -12,8 +12,10 @@ import { css, jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 import CommentForm from '../CommentForm/CommentForm';
 import UsernameLink from '../UsernameLink/UsernameLink';
+import { LoggedInUserContext } from '../../user-context';
 
 function PostCard({postId}) {
+  const { isAuthenticated } = React.useContext(LoggedInUserContext);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   const [postData, changePostData] = React.useState({
     id: '',
@@ -201,7 +203,7 @@ function PostCard({postId}) {
             <Like postId={postId} getPostData={getPostData} />
             <MessageOutlined 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
-              onClick={e => document.getElementById(`CommentForm_input_${postId}`).focus()}
+              onClick={isAuthenticated ? e => document.getElementById(`CommentForm_input_${postId}`).focus() : null}
             />
           </div>
           {postData.likes.items.length > 0 &&
@@ -217,12 +219,12 @@ function PostCard({postId}) {
                       content={
                         <div>
                           {postData.likes.items.slice(1).map(item => (
-                            <div key={item.id}><UsernameLink>{item.user.username}</UsernameLink></div>
+                            <span key={item.id}><UsernameLink>{item.user.username}</UsernameLink></span>
                           ))}
                         </div>
                       }
                     >
-                      <span css={{fontWeight: '600', color: 'black', marginLeft: '4px'}}>
+                      <span css={{fontWeight: '600', color: 'black', marginLeft: '4px', cursor: 'pointer'}}>
                         {postData.likes.items.length - 1} {postData.likes.items.length === 2 ? 'other' : 'others'}
                       </span>
                     </Popover>
