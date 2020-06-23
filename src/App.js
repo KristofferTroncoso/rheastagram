@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
 import MobileNavbar from './components/MobileNavbar/MobileNavbar';
 import HomePage from './pages/HomePage/HomePage';
@@ -175,6 +175,7 @@ function App() {
           <ScrollToTop />
           <Navbar />
           <Wrapper>
+            <Route render={() => <Redirect to="/" />} />
             <Route path="/" exact render={props => <HomePage />} />
             <Route path="/user/:id" render={props => <UserPage props={props} />} />
             <Route path="/editprofile" render={props => <EditProfilePage />} />
