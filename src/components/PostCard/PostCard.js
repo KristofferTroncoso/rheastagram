@@ -112,28 +112,7 @@ function PostCard({postId}) {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
           border-bottom-left-radius: inherit;
-          background: orange;
-          background-image: radial-gradient(
-              closest-corner circle at 30% 70%,
-              steelblue 30%,
-              rgb(207, 84, 84),
-              90%,
-              transparent
-            ),
-            radial-gradient(
-              closest-corner circle at 90% 40%,
-              pink 20%,
-              orange,
-              90%,
-              transparent
-            ),
-            radial-gradient(
-              closest-corner circle at 30% 10%,
-              tomato 15%,
-              green,
-              85%,
-              transparent
-            );        
+          background: #e6e6e6;       
         `}
       >
         <img 

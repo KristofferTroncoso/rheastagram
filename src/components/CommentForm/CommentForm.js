@@ -84,6 +84,7 @@ function CommentForm({postId, getPostData}) {
           border-bottom-right-radius: inherit;
           padding: 8px 5px;
           width: 100%;
+          background: inherit;
           
           @media (max-width: 768px){ 
             font-size: 18px;
