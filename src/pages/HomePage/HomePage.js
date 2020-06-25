@@ -4,7 +4,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 import HomePageCard from '../../components/HomePageCard/HomePageCard';
 import { css, jsx } from '@emotion/core';
 
-
 const HomePage = () => {
   React.useEffect(() => {
     getAllPosts();
@@ -14,50 +13,34 @@ const HomePage = () => {
 
   const getAllPosts = async () => {
     const query = `
-      query ListPosts(
-        $filter: ModelPostFilterInput
-        $limit: Int
-        $nextToken: String
+      query ListPostsByVisibility(
+        $visibility:String
+        $sortDirection:ModelSortDirection
+        $limit:Int
+        $nextToken:String
       ) {
-        listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+        listPostsByVisibility(
+          visibility:$visibility
+          sortDirection: $sortDirection
+          limit: $limit
+          nextToken: $nextToken
+        ) {
           items {
             id
-            picUrl
-            user {
-              id
-              username
-              name
-              bio
-              email
-              photoUrl
-            }
-            comments {
-              nextToken
-            }
-            likes {
-              nextToken
-            }
-            timeCreated
           }
-          nextToken
         }
       }
     `;
 
     const variables = {
-      limit: 12
+      visibility: 'public',
+      sortDirection: 'DESC',
+      limit: 12,
+      nextToken: null
     }
 
     let response = await API.graphql(graphqlOperation(query, variables));
-    let sortedPosts = response.data.listPosts.items.sort((a, b) => (
-      (a.timeCreated < b.timeCreated) 
-      ? -1 
-      : ((a.timeCreated > b.timeCreated) 
-        ? 1 
-        : 0)
-      )
-    ).reverse();
-    changeAllPosts(sortedPosts);
+    changeAllPosts(response.data.listPostsByVisibility.items);
   }
 
   return (
@@ -69,10 +52,7 @@ const HomePage = () => {
       {allPosts.map(post => (
         <HomePageCard
           key={post.id}
-          id={post.id}
-          imgUrl={post.picUrl}
-          createdAt={post.timeCreated}
-          userData={post.user}
+          postId={post.id}
         />
       ))}
     </div>
