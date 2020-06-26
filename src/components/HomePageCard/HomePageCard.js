@@ -184,7 +184,7 @@ function HomePageCard({ postId }) {
           css={css`padding: 2px 10px; height: 100%; overflow: auto;`}
         >
           {postData.comments.items.map(comment => (
-            <div css={css`display: flex; align-items: baseline`}>
+            <div css={css`display: flex; align-items: baseline`} key={comment.id}>
               <UsernameLink>{comment.user.username}</UsernameLink>
               <p css={css`font-size: 14px; color: #2b2b2b; margin: 0`}>
                 {comment.content}
