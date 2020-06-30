@@ -5,7 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { jsx } from '@emotion/core';
 import useSignedS3Url from '../../hooks/useSignedS3Url';
 
-function Avatar({img, username, large, rainbow}) {
+function Avatar({img, username, rainbow, ...rest}) {
   const imgKey = useSignedS3Url(img);
   
   return (
@@ -38,8 +38,8 @@ function Avatar({img, username, large, rainbow}) {
         <AntAvatar 
           icon={<UserOutlined />}
           src={imgKey && imgKey} 
-          size={large ? "large" : "default"}
           css={rainbow ? {border: '2px solid white'} : {border: '1px solid lightgrey'}}
+          {...rest}
         />
       </div>
     </Link>

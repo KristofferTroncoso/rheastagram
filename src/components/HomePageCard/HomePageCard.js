@@ -127,7 +127,7 @@ function HomePageCard({ postId }) {
       <StyledDiv>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <div css={{marginRight: '10px'}}>
-            <Avatar img={postData.user.photoUrl}  username={postData.user.username} rainbow large />
+            <Avatar img={postData.user.photoUrl}  username={postData.user.username} size={34} rainbow />
           </div>
           <UsernameLink>{postData.user.username}</UsernameLink>
         </div>
@@ -154,7 +154,9 @@ function HomePageCard({ postId }) {
         </div>
         {postData.likes.items.length > 0 &&
           <div css={css`display: flex; align-content: center; align-items: center; padding: 2px 10px`}>
-            <div css={css`margin-right: 5px`}><Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} /></div>
+            <div css={css`margin-right: 5px`}>
+              <Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} size="small" />
+            </div>
             <span>
               Liked by <UsernameLink>{postData.likes.items[0].user.username}</UsernameLink>
               {postData.likes.items.length > 1 &&

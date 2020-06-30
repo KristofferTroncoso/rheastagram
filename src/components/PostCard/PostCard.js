@@ -187,7 +187,9 @@ function PostCard({postId}) {
           </div>
           {postData.likes.items.length > 0 &&
             <div css={css`display: flex; align-content: center; align-items: center; margin: 5px 0`}>
-              <div css={css`margin-right: 5px`}><Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} /></div>
+              <div css={css`margin-right: 5px`}>
+                <Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} size="small" />
+              </div>
               <span>
                 Liked by <UsernameLink>{postData.likes.items[0].user.username}</UsernameLink>
                 {postData.likes.items.length > 1 &&
