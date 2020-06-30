@@ -200,6 +200,10 @@ function HomePageCard({ postId }) {
             width: 100%; 
             border-top: 1px solid #efefef;
             padding: 0 2px 0 10px;
+            height: 50px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
           `}
         >
           <CommentForm postId={postId} getPostData={getPostData} /> 
