@@ -15,6 +15,7 @@ import { getISODate } from './utils';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from './user-context';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import GlobalStyles from './GlobalStyles';
 
 function App() {
   const [loggedInUserData, setLoggedInUserData] = React.useState({});
@@ -172,6 +173,7 @@ function App() {
     <Router>
       <LoggedInUserContext.Provider value={{loggedInUserData, getAuthenticatedUserAndData, isAuthenticated, setIsAuthenticated, setLoggedInUserData}}>
         <div className="App" css={{width: '100vw'}}>
+          <GlobalStyles />
           <ScrollToTop />
           <Navbar />
           <Wrapper>
