@@ -23,7 +23,7 @@ const StyledNav = styled.nav`
 
 function MobileNavbar() {
   const [currentPage, changeCurrentPage] = React.useState();
-  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
   
   return (
     <StyledNav className="MobileNavbar">
@@ -60,9 +60,9 @@ function MobileNavbar() {
           : <FaRegPlusSquare css={{fontSize: '30px', color: '#3b3b3b'}} />
         }
       </NavLink>
-      {isAuthenticated
+      {currentCredentials.authenticated
       ?<NavLink 
-        to={`/user/${loggedInUserData.username}`}
+        to={`/user/${loggedInUserData.getUser.username}`}
         isActive={(match, location) => {
           if (match) {
             changeCurrentPage('user')

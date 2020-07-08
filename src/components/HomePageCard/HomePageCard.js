@@ -2,7 +2,7 @@
 import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import { API } from 'aws-amplify';
-import { MessageOutlined } from '@ant-design/icons';
+import { MessageOutlined, HeartOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import PostOptions from '../PostOptions/PostOptions';
 import { css, jsx } from '@emotion/core';
@@ -50,7 +50,7 @@ const StyledImg = styled.img`
 `;
 
 function HomePageCard({ postId }) {
-  const { isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { currentCredentials } = React.useContext(LoggedInUserContext);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
   const [postData, changePostData] = React.useState({
     id: '',
@@ -146,10 +146,10 @@ function HomePageCard({ postId }) {
       </div>
       <div>
         <div className="PostCard_stats_icons" css={css`display: flex; padding: 10px 10px 2px`}>
-          <Like postId={postId} getPostData={getPostData} />
+          {currentCredentials.isAuthenticated ? <Like postId={postId} getPostData={getPostData} /> : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} /> }
           <MessageOutlined 
             css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
-            onClick={isAuthenticated ? e => document.getElementById(`CommentForm_input_${postId}`).focus() : null}
+            onClick={currentCredentials.authenticated ? e => document.getElementById(`CommentForm_input_${postId}`).focus() : null}
           />
         </div>
         {postData.likes.items.length > 0 &&

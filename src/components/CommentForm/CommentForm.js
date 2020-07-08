@@ -1,56 +1,54 @@
 /** @jsx jsx */
 import React from 'react';
 import { css, jsx } from '@emotion/core';
-import { API } from 'aws-amplify'
 import { genUUID, getISODate } from '../../utils';
 import { LoggedInUserContext } from '../../user-context';
 import { Link } from 'react-router-dom';
+import { gql, useMutation } from '@apollo/client';
 
 function CommentForm({postId, getPostData}) {
   const [inputText, changeInputText] = React.useState('');
-  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
+
+  const query = gql`
+    mutation CreateComment(
+      $id: ID
+      $content: String
+      $timeCreated: String
+      $userId: ID!
+      $postId: ID!
+      $condition: ModelCommentConditionInput
+    ) {
+      createComment(input: {
+        id: $id
+        content: $content
+        timeCreated: $timeCreated
+        userId: $userId
+        postId: $postId
+      }, condition: $condition) {
+        id
+        content
+        timeCreated
+        userId
+        postId
+      }
+    }
+  `;
+  
+  const [addComment] = useMutation(query);
 
   const handleSubmit = e => {
     e.preventDefault();
-    const query = `
-      mutation CreateComment(
-        $id: ID
-        $content: String
-        $timeCreated: String
-        $userId: ID!
-        $postId: ID!
-        $condition: ModelCommentConditionInput
-      ) {
-        createComment(input: {
-          id: $id
-          content: $content
-          timeCreated: $timeCreated
-          userId: $userId
-          postId: $postId
-        }, condition: $condition) {
-          id
-          content
-          timeCreated
-          userId
-          postId
-        }
-      }
-    `;
 
     const variables = {
       id: `commentid:${genUUID()}`,
       content: inputText,
       timeCreated: getISODate(),
-      userId: loggedInUserData.id,
+      userId: loggedInUserData.getUser.id,
       postId: postId
     }
   
-    
-    API.graphql({query, variables})
-    .then(res => {
-      getPostData(postId);
-    })
-    .catch(err => console.log(err));
+    addComment({variables}).then(d => getPostData()).catch(err => console.log(err))
     changeInputText('');
   }
   
@@ -59,7 +57,7 @@ function CommentForm({postId, getPostData}) {
   }
   
   return (
-    isAuthenticated
+    currentCredentials.authenticated
     ?<form 
       onSubmit={inputText ? handleSubmit : e => console.log(e)} 
       css={css`

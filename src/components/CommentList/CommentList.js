@@ -8,13 +8,7 @@ function CommentList({comments}) {
       className="CommentList" 
       css={css`padding: 10px; height: 100%; overflow: auto;`}
     >
-      {comments
-      .sort((a, b) => (a.timeCreated < b.timeCreated) 
-        ? -1 
-        : ((a.timeCreated > b.timeCreated) 
-          ? 1 
-          : 0))
-      .map(comment => (
+      {comments.map(comment => (
         <Comment key={comment.id} comment={comment} />
       ))}
     </div> 

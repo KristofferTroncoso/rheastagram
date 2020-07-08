@@ -1,141 +1,99 @@
 import React from 'react';
 import PicGrid from '../../components/PicGrid/PicGrid';
 import InfoHeader from '../../components/InfoHeader/InfoHeader';
-import { API, graphqlOperation } from 'aws-amplify';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { PictureOutlined } from '@ant-design/icons';
-import styled from '@emotion/styled';
+import { css } from '@emotion/core';
+import { gql, useQuery } from '@apollo/client';
+import Error from '../../components/Error/Error';
+import Loading from '../../components/Loading/Loading';
 
-
-
-const StyledDiv = styled.div`
-  padding: 15px 0 200px;
-  
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-`;
-
-const StyledH1 = styled.h1`
-  text-align: center;
-  padding-top: 200px;
-`;
-
-const StyledBtnDiv = styled.div`
-  text-align: center;
-`;
-
-function UserPage({props}) {
-  const [foundUserData, changeFoundUserData] = React.useState({posts: []})
-  const [isFound, changeIsFound] = React.useState(true);
-  
-  React.useEffect(() => {
-    getUser(props.match.params.id);
-  }, [props.match.params.id]);
-  
-  
-  async function getUser(username) {
-    /* listUsers query is being used instead of getUser since we have to search
-    for the user via username instead of uuid */
-    const listUsersQuery = `
-      query customListUsers($filter: ModelUserFilterInput) {
-        listUsers(filter: $filter) {
-         items {
+/* listUsers query is being used instead of getUser since we have to search
+for the user via username instead of uuid */
+const listUsersQuery = gql`
+  query customListUsers($filter: ModelUserFilterInput) {
+    listUsers(filter: $filter) {
+      items {
+        id
+        name
+        username
+        bio
+        photoUrl
+        userPosts(sortDirection: DESC) {
+          items {
             id
-            name
-            username
-            bio
-            photoUrl
-            userPosts {
+            picUrl
+            timeCreated
+            comments {
               items {
                 id
-                picUrl
-                timeCreated
-                comments {
-                  items {
-                    id
-                  }
-                }
-                likes {
-                  items {
-                    id
-                  }
-                }
+              }
+            }
+            likes {
+              items {
+                id
               }
             }
           }
         }
       }
-    `;
-      
-    let queryVariables = {
-      filter: {
-        username: {
-          eq: username
-        }
-      }
-    };
-    
-    let res = await API.graphql(graphqlOperation(listUsersQuery, queryVariables));
-    if (res.data.listUsers.items.length > 0) {
-      changeIsFound(true);
-      let {id, name, username, bio, email, photoUrl, userPosts} = res.data.listUsers.items[0];
-      changeFoundUserData({
-        id: id,
-        name: name,
-        username: username,
-        bio: bio,
-        photoUrl: photoUrl,
-        email: email,
-        posts: userPosts.items
-      })     
-    } else {
-      console.log("User does not exist");
-      changeIsFound(false);
     }
   }
-  
+`;
+
+function UserPage({props}) {
+  const { loading, error, data, refetch } = useQuery(
+    listUsersQuery, 
+    {variables: {
+      filter: {
+        username: {
+          eq: props.match.params.id
+        }
+      }
+    }}
+  );
+
+  if (loading) return <Loading />;
+  if (error) return <Error>{error.message}</Error>;
   
   return (
-    <StyledDiv>
-      {isFound 
-      ? <>
-          <InfoHeader userData={foundUserData} />
-          {foundUserData.posts.length > 0 
-          ? <PicGrid 
-              userData={foundUserData} 
-              getUser={getUser} 
-            />
-          : <Link to="/post">
-              <Button 
-                style={{
-                  height: '200px', 
-                  width: '200px', 
-                  display: 'flex',
-                  flexDirection: 'column', 
-                  justifyContent: 'center', 
-                  alignItems: 'center',
-                  margin: '10px 20px'
-                }}
-                type="dashed"
-              >
-                <PictureOutlined style={{fontSize: '120px'}} />
-                Upload your first photo!
-              </Button>            
-            </Link>
-          }
-        </> 
-      : <>
-          <StyledH1>User not found</StyledH1>
-          <StyledBtnDiv>
-            <Link to={"/"}>
-              <Button type="primary">Go home</Button>
-            </Link>
-          </StyledBtnDiv>
-        </>
-      }
-    </StyledDiv>
+    <div
+      css={css`
+        padding: 15px 0 200px;
+        
+        @media (max-width: 768px) {
+          padding: 0;
+        }
+      `}
+    >
+      <>
+        <InfoHeader userData={data.listUsers.items[0]} />
+        {data.listUsers.items[0].userPosts.items.length > 0 
+        ? <PicGrid 
+            userData={data.listUsers.items[0]} 
+            getUser={refetch} 
+          />
+        : <Link to="/post">
+            <Button 
+              style={{
+                height: '200px', 
+                width: '200px', 
+                display: 'flex',
+                flexDirection: 'column', 
+                justifyContent: 'center', 
+                alignItems: 'center',
+                margin: '10px 20px'
+              }}
+              type="dashed"
+            >
+              <PictureOutlined style={{fontSize: '120px'}} />
+              Upload your first photo!
+            </Button>            
+          </Link>
+        }
+      </> 
+    </div>
   )
 }
 

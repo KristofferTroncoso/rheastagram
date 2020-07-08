@@ -2,24 +2,22 @@ import React from 'react';
 import { Storage, Cache } from 'aws-amplify';
 import { LoggedInUserContext } from '../user-context';
 
-
-
 function useSignedS3Url(imgKey) {
   const [signedUrl, setSignedUrl] = React.useState();
-  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
 
   // hoursToCacheImageInBrowser is located in SubmitPostPage.js
   // how long the signed url is valid for
-  let hoursTillSignedUrlExpires = isAuthenticated ? 11 : 0.5;
+  let hoursTillSignedUrlExpires = currentCredentials.authenticated ? 11 : 0.5;
   // hoursToCacheSignedUrl should be less than or equal to hoursTillSignedUrlExpires
-  let hoursToCacheSignedUrl = isAuthenticated ? 11 : 0.5;
+  let hoursToCacheSignedUrl = currentCredentials.authenticated ? 11 : 0.5;
   
   React.useEffect(() => {
     if (!imgKey) {
       console.log("image key is undefined");
       setSignedUrl(undefined);
     } else {
-      let cacheKey = `_${loggedInUserData.id || 'temp'}/${imgKey}`
+      let cacheKey = `_${loggedInUserData.getUser ? loggedInUserData.getUser.id : 'temp'}/${imgKey}`
       let cacheRes = Cache.getItem(cacheKey);
       if (cacheRes === null) {
         console.log('getting new signed url for image')

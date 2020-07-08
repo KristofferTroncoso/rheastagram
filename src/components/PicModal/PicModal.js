@@ -7,8 +7,6 @@ import useSignedS3Url from '../../hooks/useSignedS3Url';
 import PostCard from '../PostCard/PostCard';
 import { CloseSquareTwoTone } from '@ant-design/icons';
 
-
-
 function PicModal({img, hearts, comments, post}) {
   const [visible, changeVisible] = React.useState(false);
 

@@ -6,22 +6,51 @@ import Avatar from '../../components/Avatar/Avatar';
 import { css, jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 import { Redirect } from 'react-router-dom';
+import { gql, useMutation } from '@apollo/client';
+
+const updateUser = gql`
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      username
+      name
+      bio
+      email
+      photoUrl
+    }
+  }
+`;
+
+      
+const customChangeProfilePicQuery = gql`
+  mutation ChangeProfilePic($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      id
+    }
+  }
+`;
+
+
 
 function EditProfilePage() {
-  const { loggedInUserData, getAuthenticatedUserAndData, isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, fetchLoggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
+  
   React.useEffect(() => {
     console.log('edit page affecting!');
-    if (loggedInUserData.id === null) {
+    if (loggedInUserData.getUser.id === null) {
       console.log('not found yet');
     } else {
       console.log('found');
       changeInitialData({
-        name: loggedInUserData.name,
-        bio: loggedInUserData.bio
+        name: loggedInUserData.getUser.name,
+        bio: loggedInUserData.getUser.bio
       });
       changeFormData({
-        name: loggedInUserData.name,
-        bio: loggedInUserData.bio
+        name: loggedInUserData.getUser.name,
+        bio: loggedInUserData.getUser.bio
       })
       changeIsUserFound(true);
     }
@@ -34,8 +63,8 @@ function EditProfilePage() {
   });
   
   const [formData, changeFormData] = React.useState({
-    name: loggedInUserData.name,
-    bio: loggedInUserData.bio
+    name: loggedInUserData.getUser.name,
+    bio: loggedInUserData.getUser.bio
   });
   
 
@@ -43,57 +72,34 @@ function EditProfilePage() {
     e.preventDefault();
     console.log(formData);
 
-    const updateUser = `
-      mutation UpdateUser(
-        $input: UpdateUserInput!
-        $condition: ModelUserConditionInput
-      ) {
-        updateUser(input: $input, condition: $condition) {
-          id
-          username
-          name
-          bio
-          email
-          photoUrl
-        }
-      }
-    `;
 
     let updateUserInput = {
-      id: loggedInUserData.id,
+      id: loggedInUserData.getUser.id,
       name: formData.name,
       bio: formData.bio
     };
     console.log(updateUserInput)
     const data = await API.graphql(graphqlOperation(updateUser, {input: updateUserInput}));
     console.log(data);
-    getAuthenticatedUserAndData();
+    fetchLoggedInUserData();
   }
   
   const handlePicUpload = file => {
     console.log(file)
-    Storage.put(`${loggedInUserData.id}/${file.name}`, file, {
+    Storage.put(`${loggedInUserData.getUser.id}/${file.name}`, file, {
       level: 'public',
       contentType: file.type
     })
     .then (result => {
       let imgKey = result.key;
       let updateUserInput = {
-        id: loggedInUserData.id,
+        id: loggedInUserData.getUser.id,
         photoUrl: imgKey
       };
-      
-      const customChangeProfilePicQuery = `
-        mutation ChangeProfilePic($input: UpdateUserInput!) {
-          updateUser(input: $input) {
-            id
-          }
-        }
-      `;
-      
+
       API.graphql(graphqlOperation(customChangeProfilePicQuery, {input: updateUserInput}))
       .then(res => {
-        getAuthenticatedUserAndData(); 
+        fetchLoggedInUserData(); 
       })
       .catch(err => console.log(err));
     })
@@ -102,7 +108,7 @@ function EditProfilePage() {
   }
   
   return (
-    isAuthenticated
+    currentCredentials.authenticated
     ? <div
       css={css`
         padding: 20px;
@@ -120,9 +126,9 @@ function EditProfilePage() {
         >
           <h1>Edit Profile</h1>
           <div css={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
-            <Avatar img={loggedInUserData.photoUrl} css={{alignContent: 'center'}} username={loggedInUserData.username} large />
+            <Avatar img={loggedInUserData.getUser.photoUrl} css={{alignContent: 'center'}} username={loggedInUserData.getUser.username} large />
             <div css={{padding: '0 10px'}}>
-              <h2 css={{margin: 0, padding: 0}}>{loggedInUserData.username}</h2>
+              <h2 css={{margin: 0, padding: 0}}>{loggedInUserData.getUser.username}</h2>
               <Upload 
                 accept="image/*" 
                 showUploadList={false}

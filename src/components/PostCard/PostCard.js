@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import React from 'react';
-import { API } from 'aws-amplify'
 import PostOptions from '../PostOptions/PostOptions';
 import Avatar from '../Avatar/Avatar';
-import { MessageOutlined } from '@ant-design/icons';
+import { MessageOutlined, HeartOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
 import CommentList from '../CommentList/CommentList';
 import moment from 'moment';
@@ -13,81 +12,59 @@ import useSignedS3Url from '../../hooks/useSignedS3Url';
 import CommentForm from '../CommentForm/CommentForm';
 import UsernameLink from '../UsernameLink/UsernameLink';
 import { LoggedInUserContext } from '../../user-context';
+import { gql, useQuery } from '@apollo/client';
+import Error from '../Error/Error';
+import Loading from '../Loading/Loading';
 
 function PostCard({postId}) {
-  const { isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { currentCredentials } = React.useContext(LoggedInUserContext);
   const [isImgLoaded, setIsImgLoaded] = React.useState(false);
-  const [postData, changePostData] = React.useState({
-    id: '',
-    picUrl: '',
-    type: '',
-    visibility: '',
-    timeCreated: '',
-    userId: '',
-    user: {},
-    comments: {items: []},
-    likes: {items: [{user: {id: '', photoUrl: '', username: ''}}]}
-  });
 
-  const getPostData = async (postId) => {
-    const query = `
-      query GetPost($postId: ID!) {
-        getPost(id: $postId) {
+  const query = gql`
+    query GetPost($postId: ID!) {
+      getPost(id: $postId) {
+        id
+        picUrl
+        type
+        visibility
+        timeCreated
+        userId
+        user {
           id
-          picUrl
-          type
-          visibility
-          timeCreated
-          userId
-          user {
+          username
+          photoUrl
+        }
+        comments {
+          items {
             id
-            username
-            photoUrl
-          }
-          comments {
-            items {
+            content
+            timeCreated
+            user {
               id
-              content
-              timeCreated
-              user {
-                id
-                photoUrl
-                username
-              }
+              photoUrl
+              username
             }
           }
-          likes {
-            items {
+        }
+        likes {
+          items {
+            id
+            user {
               id
-              user {
-                id
-                username
-                photoUrl
-              }
+              username
+              photoUrl
             }
           }
         }
       }
-    `;
-    
-    const variables = {
-      postId: postId
     }
-    
-    API.graphql({query, variables})
-    .then(res => {
-      changePostData(res.data.getPost);
-    })
-    .catch(err => console.log(err));
-  }
+  `;
 
-  React.useEffect(() => {
-    getPostData(postId);
-  }, [postId]);
-
-  const imgKey = useSignedS3Url(postData.picUrl);
+  const { loading, error, data, refetch } = useQuery(query, {variables: {postId}});
+  const imgKey = useSignedS3Url(data && data.getPost.picUrl)
   
-
+  if (loading) return <Loading />;
+  if (error) return <Error>{error.message}</Error>;
   return (
     <section 
       className="PostCard"
@@ -163,50 +140,50 @@ function PostCard({postId}) {
         >
           <div css={css`display: flex; align-items: center;`}>
             <div css={{marginRight: '10px'}}>
-              <Avatar img={postData.user.photoUrl}  username={postData.user.username} rainbow />
+              <Avatar img={data.getPost.user.photoUrl}  username={data.getPost.user.username} rainbow />
             </div>
-            <UsernameLink>{postData.user.username}</UsernameLink>
+            <UsernameLink>{data.getPost.user.username}</UsernameLink>
           </div>
           <PostOptions 
-            userDataId={postData.userId} 
+            userDataId={data.getPost.userId} 
             postId={postId} 
             imgKey={imgKey} 
           />
         </div>
-        <CommentList comments={postData.comments.items} />
+        <CommentList comments={data.getPost.comments.items} />
         <div 
           className="PostCard_stats" 
           css={css`border-top: 1px solid #efefef; padding: 12px;`}
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
-            <Like postId={postId} getPostData={getPostData} />
+            {currentCredentials.isAuthenticated ? <Like postId={postId} /> : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} /> }
             <MessageOutlined 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
-              onClick={isAuthenticated ? e => document.getElementById(`CommentForm_input_${postId}`).focus() : null}
+              onClick={currentCredentials.authenticated ? e => document.getElementById(`CommentForm_input_${postId}`).focus() : null}
             />
           </div>
-          {postData.likes.items.length > 0 &&
+          {data.getPost.likes.items.length > 0 &&
             <div css={css`display: flex; align-content: center; align-items: center; margin: 5px 0`}>
               <div css={css`margin-right: 5px`}>
-                <Avatar img={postData.likes.items[0].user.photoUrl} username={postData.likes.items[0].user.username} size="small" />
+                <Avatar img={data.getPost.likes.items[0].user.photoUrl} username={data.getPost.likes.items[0].user.username} size="small" />
               </div>
               <span>
-                Liked by <UsernameLink>{postData.likes.items[0].user.username}</UsernameLink>
-                {postData.likes.items.length > 1 &&
+                Liked by <UsernameLink>{data.getPost.likes.items[0].user.username}</UsernameLink>
+                {data.getPost.likes.items.length > 1 &&
                   <span>
                     and 
                     <Popover 
                       trigger="click"
                       content={
                         <div>
-                          {postData.likes.items.slice(1).map(item => (
+                          {data.getPost.likes.items.slice(1).map(item => (
                             <span key={item.id}><UsernameLink>{item.user.username}</UsernameLink></span>
                           ))}
                         </div>
                       }
                     >
                       <span css={{fontWeight: '600', color: 'black', marginLeft: '4px', cursor: 'pointer'}}>
-                        {postData.likes.items.length - 1} {postData.likes.items.length === 2 ? 'other' : 'others'}
+                        {data.getPost.likes.items.length - 1} {data.getPost.likes.items.length === 2 ? 'other' : 'others'}
                       </span>
                     </Popover>
                   </span>
@@ -215,7 +192,7 @@ function PostCard({postId}) {
             </div>
           }
           <span css={css`color: grey; font-size: 12px;`}>
-            {moment(postData.timeCreated).format('MMMM D, YYYY')}
+            {moment(data.getPost.timeCreated).format('MMMM D, YYYY')}
           </span>
         </div>
         <div 
@@ -230,7 +207,7 @@ function PostCard({postId}) {
             padding: 0 2px 0 10px;
           `}
         >
-          <CommentForm postId={postId} getPostData={getPostData} /> 
+          <CommentForm postId={postId} getPostData={refetch} /> 
         </div>
       </div>
     </section>    

@@ -1,105 +1,119 @@
 /** @jsx jsx */
 import React from 'react';
-import { API } from 'aws-amplify';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 import { motion } from "framer-motion";
+import { gql, useMutation, useQuery } from '@apollo/client';
+import Error from '../Error/Error';
+import Loading from '../Loading/Loading';
 
-function Like({postId, getPostData}) {
-  const [liked, toggleLiked] = React.useState(false);
-  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
-  const [currentLikeId, setCurrentLikeId] = React.useState();
-  
-  React.useEffect(() => {
-    const GetLikeOnPostByUserQuery = `
-      query GetLikeOnPostByUser($postId: ID!, $loggedInUserId: ID!) {
-        getPost(id: $postId) {
-          likes(filter: {userId: {eq: $loggedInUserId} }) {
-            items {
-              id
-            }
-          }
+const GetLikeOnPostByUserQuery = gql`
+  query GetLikeOnPostByUser($postId: ID!, $loggedInUserId: ID!) {
+    getPost(id: $postId) {
+      likes(filter: {userId: {eq: $loggedInUserId} }) {
+        items {
+          id
         }
       }
-    `;
-    
-    const variables = {
-      loggedInUserId: loggedInUserData.id,
-      postId: postId
     }
+  }
+`;
 
-    API.graphql({query: GetLikeOnPostByUserQuery, variables})
-    .then(res => {
-      if (res.data.getPost.likes.items.length) {
-        setCurrentLikeId(res.data.getPost.likes.items[0].id);
+const createLikeMutation = gql`
+  mutation CreateLike($likeId: ID, $timeCreated: String, $userId: ID!, $postId: ID!) {
+    createLike(input: {
+      id: $likeId
+      timeCreated: $timeCreated
+      userId: $userId
+      postId: $postId
+    }) {
+      id
+    }
+  }
+`;
+
+const deleteLikeMutation = gql`
+  mutation DeleteLike($likeId: ID) {
+    deleteLike(input: {
+      id: $likeId
+    }) {
+      id
+    }
+  }
+`;
+
+function Like({postId}) {
+  const [liked, toggleLiked] = React.useState(false);
+  const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
+  const [currentLikeId, setCurrentLikeId] = React.useState();
+  const [addLike] = useMutation(createLikeMutation);
+  const [removeLike] = useMutation(deleteLikeMutation);
+  const { loading, error, data, refetch } = useQuery(
+    GetLikeOnPostByUserQuery, 
+    {variables: {
+      loggedInUserId: loggedInUserData.getUser.id,
+      postId: postId
+    }}
+  );
+
+  React.useEffect(() => {
+    if (data) {
+      if (data.getPost.likes.items.length) {
+        setCurrentLikeId(data.getPost.likes.items[0].id);
         toggleLiked(true)
       } else {
         toggleLiked(false);
       }
-    })
-    .catch(err => console.log(err));
-  }, [loggedInUserData, postId, liked])
-
+    }
+  }, [data])
+  console.log(data)
 
   const handleToggle = async e => {
-    const createLike = async () => {
-      const createLikeMutation = `
-        mutation CreateLike($likeId: ID, $timeCreated: String, $userId: ID!, $postId: ID!) {
-          createLike(input: {
-            id: $likeId
-            timeCreated: $timeCreated
-            userId: $userId
-            postId: $postId
-          }) {
-            id
-          }
-        }
-      `;
-      
+    const createLike = async () => { 
       const createLikeVariables = {
         likeId: `likeid:${genUUID()}`,
         timeCreated: getISODate(),
-        userId: loggedInUserData.id,
+        userId: loggedInUserData.getUser.id,
         postId: postId
       }
 
-      API.graphql({query: createLikeMutation, variables: createLikeVariables})
-      .then(res => {toggleLiked(true); getPostData(postId);})
+      addLike({variables: createLikeVariables})
+      .then(res => {
+        toggleLiked(true); 
+        refetch();
+      })
       .catch(err => console.log(err));
     }
 
     const deleteLike = async () => {
       console.log(`deleting like with id ${currentLikeId}`)
-      const deleteLikeMutation = `
-        mutation DeleteLike($likeId: ID) {
-          deleteLike(input: {
-            id: $likeId
-          }) {
-            id
-          }
-        }
-      `;
-      
+
       const variables = {
         likeId: currentLikeId
       }
 
-      API.graphql({query: deleteLikeMutation, variables: variables})
-      .then(res => {toggleLiked(false); getPostData(postId);})
+      removeLike({variables: variables})
+      .then(res => {
+        toggleLiked(false); 
+        refetch();
+      })
       .catch(err => console.log(err));
     }
 
     liked ? deleteLike() : createLike();
   }
-  
+
+  if (!currentCredentials.authenticated) return <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} />;
+  if (loading) return <Loading />;
+  if (error) return <Error>{error.message}</Error>;
   return (
     <button 
       onClick={handleToggle} 
       css={{border: 0, margin: 0, padding: 0}} 
       className="LikeBtn"
-      disabled={isAuthenticated ? false : true}
+      disabled={currentCredentials.authenticated ? false : true}
     >
       <motion.div whileHover={{ scale: 0.9 }} whileTap={{ scale: 1.2 }}>
         {liked

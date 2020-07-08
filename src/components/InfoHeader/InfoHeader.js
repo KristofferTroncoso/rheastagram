@@ -11,7 +11,7 @@ import { LoggedInUserContext } from '../../user-context';
 
 function InfoHeader({userData}) {
   const imgKey = useSignedS3Url(userData.photoUrl);
-  const { loggedInUserData } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
   
   return (
     <div 
@@ -95,29 +95,31 @@ function InfoHeader({userData}) {
           >
             {userData.username}
           </h1>
-          {userData.username === loggedInUserData.username 
-            ? <Fragment>
-                <Link to="/editprofile">
-                  <button 
-                    css={css`
-                      padding: 3px 8px;
-                      margin: 2px 20px;
-                      color: #262626;
-                      border-radius: 4px;
-                      font-weight: 500;
+          {currentCredentials.authenticated ? 
+            (userData.username === loggedInUserData.getUser.username 
+              ? <Fragment>
+                  <Link to="/editprofile">
+                    <button 
+                      css={css`
+                        padding: 3px 8px;
+                        margin: 2px 20px;
+                        color: #262626;
+                        border-radius: 4px;
+                        font-weight: 500;
 
-                      @media (max-width: 768px){ 
-                        padding: 1px 3px;
-                        margin: 2px 6px;
-                      }
-                    `}
-                  >
-                    Edit Profile
-                  </button>
-                </Link>
-                <SettingsModal />
-              </Fragment>
-            : null
+                        @media (max-width: 768px){ 
+                          padding: 1px 3px;
+                          margin: 2px 6px;
+                        }
+                      `}
+                    >
+                      Edit Profile
+                    </button>
+                  </Link>
+                  <SettingsModal />
+                </Fragment>
+              : null
+            ) : null
           }
         </div>
         <h3 css={{marginBottom: '4px'}}>{userData.name}</h3>

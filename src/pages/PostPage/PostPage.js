@@ -1,5 +1,4 @@
 /** @jsx jsx */
-//import React from 'react';
 import PostCard from '../../components/PostCard/PostCard';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';

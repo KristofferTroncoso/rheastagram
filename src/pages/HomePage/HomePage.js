@@ -1,47 +1,43 @@
 /** @jsx jsx */
-import React from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
 import HomePageCard from '../../components/HomePageCard/HomePageCard';
 import { css, jsx } from '@emotion/core';
+import { gql, useQuery } from '@apollo/client';
+import Error from '../../components/Error/Error';
+import Loading from '../../components/Loading/Loading';
+
+const query = gql`
+  query ListPostsByVisibility(
+    $visibility:String
+    $sortDirection:ModelSortDirection
+    $limit:Int
+    $nextToken:String
+  ) {
+    listPostsByVisibility(
+      visibility:$visibility
+      sortDirection: $sortDirection
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+      }
+    }
+  }
+`;
 
 const HomePage = () => {
-  React.useEffect(() => {
-    getAllPosts();
-  }, [])
-
-  const [allPosts, changeAllPosts] = React.useState([])
-
-  const getAllPosts = async () => {
-    const query = `
-      query ListPostsByVisibility(
-        $visibility:String
-        $sortDirection:ModelSortDirection
-        $limit:Int
-        $nextToken:String
-      ) {
-        listPostsByVisibility(
-          visibility:$visibility
-          sortDirection: $sortDirection
-          limit: $limit
-          nextToken: $nextToken
-        ) {
-          items {
-            id
-          }
-        }
-      }
-    `;
-
-    const variables = {
+  const { loading, error, data, refetch } = useQuery(
+    query, 
+    {variables: {
       visibility: 'public',
       sortDirection: 'DESC',
       limit: 12,
       nextToken: null
-    }
+    }}
+  );
 
-    let response = await API.graphql(graphqlOperation(query, variables));
-    changeAllPosts(response.data.listPostsByVisibility.items);
-  }
+  if (loading) return <Loading />;
+  if (error) return <Error>{error.message}</Error>;
 
   return (
     <div
@@ -49,7 +45,7 @@ const HomePage = () => {
         padding: 10px 0;
       `}
     >
-      {allPosts.map(post => (
+      {data.listPostsByVisibility.items.map(post => (
         <HomePageCard
           key={post.id}
           postId={post.id}

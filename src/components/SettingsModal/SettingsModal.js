@@ -8,7 +8,7 @@ import { LoggedInUserContext } from '../../user-context';
 import { useHistory } from 'react-router-dom';
 
 function SettingsModal() {
-  const { setIsAuthenticated, setLoggedInUserData} = React.useContext(LoggedInUserContext);
+  const { fetchLoggedInUserData, setCurrentCredentials } = React.useContext(LoggedInUserContext);
   const [visible, changeVisible] = React.useState(false);
   const history = useHistory();
 
@@ -27,9 +27,9 @@ function SettingsModal() {
   const handleLogOut = e => {
     Auth.signOut()
       .then(d => {
-        setIsAuthenticated(false);
-        setLoggedInUserData({});
+        setCurrentCredentials({})
         Cache.clear();
+        fetchLoggedInUserData();
         history.push("/");
     });
   }

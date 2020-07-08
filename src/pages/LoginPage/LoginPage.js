@@ -3,11 +3,10 @@ import React from 'react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { LoggedInUserContext } from '../../user-context';
 import { Redirect } from 'react-router-dom';
-import { Auth } from 'aws-amplify';
 
 /*
 function LoginPage() {
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(LoggedInUserContext);
+  const { authenticated, setIsAuthenticated } = React.useContext(LoggedInUserContext);
 
   const handleSignIn = () => {
     setIsAuthenticated(true);
@@ -72,17 +71,10 @@ we can use the authenticator components as a separate custom Authenticator compo
 that wraps this LoginPage. That way the components will be more customizable.
 */
 function LoginPage() {
-  const { setIsAuthenticated } = React.useContext(LoggedInUserContext);
+  const { setCurrentCredentials } = React.useContext(LoggedInUserContext);
   React.useEffect(() => {
-    Auth.currentCredentials()
-    .then(res => {
-      res.authenticated ? setIsAuthenticated(true) : setIsAuthenticated(false);
-    })
-    .catch(err => {
-      console.log(err);
-      setIsAuthenticated(false);
-    })
-  }, [setIsAuthenticated]);
+    setCurrentCredentials({});
+  });
 
   return (
     <Redirect to="/" />

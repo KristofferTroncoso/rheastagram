@@ -32,7 +32,7 @@ const StyledDiv = styled.div`
 function SubmitPostPage() {
   const [imgFile, changeImgFile] = React.useState();
   const [isOnCompatibilityMode, setIsOnCompatibilityMode] = React.useState(false);
-  const { loggedInUserData, isAuthenticated } = React.useContext(LoggedInUserContext);
+  const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
   const history = useHistory();
   
   const handleCompatibilityModeToggle = checked => {
@@ -41,7 +41,7 @@ function SubmitPostPage() {
 
   const handleSave = e => {
     let hoursToCacheImageInBrowser = 12;
-    Storage.put(`${loggedInUserData.id}/${genUUID()}-${imgFile.name}`, imgFile, {
+    Storage.put(`${loggedInUserData.getUser.id}/${genUUID()}-${imgFile.name}`, imgFile, {
       level: 'public',
       contentType: imgFile.type,
       cacheControl: `max-age=${3600 * hoursToCacheImageInBrowser}`
@@ -68,7 +68,7 @@ function SubmitPostPage() {
         picUrl: result.key,
         type: "post",
         visibility: "public",
-        userId: loggedInUserData.id,
+        userId: loggedInUserData.getUser.id,
         timeCreated: getISODate()
       };
 
@@ -80,7 +80,7 @@ function SubmitPostPage() {
   }
   
   return (
-    isAuthenticated
+    currentCredentials.authenticated
     ?<StyledPageWrapper>
       <StyledDiv>
         {isOnCompatibilityMode

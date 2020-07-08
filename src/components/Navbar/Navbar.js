@@ -110,7 +110,7 @@ const StyledSignUpBtn = styled.button`
 `;
 
 function Navbar() {
-  const { loggedInUserData, isAuthenticated } = useContext(LoggedInUserContext);
+  const { loggedInUserData, currentCredentials } = useContext(LoggedInUserContext);
 
   return (
     <StyledDiv className="Navbar">
@@ -126,7 +126,7 @@ function Navbar() {
         <StyledSearchForm className="Search" onSubmit={e => e.preventDefault()}>
           <StyledSearchInput type="text" className="Search_Box" placeholder="Search" />
         </StyledSearchForm>
-        {isAuthenticated
+        {currentCredentials.authenticated
         ? (
           <div css={{display: 'flex', alignItems: 'center', marginRight: '20px'}}>
             <div 
@@ -148,8 +148,8 @@ function Navbar() {
               </Link>
             </div>
             <Avatar 
-              img={loggedInUserData.photoUrl} 
-              username={loggedInUserData.username} 
+              img={loggedInUserData.getUser.photoUrl} 
+              username={loggedInUserData.getUser.username} 
             />
           </div>
           )

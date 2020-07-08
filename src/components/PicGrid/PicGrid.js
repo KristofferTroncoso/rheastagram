@@ -24,12 +24,10 @@ const StyledPicGrid = styled.div`
 `;
 
 function PicGrid({userData}) {
-  let sortedPosts = userData.posts.sort((a, b) => (a.timeCreated < b.timeCreated) ? -1 : ((a.timeCreated > b.timeCreated) ? 1 : 0)).reverse();
-  
   return (
     <StyledPicGridWrapper className="PicGridWrapper">
       <StyledPicGrid className="PicGrid">
-        {sortedPosts.map((post) => (
+        {userData.userPosts.items.map((post) => (
           <PicModal 
             key={post.id} 
             img={post.picUrl} 
