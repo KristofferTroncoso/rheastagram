@@ -156,7 +156,7 @@ function PostCard({postId}) {
           css={css`border-top: 1px solid #efefef; padding: 12px;`}
         >
           <div className="PostCard_stats_icons" css={css`display: flex;`}>
-            {currentCredentials.isAuthenticated ? <Like postId={postId} /> : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} /> }
+            {currentCredentials.authenticated ? <Like postId={postId} /> : <HeartOutlined style={{fontSize: '26px', color: '#5c5c5c'}} /> }
             <MessageOutlined 
               css={css`font-size: 24px; margin: 0 8px; color: #5c5c5c;`}
               onClick={currentCredentials.authenticated ? e => document.getElementById(`CommentForm_input_${postId}`).focus() : null}
