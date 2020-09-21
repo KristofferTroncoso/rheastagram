@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 import { gql, useMutation } from '@apollo/client';
+import { ListPostsByVisibilityQuery } from '../../pages/HomePage/HomePage';
 
 const StyledButton = styled.button`
   border: 0;
@@ -44,7 +45,38 @@ const deletePostQuery = gql`
 function PostOptions({postId, imgKey, userDataId}) {
   const [visible, changeVisible] = React.useState(false);
   const history = useHistory();
-  const [deletePost] = useMutation(deletePostQuery);
+  const [deletePost] = useMutation(
+    deletePostQuery,
+    {
+      update(cache, { data: { deletePost } }) {
+        const res = cache.readQuery({ query: ListPostsByVisibilityQuery, variables: {
+          visibility: 'public',
+          sortDirection: 'DESC',
+          limit: 12,
+          nextToken: null
+        }});
+        console.log(res);
+        console.log(deletePost);
+        const filteredPosts = res.listPostsByVisibility.items.filter(post => {
+          if (deletePost.id !== post.id) {
+            return post;
+          } else {
+            return null;
+          }
+        });
+        cache.writeQuery({
+          query: ListPostsByVisibilityQuery,
+          variables: {
+            visibility: 'public',
+            sortDirection: 'DESC',
+            limit: 12,
+            nextToken: null
+          },
+          data: { listPostsByVisibility: {items: filteredPosts }}
+        });
+      }
+    }
+  );
   const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
 
   const showModal = () => changeVisible(true)

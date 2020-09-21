@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
-import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 import { Button, Switch } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import { genUUID, getISODate } from '../../utils';
@@ -11,6 +11,8 @@ import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 import PicUploader from '../../components/PicUploader/PicUploader';
 import PicUploaderCompatibilityMode from '../../components/PicUploader/PicUploaderCompatibilityMode';
+import { gql, useMutation } from '@apollo/client';
+import { ListPostsByVisibilityQuery } from '../HomePage/HomePage';
 
 const StyledPageWrapper = styled.div`
   padding: 40px 0;
@@ -28,12 +30,47 @@ const StyledDiv = styled.div`
   padding: 0 15px;
 `;
 
+const createPostMutation = gql`
+  mutation CreatePost(
+    $input: CreatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    createPost(input: $input, condition: $condition) {
+      id
+    }
+  }
+`;
+
+
 
 function SubmitPostPage() {
   const [imgFile, changeImgFile] = React.useState();
   const [isOnCompatibilityMode, setIsOnCompatibilityMode] = React.useState(false);
   const { loggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
   const history = useHistory();
+  const [createPost] = useMutation(
+    createPostMutation,
+    {
+      update(cache, { data: { createPost } }) {
+        const res = cache.readQuery({ query: ListPostsByVisibilityQuery, variables: {
+          visibility: 'public',
+          sortDirection: 'DESC',
+          limit: 12,
+          nextToken: null
+        }});
+        cache.writeQuery({
+          query: ListPostsByVisibilityQuery,
+          variables: {
+            visibility: 'public',
+            sortDirection: 'DESC',
+            limit: 12,
+            nextToken: null
+          },
+          data: { listPostsByVisibility: {items: [createPost, ...res.listPostsByVisibility.items] }}
+        });
+      }
+    }
+  );
   
   const handleCompatibilityModeToggle = checked => {
     setIsOnCompatibilityMode(checked);
@@ -47,22 +84,6 @@ function SubmitPostPage() {
       cacheControl: `max-age=${3600 * hoursToCacheImageInBrowser}`
     })
     .then (result => {
-      const createPost = `
-        mutation CreatePost(
-          $input: CreatePostInput!
-          $condition: ModelPostConditionInput
-        ) {
-          createPost(input: $input, condition: $condition) {
-            id
-            picUrl
-            type
-            visibility
-            timeCreated
-            userId
-          }
-        }
-      `;
-
       let createPostInput = {
         id: `postid:${genUUID()}`,
         picUrl: result.key,
@@ -72,8 +93,10 @@ function SubmitPostPage() {
         timeCreated: getISODate()
       };
 
-      API.graphql(graphqlOperation(createPost, {input: createPostInput}))
-        .then(res => {history.push("/")})
+      createPost({variables: {input: createPostInput}})
+        .then(res => {
+          history.push("/")
+        })
         .catch(err => {console.log(err)})
     })
     .catch(err => console.log(err)); 

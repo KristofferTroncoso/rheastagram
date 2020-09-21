@@ -5,7 +5,7 @@ import { gql, useQuery } from '@apollo/client';
 import Error from '../../components/Error/Error';
 import Loading from '../../components/Loading/Loading';
 
-const query = gql`
+export const ListPostsByVisibilityQuery = gql`
   query ListPostsByVisibility(
     $visibility:String
     $sortDirection:ModelSortDirection
@@ -27,7 +27,7 @@ const query = gql`
 
 const HomePage = () => {
   const { loading, error, data, refetch } = useQuery(
-    query, 
+    ListPostsByVisibilityQuery, 
     {variables: {
       visibility: 'public',
       sortDirection: 'DESC',

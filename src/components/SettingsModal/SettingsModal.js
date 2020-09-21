@@ -12,17 +12,9 @@ function SettingsModal() {
   const [visible, changeVisible] = React.useState(false);
   const history = useHistory();
 
-  const showModal = () => {
-    changeVisible(true)
-  };
-
-  const handleOk = e => {
-    changeVisible(false);
-  };
-  
-  const handleCancel = e => {
-    changeVisible(false);
-  };
+  const showModal = () => {changeVisible(true)};
+  const handleOk = e => {changeVisible(false)}; 
+  const handleCancel = e => {changeVisible(false)};
   
   const handleLogOut = e => {
     Auth.signOut()

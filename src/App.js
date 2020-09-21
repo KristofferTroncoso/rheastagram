@@ -10,6 +10,7 @@ import UserPage from './pages/UserPage/UserPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
 import PostPage from './pages/PostPage/PostPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import CreateProfilePage from './pages/CreateProfilePage/CreateProfilePage';
 import Wrapper from './components/Wrapper/Wrapper';
 import { jsx } from '@emotion/core';
 import { LoggedInUserContext } from './user-context';
@@ -61,33 +62,32 @@ function App() {
   if (error) return <Error>{error.message}</Error>;
   return (
     <Router>
-      {true && 
-        <LoggedInUserContext.Provider
-          value={{
-            loggedInUserData: data,
-            fetchLoggedInUserData: refetch, 
-            currentCredentials,
-            setCurrentCredentials
-          }}
-        >
-          <div className="App" css={{width: '100vw'}}>
-            <GlobalStyles />
-            <ScrollToTop />
-            <Navbar />
-            <Wrapper>
-              {/* <Route render={() => <Redirect to="/" />} /> */}{/* below is a workaround for following issue: when deployed to amplify, it's redirecting to a random hash url */}
-              <Route path="/" exact render={props => <HomePage />} />
-              <Route path="/user/:id" render={props => <UserPage props={props} />} />
-              <Route path="/editprofile" render={props => <EditProfilePage />} />
-              <Route path="/post" render={props => <SubmitPostPage />} />
-              <Route path="/p/:postId" render={props => <PostPage props={props} />} />
-              <Route path="/login" render={props => <LoginPage props={props} />} />  
-              {(currentCredentials.authenticated && data.getUser === null) && <Redirect to="/createprofile" />}{/* if user is authenticated but profile record is not in db yet */}
-            </Wrapper>
-            {window.innerWidth < 600 && <MobileNavbar /> }
-          </div>
-        </LoggedInUserContext.Provider>
-      }
+      <LoggedInUserContext.Provider
+        value={{
+          loggedInUserData: data,
+          fetchLoggedInUserData: refetch, 
+          currentCredentials,
+          setCurrentCredentials
+        }}
+      >
+        <div className="App" css={{width: '100vw'}}>
+          <GlobalStyles />
+          <ScrollToTop />
+          <Navbar />
+          <Wrapper>
+            {/* <Route render={() => <Redirect to="/" />} /> */}{/* below is a workaround for following issue: when deployed to amplify, it's redirecting to a random hash url */}
+            <Route path="/" exact render={props => <HomePage />} />
+            <Route path="/user/:id" render={props => <UserPage props={props} />} />
+            <Route path="/editprofile" render={props => <EditProfilePage />} />
+            <Route path="/createprofile" render={props => <CreateProfilePage />} />
+            <Route path="/post" render={props => <SubmitPostPage />} />
+            <Route path="/p/:postId" render={props => <PostPage props={props} />} />
+            <Route path="/login" render={props => <LoginPage props={props} />} />  
+            {(currentCredentials.authenticated && data.getUser === null) && <Redirect to="/createprofile" />}{/* if user is authenticated but profile record is not in db yet */}
+          </Wrapper>
+          {window.innerWidth < 600 && <MobileNavbar /> }
+        </div>
+      </LoggedInUserContext.Provider>
     </Router>
   )
 }

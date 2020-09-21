@@ -1,14 +1,23 @@
 /** @jsx jsx */
 import React from 'react';
 import { Button, Form, Input, Upload } from 'antd';
-import { API, Storage, graphqlOperation } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 import Avatar from '../../components/Avatar/Avatar';
 import { css, jsx } from '@emotion/core';
 import { LoggedInUserContext } from '../../user-context';
 import { Redirect } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 
-const updateUser = gql`
+
+const customChangeProfilePicQuery = gql`
+  mutation ChangeProfilePic($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      id
+    }
+  }
+`;
+
+const updateUserDataQuery = gql`
   mutation UpdateUser(
     $input: UpdateUserInput!
     $condition: ModelUserConditionInput
@@ -24,22 +33,13 @@ const updateUser = gql`
   }
 `;
 
-      
-const customChangeProfilePicQuery = gql`
-  mutation ChangeProfilePic($input: UpdateUserInput!) {
-    updateUser(input: $input) {
-      id
-    }
-  }
-`;
-
-
 
 function EditProfilePage() {
   const { loggedInUserData, fetchLoggedInUserData, currentCredentials } = React.useContext(LoggedInUserContext);
+  const [changeProfilePic] = useMutation(customChangeProfilePicQuery);
+  const [updateUserData] = useMutation(updateUserDataQuery);
   
   React.useEffect(() => {
-    console.log('edit page affecting!');
     if (loggedInUserData.getUser.id === null) {
       console.log('not found yet');
     } else {
@@ -72,15 +72,13 @@ function EditProfilePage() {
     e.preventDefault();
     console.log(formData);
 
-
     let updateUserInput = {
       id: loggedInUserData.getUser.id,
       name: formData.name,
       bio: formData.bio
     };
     console.log(updateUserInput)
-    const data = await API.graphql(graphqlOperation(updateUser, {input: updateUserInput}));
-    console.log(data);
+    updateUserData({variables: {input: updateUserInput}})
     fetchLoggedInUserData();
   }
   
@@ -97,14 +95,13 @@ function EditProfilePage() {
         photoUrl: imgKey
       };
 
-      API.graphql(graphqlOperation(customChangeProfilePicQuery, {input: updateUserInput}))
+      changeProfilePic({variables: {input: updateUserInput}})
       .then(res => {
-        fetchLoggedInUserData(); 
+        fetchLoggedInUserData();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
     })
     .catch(err => console.log(err));
-    
   }
   
   return (
@@ -126,7 +123,7 @@ function EditProfilePage() {
         >
           <h1>Edit Profile</h1>
           <div css={{display: 'flex', alignContent: 'center', alignItems: 'center'}}>
-            <Avatar img={loggedInUserData.getUser.photoUrl} css={{alignContent: 'center'}} username={loggedInUserData.getUser.username} large />
+            <Avatar img={loggedInUserData.getUser.photoUrl} css={{alignContent: 'center'}} username={loggedInUserData.getUser.username} />
             <div css={{padding: '0 10px'}}>
               <h2 css={{margin: 0, padding: 0}}>{loggedInUserData.getUser.username}</h2>
               <Upload 
