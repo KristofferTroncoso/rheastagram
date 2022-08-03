@@ -14,7 +14,7 @@
     "aws-appsync-auth-link": "^2.0.3",
     "framer-motion": "^1.11.1",
     "kht-ui": "^1.0.6",
-    "moment": "^2.28.0",
+    "moment": "^2.29.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
